@@ -22,17 +22,19 @@
 
 ### Tree App
 
-controller.php
-
-Dossier GLOBAL
-|		
-+--Dossier CLASS
-|   |
-|   +--Entity.php
-|		|	
-|   +--Manager.php
-|			
-+--init.php
-|
+.
++-- _controller.php
++-- _global
+|   +-- _class
+|       +-- Entity.php
+|       +-- Manager.php
++--init.php 
 +--params.php
+
+
+
+
+
+
+
 
