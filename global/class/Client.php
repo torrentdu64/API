@@ -10,10 +10,12 @@ class Client extends Entity {
     private $id;
     private $nom;
     private $prenom;
-    private $genre;
-    private $dateN;
+    private $genre; // change to tel
+    private $dateN; // change to adresse
     private $email;
-    private $photo;
+    private $photo; // change to societe
+    private $commentaire;
+
 
     public function __construct($data=NULL) {
         if (is_array($data)){
