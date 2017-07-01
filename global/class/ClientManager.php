@@ -13,7 +13,7 @@ class ClientManager extends Manager {
         parent::__construct();
     }
 
-    public function lire($id) {
+    public function read($id) {
 
         $this->pdoStatement = $this->pdo->prepare("SELECT * FROM client WHERE id = :id");
         $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
@@ -25,7 +25,7 @@ class ClientManager extends Manager {
         return $client;
     }
 
-    public function ecrire(Client & $client) {
+    public function create(Client & $client) {
         $this->pdoStatement = $this->pdo->prepare("INSERT INTO client(nom, prenom, genre, dateN, email, photo)"
                 . " VALUES(:nom,:prenom,:genre ,:dateN ,:email ,:photo)");
         $this->pdoStatement->bindValue(':nom', $client->getNom(), PDO::PARAM_STR);
@@ -41,7 +41,7 @@ class ClientManager extends Manager {
         return $client;
     }
 
-    public function modifier(Client & $client) {
+    public function update(Client & $client) {
 
         $this->pdoStatement = $this->pdo->prepare("UPDATE * FROM client(nom, prenom, genre, dateN, email, photo)"
                 . " VALUES(:nom,:prenom,:genre ,:dateN ,:email ,:photo) WHERE id = :id");
@@ -59,7 +59,7 @@ class ClientManager extends Manager {
         return $client;
     }
 
-    public function supprimer($id) {
+    public function delete($id) {
 
         $this->pdoStatement = $this->pdo->prepare("SELECT * FROM client WHERE id = :id");
         $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
