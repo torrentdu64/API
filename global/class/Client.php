@@ -10,10 +10,10 @@ class Client extends Entity {
     private $id;
     private $nom;
     private $prenom;
-    private $genre; // change to tel
-    private $dateN; // change to adresse
+    private $tel; // change to tel
+    private $adresse; // change to adresse
     private $email;
-    private $photo; // change to societe
+    private $societe; // change to societe
     private $commentaire;
 
 
@@ -48,16 +48,16 @@ class Client extends Entity {
         }
     }
 
-    public function setGenre($genre) {
-        if (strlen($genre) <= 25) {
-            $this->genre = $genre;
+    public function setTel($tel) {
+        if (strlen($tel) <= 25) {
+            $this->tel = $tel;
         } else {
-            $this->addErreur('Le genre doit comporter moins de 25 caractères');
+            $this->addErreur('Le tel doit comporter moins de 25 caractères');
         }
     }
 
-    public function setDateN($dateN) {
-        $this->dateN = $dateN;
+    public function setAdresse($adresse) {
+        $this->adresse = $adresse;
     }
 
     public function setEmail($email) {
@@ -70,8 +70,8 @@ class Client extends Entity {
         }
     }
 
-    public function setPhoto($photo) {
-        $this->photo = $photo;
+    public function setSociete($societe) {
+        $this->societe = $societe;
     }
 
     function getId() {
@@ -86,19 +86,19 @@ class Client extends Entity {
         return $this->prenom;
     }
 
-    function getGenre() {
-        return $this->genre;
+    function getTel() {
+        return $this->tel;
     }
 
-    function getDateN() {
-        return $this->dateN;
+    function getAdresse() {
+        return $this->adresse;
     }
 
     function getEmail() {
         return $this->email;
     }
 
-    function getPhoto() {
-        return $this->photo;
+    function getSociete() {
+        return $this->societe;
     }
 }
