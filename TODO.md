@@ -18,10 +18,17 @@
 ### render Json
 
 - [ ] format respond  to Json encode 
+```json
+{
+	"title": "data",
+	"tagline": "The Easiest Way To Document Your Project",
+	"image": "app.png"
+}
+```
 
 
 ### Tree App
-
+```
 .
 +-- _controller.php
 +-- _global
@@ -30,7 +37,7 @@
 |       +-- Manager.php
 +--init.php 
 +--params.php
-
+```
 
 
 
