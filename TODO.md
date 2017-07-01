@@ -28,15 +28,20 @@
 
 
 ### Tree App
-```
+```tree
 .
-+-- _controller.php
-+-- _global
-|   +-- _class
-|       +-- Entity.php
-|       +-- Manager.php
-+--init.php 
-+--params.php
+*-- controller.php
+*-- global
+|   |
+|   *-- class
+|       |
+|       *-- Entity.php
+|       |
+|       *-- Manager.php
+|
+*--init.php 
+|
+*--params.php
 ```
 
 
