@@ -10,7 +10,7 @@ define('_dbUser', 'root');
 define('_dbPassW', 'root');
 
 //Définition du répertoire de base.
-define('_dirRoot', $_SERVER['DOCUMENT_ROOT'] . 'demo-php/POO/MVC/global');
+define('_dirRoot', $_SERVER['DOCUMENT_ROOT'] . 'demo-php/POO/API/global');
 
 //Définition du répertoire des classes.
 define('_dirclass', _dirRoot.'/class/');
