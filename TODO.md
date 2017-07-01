@@ -18,3 +18,21 @@
 ### render Json
 
 - [ ] format respond  to Json encode 
+
+
+### Tree App
+
+controller.php
+
+Dossier GLOBAL
+|		
+*	--Dossier CLASS
+|   |
+|   *--Entity.php
+|		|	
+|   *--Manager.php
+|			
+*--init.php
+|
+*--params.php
+
