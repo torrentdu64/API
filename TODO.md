@@ -26,13 +26,13 @@ controller.php
 
 Dossier GLOBAL
 |		
-*	--Dossier CLASS
++--Dossier CLASS
 |   |
-|   *--Entity.php
+|   +--Entity.php
 |		|	
-|   *--Manager.php
+|   +--Manager.php
 |			
-*--init.php
++--init.php
 |
-*--params.php
++--params.php
 
