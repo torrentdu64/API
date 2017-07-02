@@ -10,10 +10,10 @@ class Client extends Entity {
     private $id;
     private $nom;
     private $prenom;
-    private $tel; // change to tel
-    private $adresse; // change to adresse
+    private $tel;
+    private $adresse;
     private $email;
-    private $societe; // change to societe
+    private $societe;
     private $commentaire;
 
 
