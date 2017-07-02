@@ -1,6 +1,6 @@
 <?php
 
-class Frais extends Entity {
+class NoteDeFrais extends Entity {
 
     private $id;
     private $nature;

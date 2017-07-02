@@ -7,7 +7,7 @@ require_once 'Manager.php';
  *
  * @author Micka
  */
-class FraisManager extends Manager {
+class NoteDeFraisManager extends Manager {
 
   public function __construct() {
       parent::__construct();
