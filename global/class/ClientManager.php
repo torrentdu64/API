@@ -103,4 +103,13 @@ class ClientManager extends Manager {
     return $client;
   }
 
+
+//   private function json($data){
+//    if(is_array($data)){
+//      return json_encode($data);
+//    }
+ }
+
+
+
 }
