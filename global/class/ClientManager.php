@@ -22,6 +22,8 @@ class ClientManager extends Manager {
 //============================================================================//
 // * CRUD
 //   !! TODO : CRUD refacto to generique class !!
+//   !!        Pagination ?? !!
+//   !!        return Json_encode !!
 //
 //   Oject attribut =>
 //
