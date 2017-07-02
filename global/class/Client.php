@@ -7,15 +7,23 @@
  */
 class Client extends Entity {
 
-    private $id;
-    private $nom;
-    private $prenom;
-    private $tel;
-    private $adresse;
-    private $email;
-    private $societe;
-    private $commentaire;
+// * Attribut to sync db
 
+    private $IdClient;
+    private $NomClient;
+    private $PrenomClient;
+    private $Adresse1Client;
+    private $Adresse2Client;
+    private $CodePostalClient;
+    private $VilleClient;
+    private $TelephoneBureauClient;
+    private $TelephoneMobileClient;
+    private $MailClient;
+    private $BudgetMaxRemboursementClient;
+
+//============================================================================//
+// * Constructeur
+//============================================================================//
 
     public function __construct($data=NULL) {
         if (is_array($data)){
@@ -23,82 +31,166 @@ class Client extends Entity {
         }
     }
 
+//============================================================================//
+// * Setter
+//  !! TODO changer les message d 'erreur !!
+//============================================================================//
 
-    public function setId($id) {
-        if (is_integer(intval($id))) {
-            $this->id = $id;
+    public function setIdClient($IdClient) {
+        if (is_integer(intval($IdClient))) {
+            $this->IdClient = $IdClient;
         } else {
-            $this->addErreur('L\'id doit être un nombre entier');
+            $this->addErreur('L\'IdClient doit être un nombre entier');
         }
     }
 
-    public function setNom($nom) {
-        if (strlen($nom) <= 25) {
-            $this->nom = $nom;
+    public function setNomClient($NomClient) {
+        if (strlen($NomClient) <= 25) {
+            $this->NomClient = $NomClient;
         } else {
-            $this->addErreur('Le nom doit comporter moins de 25 caractères');
+            $this->addErreur('Le NomClient doit comporter moins de 25 caractères');
         }
     }
 
-    public function setPrenom($prenom) {
-        if (strlen($prenom) <= 25) {
-            $this->prenom = $prenom;
+    public function setPrenomClient($PrenomClient) {
+        if (strlen($PrenomClient) <= 25) {
+            $this->PrenomClient = $PrenomClient;
         } else {
-            $this->addErreur('Le prenom doit comporter moins de 25 caractères');
+            $this->addErreur('Le PrenomClient doit comporter moins de 25 caractères');
         }
     }
 
-    public function setTel($tel) {
-        if (strlen($tel) <= 25) {
-            $this->tel = $tel;
+    public function setAdresse1Client($Adresse1Client) {
+        if (strlen($Adresse1Client) <= 25) {
+            $this->Adresse1Client = $Adresse1Client;
         } else {
-            $this->addErreur('Le tel doit comporter moins de 25 caractères');
+            $this->addErreur('Le Adresse1Client doit comporter moins de 25 caractères');
         }
     }
 
-    public function setAdresse($adresse) {
-        $this->adresse = $adresse;
+    public function setAdresse2Client($Adresse2Client) {
+        if (strlen($Adresse1Client) <= 25) {
+            $this->Adresse2Client = $Adresse2Client;
+        } else {
+            $this->addErreur('Le Adresse2Client doit comporter moins de 25 caractères');
+        }
     }
 
-    public function setEmail($email) {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //  !! TODO => change filter to code postal !!
+
+    public function setCodePostalClient($CodePostalClient) {
+        if (filter_var($CodePostalClient, FILTER_VALIDATE_EMAIL)) {
             if (FILTER_VALIDATE_EMAIL == true) {
-                $this->email = $email;
+                $this->CodePostalClient = $CodePostalClient;
             } else {
-                $this->addErreur('L\'email est incorrect !');
+                $this->addErreur('L\'CodePostalClient est incorrect !');
             }
         }
     }
 
-    public function setSociete($societe) {
-        $this->societe = $societe;
+        // !! TODO strlen change to array who check ville !!
+
+    public function setVilleClient($VilleClient) {
+        if (strlen($VilleClient) <= 25) {
+            $this->VilleClient = $VilleClient;
+        } else {
+            $this->addErreur('Le VilleClient doit comporter moins de 25 caractères');
+        }
     }
 
-    function getId() {
-        return $this->id;
+        // !! TODO strlen change to integer !!
+
+    public function setTelephoneBureauClient($TelephoneBureauClient) {
+        if (strlen($TelephoneBureauClient) <= 25) {
+            $this->TelephoneBureauClient = $TelephoneBureauClient;
+        } else {
+            $this->addErreur('Le TelephoneBureauClient doit comporter moins de 25 caractères');
+        }
+    }
+        //  !! TODO strlen change to integer !!
+   public function setTelephoneMobileClient($TelephoneMobileClient) {
+        if (strlen($TelephoneMobileClient) <= 25) {
+            $this->TelephoneMobileClient = $TelephoneMobileClient;
+        } else {
+            $this->addErreur('Le TelephoneMobileClient doit comporter moins de 25 caractères');
+        }
     }
 
-    function getNom() {
-        return $this->nom;
+
+      // !! TODO change strlen to filter regex to check mail valid? !!
+    public function setMailClient($MailClient) {
+        if (strlen($MailClient) <= 25) {
+            $this->MailClient = $MailClient;
+        } else {
+            $this->addErreur('Le MailClient doit comporter moins de 25 caractères');
+        }
     }
 
-    function getPrenom() {
-        return $this->prenom;
+      // !! TODO change strlen to Interger  !!
+    public function setBudgetMaxRemboursementClient($BudgetMaxRemboursementClient) {
+        if (strlen($BudgetMaxRemboursementClient) <= 25) {
+            $this->BudgetMaxRemboursementClient = $BudgetMaxRemboursementClient;
+        } else {
+            $this->addErreur('Le BudgetMaxRemboursementClient doit comporter moins de 25 caractères');
+        }
     }
 
-    function getTel() {
-        return $this->tel;
+//============================================================================//
+// * Getter
+//    Prefix to get Attribut:
+//    private $IdClient;
+//    private $PrenomClient;
+//    private $Adresse1Client;
+//    private $Adresse2Client;
+//    private $CodePostalClient;
+//    private $VilleClient;
+//    private $TelephoneBureauClient;
+//    private $TelephoneMobileClient;
+//    private $MailClient;
+//    private $BudgetMaxRemboursementClient;
+//============================================================================//
+
+    function getIdClient() {
+        return $this->IdClient;
     }
 
-    function getAdresse() {
-        return $this->adresse;
+    function getNomClient() {
+        return $this->NomClient;
     }
 
-    function getEmail() {
-        return $this->email;
+    function getPrenomClient() {
+        return $this->PrenomClient;
     }
 
-    function getSociete() {
-        return $this->societe;
+    function getAdresse1Client() {
+        return $this->Adresse1Client;
+    }
+
+    function getAdresse2Client() {
+        return $this->Adresse2Client;
+    }
+
+    function getCodePostalClient() {
+        return $this->CodePostalClient;
+    }
+
+    function getVilleClient() {
+        return $this->VilleClient;
+    }
+
+    function getTelephoneBureauClient() {
+        return $this->TelephoneBureauClient;
+    }
+
+    function getTelephoneMobileClient() {
+        return $this->TelephoneMobileClient;
+    }
+
+    function getMailClient() {
+        return $this->MailClient;
+    }
+
+    function getBudgetMaxRemboursementClient() {
+        return $this->BudgetMaxRemboursementClient;
     }
 }
