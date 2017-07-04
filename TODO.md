@@ -5,19 +5,20 @@
 - [ ] field/attribut
 - [ ] getter/setter
 - [ ] think function to future
+- [ ] Refact to ClassManger ???
 
 
-### namespace 
+### namespace
 
 => https://localhost/api/v1/clients/1/client
 
 ### auth
 
-- [ ] how to manage auth connect 
+- [ ] how to manage auth connect
 
 ### render Json
 
-- [ ] format respond  to Json encode 
+- [ ] format respond  to Json encode
 ```json
 {
 	"title": "data",
@@ -39,7 +40,7 @@
 |       |
 |       *-- Manager.php
 |
-*--init.php 
+*--init.php
 |
 *--params.php
 ```

@@ -9,65 +9,109 @@ require_once 'Manager.php';
  */
 class ClientManager extends Manager {
 
-    public function __construct() {
-        parent::__construct();
-    }
+//============================================================================//
+// * Constructeur
+//============================================================================//
 
-    public function read($id) {
 
-        $this->pdoStatement = $this->pdo->prepare("SELECT * FROM client WHERE id = :id");
-        $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
-        $this->pdoStatement->execute();
+  public function __construct() {
+    parent::__construct();
+  }
 
-        $data = $this->pdoStatement->fetch();
 
-        $client = new Client($data);
-        return $client;
-    }
+//============================================================================//
+// * CRUD
+//   !! TODO : CRUD refacto to generique class !!
+//   !!        Pagination ?? !!
+//   !!        return Json_encode !!
+//
+//   Oject attribut =>
+//
+//   private $IdClient;
+//   private $NomClient;
+//   private $PrenomClient;
+//   private $Adresse1Client;
+//   private $Adresse2Client;
+//   private $CodePostalClient;
+//   private $VilleClient;
+//   private $TelephoneBureauClient;
+//   private $TelephoneMobileClient;
+//   private $MailClient;
+//   private $BudgetMaxRemboursementClien
+//============================================================================//
 
-    public function create(Client & $client) {
-        $this->pdoStatement = $this->pdo->prepare("INSERT INTO client(nom, prenom, genre, dateN, email, photo)"
-                . " VALUES(:nom,:prenom,:genre ,:dateN ,:email ,:photo)");
-        $this->pdoStatement->bindValue(':nom', $client->getNom(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':prenom', $client->getPrenom(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':genre', $client->getGenre(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':dateN', $client->getDateN(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':email', $client->getEmail(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':photo', $client->getPhoto(), PDO::PARAM_STR);
-        $this->pdoStatement->execute();
 
-        $data = $this->pdoStatement->fetch();
-        $client = new Client($data);
-        return $client;
-    }
+  public function read($IdClient) {
+    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM Client WHERE IdClient = :IdClient");
+    $this->pdoStatement->bindValue(':IdClient', $IdClient, PDO::PARAM_INT);
+    $this->pdoStatement->execute();
+    $data = $this->pdoStatement->fetch();
+    $client = new Client($data);
+    return $client;
+  }
 
-    public function update(Client & $client) {
+   //  !! TODO : change PDO::PARAM_ to good params !!
 
-        $this->pdoStatement = $this->pdo->prepare("UPDATE * FROM client(nom, prenom, genre, dateN, email, photo)"
-                . " VALUES(:nom,:prenom,:genre ,:dateN ,:email ,:photo) WHERE id = :id");
-        $this->pdoStatement->bindValue(':id', $client->getId(), PDO::PARAM_INT);
-        $this->pdoStatement->bindValue(':nom', $client->getNom(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':prenom', $client->getPrenom(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':genre', $client->getGenre(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':dateN', $client->getDateN(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':email', $client->getEmail(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':photo', $client->getPhoto(), PDO::PARAM_STR);
-        $this->pdoStatement->execute();
 
-        $data = $this->pdoSatement->fetch();
-        $client = new Client($data);
-        return $client;
-    }
+  public function create(Client &$client) {
+    $this->pdoStatement = $this->pdo->prepare("INSERT INTO Client( NomClient, PrenomClient, Adresse1Client, Adresse2Client, CodePostalClient, VilleClient, TelephoneBureauClient, TelephoneMobileClient, MailClient, BudgetMaxRemboursementClient) VALUES(:NomClient, :PrenomClient, :Adresse1Client , :Adresse2Client , :CodePostalClient , :VilleClient, :TelephoneBureauClient, :TelephoneMobileClient, :MailClient, :BudgetMaxRemboursementClient)");
+    $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':PrenomClient', $client->getPrenomClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':Adresse1Client', $client->getAdresse1Client(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':Adresse2Client', $client->getAdresse2Client(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':CodePostalClient', $client->getCodePostalClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':VilleClient', $client->getVilleClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':TelephoneBureauClient', $client->getTelephoneBureauClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':TelephoneMobileClient', $client->getTelephoneMobileClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':MailClient', $client->getMailClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':BudgetMaxRemboursementClient', $client->getBudgetMaxRemboursementClient(), PDO::PARAM_INT);
+    $result = $this->pdoStatement->execute();
+    if($result){
+      $id = $this->pdo->lastInsertId();
+      $client = $this->read($id);
+    } else {
+      return false;
+    }  
+  }
 
-    public function delete($id) {
+  //  !! TODO : change PDO::PARAM_ to good params !!
 
-        $this->pdoStatement = $this->pdo->prepare("SELECT * FROM client WHERE id = :id");
-        $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
-        $this->pdoStatement->execute();
+  public function update(Client $client) {
+    var_dump($client);
+    $this->pdoStatement = $this->pdo->prepare("UPDATE Client SET NomCLient = :NomClient, PrenomClient =:PrenomClient, Adresse1Client =:Adresse1Client , Adresse2Client = :Adresse2Client , CodePostalClient = :CodePostalClient , VilleClient = :VilleClient, TelephoneBureauClient = :TelephoneBureauClient, TelephoneMobileClient = :TelephoneMobileClient, MailClient = :MailClient, BudgetMaxRemboursementClient = :BudgetMaxRemboursementClient WHERE IdClient = :IdClient");
+    $this->pdoStatement->bindValue(':IdClient', $client->getIdClient(), PDO::PARAM_INT);
+    $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':PrenomClient', $client->getPrenomClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':Adresse1Client', $client->getAdresse1Client(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':Adresse2Client', $client->getAdresse2Client(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':CodePostalClient', $client->getCodePostalClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':VilleClient', $client->getVilleClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':TelephoneBureauClient', $client->getTelephoneBureauClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':TelephoneMobileClient', $client->getTelephoneMobileClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':MailClient', $client->getMailClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':BudgetMaxRemboursementClient', $client->getBudgetMaxRemboursementClient(), PDO::PARAM_INT);
+    $result = $this->pdoStatement->execute();
+    var_dump($result);
+    return $client;
+  }
 
-        $data = $this->pdoSatement->fetch();
-        $client = new Client($data);
-        return $client;
-    }
+  public function delete(Client $client) {
+    var_dump($client);
+    $this->pdoStatement = $this->pdo->prepare("DELETE FROM Client WHERE IdClient = :IdClient");
+    $this->pdoStatement->bindValue(':IdClient', $client->getIdClient(), PDO::PARAM_INT);
+    $this->pdoStatement->execute();
+    var_dump($client);
+    return $client;
+  }
+
+
+//   private function json($data){
+//    if(is_array($data)){
+//      return json_encode($data);
+//    }
+ 
 
 }
+
+
+
