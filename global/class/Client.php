@@ -69,7 +69,7 @@ class Client extends Entity {
     }
 
     public function setAdresse2Client($Adresse2Client) {
-        if (strlen($Adresse1Client) <= 25) {
+        if (strlen($Adresse2Client) <= 25) {
             $this->Adresse2Client = $Adresse2Client;
         } else {
             $this->addErreur('Le Adresse2Client doit comporter moins de 25 caractères');
@@ -79,7 +79,7 @@ class Client extends Entity {
         //  !! TODO => change filter to code postal !!
 
     public function setCodePostalClient($CodePostalClient) {
-        if (filter_var($CodePostalClient, FILTER_VALIDATE_EMAIL)) {
+        if (strlen($CodePostalClient) <= 25){
             if (FILTER_VALIDATE_EMAIL == true) {
                 $this->CodePostalClient = $CodePostalClient;
             } else {
@@ -128,6 +128,7 @@ class Client extends Entity {
 
       // !! TODO change strlen to Interger  !!
     public function setBudgetMaxRemboursementClient($BudgetMaxRemboursementClient) {
+        // Vérifier si c'est un entier et le multiplier par 100 (pour convertir centimes en €)
         if (strlen($BudgetMaxRemboursementClient) <= 25) {
             $this->BudgetMaxRemboursementClient = $BudgetMaxRemboursementClient;
         } else {
@@ -191,6 +192,7 @@ class Client extends Entity {
     }
 
     function getBudgetMaxRemboursementClient() {
+        // Le diviser par 100 (pour convertir centimes en €)
         return $this->BudgetMaxRemboursementClient;
     }
 }
