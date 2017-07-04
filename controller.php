@@ -4,7 +4,7 @@ require_once 'global/init.php';
 
 
 
-$eleves = new Eleve([
+$eleves = new Client([
     'nom' => 'Jean',
     'prenom' => 'Dupond',
     'genre' => 'H',
@@ -13,7 +13,7 @@ $eleves = new Eleve([
     'photo' => 'IMG'
 ]);
 
-$eleveMan = new EleveManager();
+$eleveMan = new ClientManager();
 
 // $eleve2 = $eleveMan->lire(7);
         

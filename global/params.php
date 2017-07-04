@@ -5,9 +5,9 @@ require_once 'init.php';
 
 // On définit les constantes de connexion à la base de donnée.
 define('_dbHost', 'localhost');
-define('_dbName', 'greta');
+define('_dbName', 'gretaaa');
 define('_dbUser', 'root');
-define('_dbPassW', 'root');
+define('_dbPassW', '');
 
 //Définition du répertoire de base.
 define('_dirRoot', $_SERVER['DOCUMENT_ROOT'] . 'demo-php/POO/API/global');
