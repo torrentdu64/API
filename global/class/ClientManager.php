@@ -53,53 +53,55 @@ class ClientManager extends Manager {
    //  !! TODO : change PDO::PARAM_ to good params !!
 
 
-  public function create(Client & $client) {
-    $this->pdoStatement = $this->pdo->prepare("INSERT INTO Client( NomClient, PrenomClient, Adresse1Client, Adresse2Client, CodePostalClient, VilleClient, TelephoneBureauClient, TelephoneMobileClient, MailClient, BudgetMaxRemboursementClient)"
-            . " VALUES(:NomClient, :PrenomClient, :Adresse1Client , :Adresse2Client , :CodePostalClient , :VilleClient, :TelephoneBureauClient, :TelephoneMobileClient, :MailClient, :BudgetMaxRemboursementClient)");
-    $this->pdoStatement->bindValue(':NomClient', $client->getNom(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':PrenomClient', $client->getPrenom(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':Adresse1Client', $client->getGenre(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':Adresse2Client', $client->getDateN(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':CodePostalClient', $client->getEmail(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':VilleClient', $client->getPhoto(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':TelephoneBureauClient', $client->getPhoto(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':TelephoneMobileClient', $client->getPhoto(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':MailClient', $client->getPhoto(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':BudgetMaxRemboursementClient', $client->getPhoto(), PDO::PARAM_STR);
-    $this->pdoStatement->execute();
-    $data = $this->pdoStatement->fetch();
-    $client = new Client($data);
-    return $client;
+  public function create(Client &$client) {
+
+    $this->pdoStatement = $this->pdo->prepare("INSERT INTO Client( NomClient, PrenomClient, Adresse1Client, Adresse2Client, CodePostalClient, VilleClient, TelephoneBureauClient, TelephoneMobileClient, MailClient, BudgetMaxRemboursementClient) VALUES(:NomClient, :PrenomClient, :Adresse1Client , :Adresse2Client , :CodePostalClient , :VilleClient, :TelephoneBureauClient, :TelephoneMobileClient, :MailClient, :BudgetMaxRemboursementClient)");
+    $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':PrenomClient', $client->getPrenomClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':Adresse1Client', $client->getAdresse1Client(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':Adresse2Client', $client->getAdresse2Client(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':CodePostalClient', $client->getCodePostalClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':VilleClient', $client->getVilleClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':TelephoneBureauClient', $client->getTelephoneBureauClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':TelephoneMobileClient', $client->getTelephoneMobileClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':MailClient', $client->getMailClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':BudgetMaxRemboursementClient', $client->getBudgetMaxRemboursementClient(), PDO::PARAM_INT);
+    $result = $this->pdoStatement->execute();
+    if($result){
+      $id = $this->pdo->lastInsertId();
+      $client = $this->read($id);
+    } else {
+      return false;
+    }  
   }
 
   //  !! TODO : change PDO::PARAM_ to good params !!
 
-  public function update(Client & $client) {
-    $this->pdoStatement = $this->pdo->prepare("UPDATE * FROM Client(NomClient, PrenomClient, Adresse1Client, Adresse2Client, CodePostalClient, VilleClient,TelephoneBureauClient, TelephoneMobileClient, MailClient, BudgetMaxRemboursementClient )"
-            . " VALUES(:NomClient,:PrenomClient,:Adresse1Client ,:Adresse2Client ,:CodePostalClient ,:VilleClient, :TelephoneBureauClient, :TelephoneMobileClient, :MailClient, :BudgetMaxRemboursementClient) WHERE IdClient = :IdClient");
-    $this->pdoStatement->bindValue(':IdClient', $client->getId(), PDO::PARAM_INT);
-    $this->pdoStatement->bindValue(':NomClient', $client->getNom(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':PrenomClient', $client->getPrenom(), PDO::PARAM_STR;
-    $this->pdoStatement->bindValue(':Adresse1Client', $client->getGenre(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':Adresse2Client', $client->getDateN(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':CodePostalClient', $client->getEmail(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':VilleClient', $client->getPhoto(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':TelephoneBureauClient', $client->getPhoto(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':TelephoneMobileClient', $client->getPhoto(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':MailClient', $client->getPhoto(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':BudgetMaxRemboursementClient', $client->getPhoto(), PDO::PARAM_STR);
-    $this->pdoStatement->execute();
-    $data = $this->pdoSatement->fetch();
-    $client = new Client($data);
+  public function update(Client $client) {
+    var_dump($client);
+    $this->pdoStatement = $this->pdo->prepare("UPDATE Client SET NomCLient = :NomClient, PrenomClient =:PrenomClient, Adresse1Client =:Adresse1Client , Adresse2Client = :Adresse2Client , CodePostalClient = :CodePostalClient , VilleClient = :VilleClient, TelephoneBureauClient = :TelephoneBureauClient, TelephoneMobileClient = :TelephoneMobileClient, MailClient = :MailClient, BudgetMaxRemboursementClient = :BudgetMaxRemboursementClient WHERE IdClient = :IdClient");
+    $this->pdoStatement->bindValue(':IdClient', $client->getIdClient(), PDO::PARAM_INT);
+    $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':PrenomClient', $client->getPrenomClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':Adresse1Client', $client->getAdresse1Client(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':Adresse2Client', $client->getAdresse2Client(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':CodePostalClient', $client->getCodePostalClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':VilleClient', $client->getVilleClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':TelephoneBureauClient', $client->getTelephoneBureauClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':TelephoneMobileClient', $client->getTelephoneMobileClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':MailClient', $client->getMailClient(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':BudgetMaxRemboursementClient', $client->getBudgetMaxRemboursementClient(), PDO::PARAM_INT);
+    $result = $this->pdoStatement->execute();
+    var_dump($result);
     return $client;
   }
 
-  public function delete($IdClient) {
-    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM Client WHERE IdClient = :IdClient");
-    $this->pdoStatement->bindValue(':IdClient', $IdClient, PDO::PARAM_INT);
+  public function delete(Client $client) {
+    var_dump($client);
+    $this->pdoStatement = $this->pdo->prepare("DELETE FROM Client WHERE IdClient = :IdClient");
+    $this->pdoStatement->bindValue(':IdClient', $client->getIdClient(), PDO::PARAM_INT);
     $this->pdoStatement->execute();
-    $data = $this->pdoSatement->fetch();
-    $client = new Client($data);
+    var_dump($client);
     return $client;
   }
 
@@ -108,8 +110,9 @@ class ClientManager extends Manager {
 //    if(is_array($data)){
 //      return json_encode($data);
 //    }
- }
-
-
+ 
 
 }
+
+
+
