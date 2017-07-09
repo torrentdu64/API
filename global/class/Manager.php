@@ -25,6 +25,5 @@ abstract class Manager {
             echo 'Exception reçue : ',  $e->getMessage(), "\n";
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
-       
     }
 }

@@ -4,18 +4,8 @@ require_once 'global/init.php';
 
 
 
-<<<<<<< HEAD
-$eleves = new Client([
-    'nom' => 'Jean',
-    'prenom' => 'Dupond',
-    'genre' => 'H',
-    'dateN' => '1996/02/20',
-    'email' => 'contact@jeandupond.fr',
-    'photo' => 'IMG'
-]);
+                             /*TABLE client*/
 
-$eleveMan = new ClientManager();
-=======
 $client1 = new Client([
 	//'IdClient' => 144,
     'NomClient' => 'DUPOND',
@@ -30,29 +20,165 @@ $client1 = new Client([
     'BudgetMaxRemboursementClient' => 200
 ]);
 
- $clientN1 = new ClientManager();
- /*
-$client1 = $clientN1->read(144);
-$client1->setNomClient("toto");
-var_dump($client1);
-$clientN1->update($client1);
 
-$eleveMan = new EleveManager();
->>>>>>> origin
+ $client = new ClientManager();   
 
-// $eleve2 = $eleveMan->lire(7);
+            /*Ajout*/    
+
+ /*$client->create($client1);*/
+
+        /*Modification*/  
+
+/*$client1->setPrenomClient("toto");
+$client->update($client1);*/
+
+
+
+        /*Suppression*/ 
+
+// $client->delete($client1);
+
+
+
+                            /*TABLE notedefrais*/
+
+$notedefrais1 = new NoteDeFrais([
+    'IdNoteDeFrais' => 101,
+    'IntituleNDF' => 'RDV',
+    'DateNDF' => '25/02/12',
+    'MotifNDF' => 'Fidelisation',
+    'MontantPrevu' => 210,
+    'EtatNDF' => 'En cours',
+    'Commentaire' => 'En Attent',
+    'NbreNuiteesSiHotellerie' => 2,
+    'NbreRepasSiRestauration' => 5,
+    '$CoordonneesGPSDepartSiTransport' => '20 rue Pasteur Cadier',
+    'CoordonneesGPSArriveeSiTransport' => 'Paris 11 eme arrondissement',
+    'TypeDeTransport' => 'Voiture',
+    'DistanceSiTransport' => '600',
+    'Login' => 21,
+    'IdClient' => 3
+]);
+
+$notedefrais = new NoteDeFraisManager();
+
+            /*Ajout*/
+
+/*$notedefrais->create($notedefrais1);*/
+
+
+            /*Modification*/
+
+/*$notedefrais1->setMotifNDF("Café");
+$notedefrais->update($notedefrais1);*/
+
+
+            /*Suppression*/
+/*$notedefrais->delete($notedefrais1);*/
+
+
+
+
+ 
+  
+                                /*TABLE user*/
+
+$user1 = new User([
+    //'Login' => '194',
+    'NomReps' => 'Gialugi',
+    'PrenomReps' => 'Makureta',
+    'Adresse1Reps' => '20 rue Nulle part',
+    'Adresse2Reps' => '2 street Gangster Miami',
+    'CodePostalReps' => '64000',
+    'VilleReps' => 'Miami',
+    'EmailReps' => 'gangsterlove@gmail.gr',
+    'TelephoneReps' => '06-52-76-14-96',
+    'Commentaires' => 'Nothing to add',
+    'DateEmbauche' => '2017-07-06',
+    'TypeDeDroits' => 'No limit',
+    'MotDePasseUser' => 'gang',
+    'CategorieUser' => 'Commercial',
+    'IdType' => 21,
+]);
+
         
-$eleveMan->create($eleves);
+    $users=new UserManager();
+
+             /*Ajout*/
+
+    /*$users->create($user1)*/
 
 
- $save = $clientN1->create($client1);
- echo 'Création';
-*/
 
-$client1 = $clientN1->read(145);
-$client1->setPrenomClient("toto");
-$clientN1->update($client1);
+            /*Modification*/
+/*
+    $user1->setCodePostalReps("64200");
+    $users->update($user1);*/
+    
+    
+            /*Suppression*/
+    
+    /*$users->delete($user1);*/
 
-// $clientN1->delete($client1);
 
-// $clientN1->read($client1->getIdClient());
+
+                                            /*TABLE tarifsremboursements*/
+
+
+$tarifsremboursement1 = new TarifsRemboursements([
+    //'TypeDeFrais'=>53,
+    'MontantRemboursement' => '25',
+    'Unites' => 'KM'
+]);
+
+$tarifsremboursements = new TarifsRemboursementManager();
+
+                /*Ajout*/
+/*$tarifsremboursements->create($tarifsremboursement1);*/
+
+                /*Modification*/
+/*$tarifsremboursements->setMontantRemboursement(42);
+$tarifsremboursements->update($tarifsremboursement1);*/
+
+
+                /*Suppression
+$tarifsremboursements->delete($tarifsremboursement1);*/
+
+
+
+
+                                        /*TABLE justificatifs*/
+
+$justificatif1 = new Justificatif([
+    //'IdJustificatif' =>5,
+    'IntituleJustificatif' =>'Restauration',
+    'URLNomFichier' => '/justificatif/restauration/id=13',
+    'MontantJustificatif' => '120'
+]);
+      
+$justificatifs = new JustificatifManager();
+
+                  /*Ajout*/
+/*$justificatifs->create($justificatif1);*/
+
+
+                /*Modification*/
+/*$justificatif1->setIntituleJustificatif('Logement');
+$justificatifs->update($justificatif1);*/
+
+
+                /*Suppression*/
+/*$justificatifs->delete($justificatif1);*/
+
+
+
+
+
+
+
+
+
+
+
+
+
