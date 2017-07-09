@@ -16,7 +16,9 @@ $eleves = new Eleve([
 $eleveMan = new EleveManager();
 
 // $eleve2 = $eleveMan->lire(7);
-        
+
 $eleveMan->ecrire($eleves);
 
 var_dump($eleveMan);
+
+
