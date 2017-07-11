@@ -16,7 +16,7 @@ define('_dbPassW', 'Wayspeis64');
 
 
 //Définition du répertoire de base.
-define('_dirRoot', $_SERVER['DOCUMENT_ROOT'] . 'API/global');
+define('_dirRoot', $_SERVER['DOCUMENT_ROOT'] . '/API/global');
 
 
 //Définition du répertoire des classes.

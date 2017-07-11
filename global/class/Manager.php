@@ -18,7 +18,7 @@ abstract class Manager {
             $dbName = _dbName;
             $dbUser = _dbUser;
             $dbPassW = _dbPassW;
-            $this->pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8",$dbUser,$dbPassW);       
+            $this->pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8",$dbUser,$dbPassW);
         }
         catch(Exception $e){
             echo 'Exception reçue : ',  $e->getMessage(), "\n";
