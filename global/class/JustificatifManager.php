@@ -39,6 +39,7 @@ class JustificatifManager extends Manager {
     }
 
     public function update($justificatifs) {
+        var_dump($justificatifs);
         $this->pdoStatement = $this->pdo->prepare("UPDATE Justificatifs SET IntituleJustificatif = :IntituleJustificatif, URLNomFichier = :URLNomFichier, MontantJustificatif = :MontantJustificatif WHERE IdJustificatif = :IdJustificatif");
         $this->pdoStatement->bindValue(':IdJustificatif', $justificatifs->getIdJustificatif(), PDO::PARAM_INT);
         $this->pdoStatement->bindValue(':IntituleJustificatif', $justificatifs->getIntituleJustificatif(), PDO::PARAM_STR);
@@ -50,6 +51,7 @@ class JustificatifManager extends Manager {
     }
 
     public function delete($justificatifs) {
+        var_dump($justificatifs);
         $this->pdoStatement = $this->pdo->prepare("DELETE FROM Justificatifs WHERE IdJustificatif = :IdJustificatif");
         $this->pdoStatement->bindValue(':IdJustificatif', $justificatifs->getIdJustificatif(), PDO::PARAM_INT);
         $this->pdoStatement->execute();
@@ -58,7 +60,7 @@ class JustificatifManager extends Manager {
     }
 
     public function jsonRead() {
-        $requete = $this->pdo->prepare("SELECT * FROM Justificatifs");
+        $requete = $pdo->prepare("ELESCT * FROM Justificatifs");
         $requete->execute();
 
         $res["success"] = true;
@@ -66,7 +68,7 @@ class JustificatifManager extends Manager {
 
         $res["results"]["justificatifs"] = $requete->fetchAll();
 
-        return json_encode($res); //Mettre au format Json    //On a un doublon
+        return $res; //Mettre au format Json    //On a un doublon
     }
 }
 
