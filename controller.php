@@ -1,12 +1,29 @@
 <?php
-
+header('Content-Type: application/json');//Forcer au fichier php de reconnaître le format Json
 require_once 'global/init.php';
 
 
 
+
+//$pdo = new PDO('mysql:host=localhost;dbname=expense_manager2;', 'root', '');
+
+
+
+$requete=$pdo->prepare("SELECT * FROM justificatifs");
+$requete->execute();
+
+$retour["success"]=true;
+$retour["message"]="Les justificatifs";
+
+
+$retour["results"]["justificatifs"]=$requete->fetchAll();
+
+echo json_encode($retour);//Mettre au format Json    //On a un doublon
+
+
                              /*TABLE client*/
 
-$client1 = new Client([
+/*$client1 = new Client([
 	//'IdClient' => 144,
     'NomClient' => 'DUPOND',
     'PrenomClient' => 'Jean',
@@ -18,10 +35,10 @@ $client1 = new Client([
     'TelephoneMobileClient' => '0686047638',
     'MailClient' => 'contact@mickaelduprat.fr',
     'BudgetMaxRemboursementClient' => 200
-]);
+]);*/
 
 
- $client = new ClientManager();   
+ /*$client = new ClientManager(); */ 
 
             /*Ajout*/    
 
@@ -42,12 +59,12 @@ $client->update($client1);*/
 
                             /*TABLE notedefrais*/
 
-$notedefrais1 = new NoteDeFrais([
+/*$notedefrais1 = new NoteDeFrais([
     'IdNoteDeFrais' => 101,
     'IntituleNDF' => 'RDV',
     'DateNDF' => '25/02/12',
     'MotifNDF' => 'Fidelisation',
-    'MontantPrevu' => 210,
+    'MontantPrevu' => '2,5',
     'EtatNDF' => 'En cours',
     'Commentaire' => 'En Attent',
     'NbreNuiteesSiHotellerie' => 2,
@@ -58,9 +75,9 @@ $notedefrais1 = new NoteDeFrais([
     'DistanceSiTransport' => '600',
     'Login' => 21,
     'IdClient' => 3
-]);
+]);*/
 
-$notedefrais = new NoteDeFraisManager();
+/*$notedefrais = new NoteDeFraisManager();*/
 
             /*Ajout*/
 
@@ -69,7 +86,7 @@ $notedefrais = new NoteDeFraisManager();
 
             /*Modification*/
 
-/*$notedefrais1->setMotifNDF("Café");
+/*$notedefrais1->setMontantPrevu('1');
 $notedefrais->update($notedefrais1);*/
 
 
@@ -83,36 +100,39 @@ $notedefrais->update($notedefrais1);*/
   
                                 /*TABLE user*/
 
-$user1 = new User([
+/*$user1 = new User([
     //'Login' => '194',
-    'NomReps' => 'Gialugi',
-    'PrenomReps' => 'Makureta',
-    'Adresse1Reps' => '20 rue Nulle part',
-    'Adresse2Reps' => '2 street Gangster Miami',
+    'NomReps' => 'Makarueta',
+    'PrenomReps' => 'Giovani',
+    'Adresse1Reps' => '20 rue Route de Tercis',
+    'Adresse2Reps' => '10 rue du Pasteur Cadier',
     'CodePostalReps' => '64000',
-    'VilleReps' => 'Miami',
-    'EmailReps' => 'gangsterlove@gmail.gr',
-    'TelephoneReps' => '06-52-76-14-96',
+    'VilleReps' => 'Dax',
+    'EmailReps' => 'makaruetagiovani@gmail.com',
+    'TelephoneReps' => '06 76 14 98 17',
     'Commentaires' => 'Nothing to add',
     'DateEmbauche' => '2017-07-06',
-    'TypeDeDroits' => 'No limit',
-    'MotDePasseUser' => 'gang',
+    'TypeDeDroits' => 'Consulter',
+    'MotDePasseUser' => 'Gre9',
     'CategorieUser' => 'Commercial',
     'IdType' => 21,
-]);
+]);*/
 
         
-    $users=new UserManager();
+//    *$users=new UserManager();*/
+
+
+
 
              /*Ajout*/
 
-    /*$users->create($user1)*/
+    /*$users->create($user1);*/
 
 
 
             /*Modification*/
-/*
-    $user1->setCodePostalReps("64200");
+
+   /* $user1->setVilleReps("");
     $users->update($user1);*/
     
     
@@ -125,19 +145,19 @@ $user1 = new User([
                                             /*TABLE tarifsremboursements*/
 
 
-$tarifsremboursement1 = new TarifsRemboursements([
-    //'TypeDeFrais'=>53,
-    'MontantRemboursement' => '25',
+/*$tarifsremboursement1 = new TarifsRemboursements([
+    'TypeDeFrais'=>53,
+    'MontantRemboursement' => '25,5',
     'Unites' => 'KM'
-]);
+]);*/
 
-$tarifsremboursements = new TarifsRemboursementManager();
+/*$tarifsremboursements = new TarifsRemboursementManager();*/
 
                 /*Ajout*/
 /*$tarifsremboursements->create($tarifsremboursement1);*/
 
                 /*Modification*/
-/*$tarifsremboursements->setMontantRemboursement(42);
+/*$tarifsremboursements->setMontantRemboursement('42');
 $tarifsremboursements->update($tarifsremboursement1);*/
 
 
@@ -149,21 +169,21 @@ $tarifsremboursements->delete($tarifsremboursement1);*/
 
                                         /*TABLE justificatifs*/
 
-$justificatif1 = new Justificatif([
+/*$justificatif1 = new Justificatif([
     //'IdJustificatif' =>5,
     'IntituleJustificatif' =>'Restauration',
     'URLNomFichier' => '/justificatif/restauration/id=13',
-    'MontantJustificatif' => '120'
-]);
+    'MontantJustificatif' => '120,5'
+]);*/
       
-$justificatifs = new JustificatifManager();
+/*$justificatifs = new JustificatifManager();*/
 
                   /*Ajout*/
 /*$justificatifs->create($justificatif1);*/
 
 
                 /*Modification*/
-/*$justificatif1->setIntituleJustificatif('Logement');
+/*$justificatif1->setMontantJustificatif('1');
 $justificatifs->update($justificatif1);*/
 
 
