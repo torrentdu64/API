@@ -196,7 +196,7 @@ class Client extends Entity {
 
     function getBudgetMaxRemboursementClient() {
         // Le diviser par 100 (pour convertir centimes en €)
-        // $convert = intval(strval($BudgetMaxRemboursementClient/100));
-        return $this->BudgetMaxRemboursementClient;
+         $convert = strval($BudgetMaxRemboursementClient/100);
+        return $this->convert;
     }
 }

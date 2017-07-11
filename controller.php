@@ -41,25 +41,46 @@ header('Content-Type: application/json');
 
 //                              /*TABLE client*/
 
-// $client1 = new Client([
-//     'IdClient' => 102,
-//     'NomClient' => 'DUPOND',
-//     'PrenomClient' => 'Jean',
-//     'Adresse1Client' => '8 rue bon accueil',
-//     'Adresse2Client' => 'Appartement 8',
-//     'CodePostalClient' => '64140',
-//     'VilleClient' => 'BILLERE',
-//     'TelephoneBureauClient' => '0559482715',
-//     'TelephoneMobileClient' => '0686047638',
-//     'MailClient' => 'contact@mickaelduprat.fr',
-//     'BudgetMaxRemboursementClient' => 200
-//  ]);
+$client1 = new Client([
+    //'IdClient' => 102,
+    'NomClient' => 'DUPOND',
+    'PrenomClient' => 'Jean',
+    'Adresse1Client' => '8 rue bon accueil',
+    'Adresse2Client' => 'Appartement 8',
+    'CodePostalClient' => '64140',
+    'VilleClient' => 'BILLERE',
+    'TelephoneBureauClient' => '0559482715',
+    'TelephoneMobileClient' => '0686047638',
+    'MailClient' => 'contact@mickaelduprat.fr',
+    'BudgetMaxRemboursementClient' => 200
+ ]);
 
 
 
 
-// $client = new ClientManager();
-// //$client->create($client1);
+$client = new ClientManager();
+$val = $client->read(1);
+
+
+
+// echo $val->getPrenomClient();
+// echo $val->getNomClient();
+// echo $val->getMailClient();
+// echo $val->getTelephoneBureauClient();
+// echo $val->getAdresse1Client();
+
+foreach ($client1 as $res ) {
+ $json .=[  $res['IdClient'] => "get" . $res()
+ ];
+}
+
+var_dump( $json);
+
+
+
+ //$client->create($client1);
+ //read($client1);
+
 // //
 
 // $client->delete($client1);
