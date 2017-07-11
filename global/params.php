@@ -4,13 +4,13 @@ require_once 'init.php';
 
 
 // On définit les constantes de connexion à la base de donnée.
-<<<<<<< HEAD
 
 
-define('_dbHost', 'localhost');
-=======
+
+//define('_dbHost', 'localhost');
+
 define('_dbHost', 'mickaeldul64.mysql.db');
->>>>>>> 0872b33ad7f8040504f3412ffbf63b5bd5bf5d9f
+
 
 define('_dbName', 'mickaeldul64');
 define('_dbUser', 'mickaeldul64');

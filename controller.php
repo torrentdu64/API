@@ -173,7 +173,7 @@ $justificatif1 = new Justificatif([
     'URLNomFichier' => '/justificatif/restauration/id=13',
 <<<<<<< HEAD
     'MontantJustificatif' => '12,5'
-]);*/
+]);
       
 $justificatifs = new JustificatifManager();
 
@@ -183,7 +183,7 @@ $justificatifs = new JustificatifManager();
 $justificatifs = new JustificatifManager();
 
 json_encode($justificatifs->jsonRead());
-
+*/
 
                 /*Ajout*/
 
