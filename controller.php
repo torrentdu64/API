@@ -3,7 +3,7 @@ require_once 'global/init.php';
 header('Content-Type: application/json');
 
 
-$pdo = new PDO('mysql:host=localhost;dbname=expense_manager;', 'root', 'root');
+// $pdo = new PDO('mysql:host=localhost;dbname=expense_manager;', 'root', 'root');
 
 
 
@@ -164,10 +164,10 @@ $justificatif1 = new Justificatif([
 */
 
 $justificatifs = new JustificatifManager();
-json_encode($justificatifs->jsonRead());
+$justificatifs->jsonRead();
 
-
-                /*Ajout*/
+ 
+               /*Ajout*/
 
 // $justificatifs->create($justificatif1);
 

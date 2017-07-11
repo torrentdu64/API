@@ -60,6 +60,7 @@ class JustificatifManager extends Manager {
     }
 
     public function jsonRead() {
+        $pdo = new PDO('mysql:host=localhost;dbname=expense_manager;', 'root', 'root');
         $requete = $pdo->prepare("SELECT * FROM Justificatifs");
         $requete->execute();
 
@@ -68,6 +69,7 @@ class JustificatifManager extends Manager {
 
         $res["results"]["justificatifs"] = $requete->fetchAll();
 
+        $res = json_encode($res);
         return $res; //Mettre au format Json    //On a un doublon
     }
 }
