@@ -154,19 +154,27 @@ $tarifsremboursements->delete($tarifsremboursement1);*/
 
 
                                         /*TABLE justificatifs*/
-/*
+
 $justificatif1 = new Justificatif([
-    //'IdJustificatif' =>5,
+    // 'IdJustificatif' =>32,
     'IntituleJustificatif' =>'Restauration',
     'URLNomFichier' => '/justificatif/restauration/id=13',
-    'MontantJustificatif' => '120,5'
+    'MontantJustificatif' => '126,5'
 ]);
-*/
+
 
 $justificatifs = new JustificatifManager();
-$justificatifs->jsonRead();
+// echo $justificatifs->jsonRead();
 
  
+               /*Lire*/
+
+$just = $justificatifs->read(1);
+echo $just->getIntituleJustificatif();
+echo $just->getURLNomFichier();
+echo $just->getMontantJustificatif();
+echo json_encode($just);
+
                /*Ajout*/
 
 // $justificatifs->create($justificatif1);
@@ -178,7 +186,7 @@ $justificatifs->update($justificatif1);*/
 
 
                 /*Suppression*/
-/*$justificatifs->delete($justificatif1);*/
+// $justificatifs->delete($justificatif1);
 
 
 
