@@ -1,8 +1,12 @@
 <?php
 
+require_once 'global/init.php';
+header('Content-Type: application/json');
 
 
-require_once 'init.php';
+
+$pdo = new PDO('mysql:host=localhost;dbname=expense_manager;', 'root', 'root');
+
 
 
 // On définit les constantes de connexion à la base de donnée.
@@ -23,6 +27,7 @@ define('_dirRoot', $_SERVER['DOCUMENT_ROOT'] . 'API/global');
 
 //Définition du répertoire des classes.
 define('_dirclass', _dirRoot.'/class/');
+
 
 
 // header('Content-Type: application/json');//Forcer au fichier php de reconnaître le format Json
@@ -156,6 +161,23 @@ define('_dirclass', _dirRoot.'/class/');
 // //    *$users=new UserManager();*/
 
 
+                                        /*TABLE justificatifs*/
+/*
+$justificatif1 = new Justificatif([
+    //'IdJustificatif' =>5,
+    'IntituleJustificatif' =>'Restauration',
+    'URLNomFichier' => '/justificatif/restauration/id=13',
+    'MontantJustificatif' => '120,5'
+]);
+*/
+
+$justificatifs = new JustificatifManager();
+json_encode($justificatifs->jsonRead());
+
+
+                /*Ajout*/
+
+// $justificatifs->create($justificatif1);
 
 
 

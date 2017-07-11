@@ -21,7 +21,7 @@ class Justificatif extends Entity {
         if (is_integer(intval($IdJustificatif))) {
             $this->IdJustificatif = $IdJustificatif;
         } else {
-            $this->addErreur('L\'IdJustificatif doit être un nombre entier');
+            $this->addErreur('L\'IdJustificatif doit etre un nombre entier');
         }
     }
 
@@ -44,20 +44,19 @@ class Justificatif extends Entity {
       public function setMontantJustificatif($MontantJustificatif) {
         if (strlen($MontantJustificatif)) {
 
-            $preg_match ="^[+]?([0-9]{1,2})*[.,]([0-9]{1,1})?$^";
+           $preg_match ="^[+]?([0-9]{1,2})*[.,]([0-9]{1,1})?$^";
         if(preg_match($preg_match,$MontantJustificatif)){
             $this->MontantJustificatif = $MontantJustificatif;
             }elseif(filter_var($MontantJustificatif, FILTER_VALIDATE_INT)){
                   $this->MontantJustificatif = $MontantJustificatif;
               }else{
-                  $this->addErreurFiltre('Le montant prevu doit être un entier ou un decimal');
+                  $this->addErreurFiltre('Le montant prevu doit etre un entier ou un decimal');
               }
-                                         
+                                        
         } else {
-            $this->addErreur('Le montant justificatif doit être un nombre entier');
+            $this->addErreur('Le montant justificatif doit etre un nombre entier');
         }
-    }
-          
+    }    
       
     
     
