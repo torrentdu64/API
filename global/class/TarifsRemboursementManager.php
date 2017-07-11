@@ -2,6 +2,7 @@
 
 require_once 'Manager.php';
 
+
 /**
  * Description of FraisManager
  *
@@ -23,7 +24,6 @@ class TarifsRemboursementManager extends Manager {
   }
 
     
-    
   public function create(TarifsRemboursements &$tarifsRemboursements) {
       var_dump($tarifsRemboursements);
        $this->pdoStatement = $this->pdo->prepare("INSERT INTO tarifsremboursements( MontantRemboursement, Unites) VALUES(:MontantRemboursement, :Unites)");
@@ -40,7 +40,7 @@ class TarifsRemboursementManager extends Manager {
   }
 
     
-      public function update(TarifsRemboursements $tarifsRemboursements) {
+    public function update(TarifsRemboursements $tarifsRemboursements) {
     var_dump($tarifsRemboursements);          
     $this->pdoStatement = $this->pdo->prepare("UPDATE tarifsremboursements SET MontantRemboursement = :MontantRemboursement, Unites = :Unites WHERE TypeDeFrais = :TypeDeFrais");
     $this->pdoStatement->bindValue(':TypeDeFrais',$tarifsRemboursements->getTypeDeFrais(), PDO::PARAM_INT);
@@ -63,23 +63,7 @@ class TarifsRemboursementManager extends Manager {
     
     
     
-    
-    
-    }
-
-/*
-  public function delete($id) {
-    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM frais WHERE id = :id");
-    $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
-    $this->pdoStatement->execute();
-    $data = $this->pdoSatement->fetch();
-    $frais = new Frais($data);
-    return $frais;
-  }
-
 }
-
-*/
 
 
 

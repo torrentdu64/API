@@ -28,7 +28,7 @@ class NoteDeFraisManager extends Manager {
     $this->pdoStatement->bindValue(':IntituleNDF', $noteDeFrais->getIntituleNDF(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':DateNDF', $noteDeFrais->getDateNDF(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':MotifNDF', $noteDeFrais->getMotifNDF(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':MontantPrevu', $noteDeFrais->getMontantPrevu(), PDO::PARAM_INT);
+    $this->pdoStatement->bindValue(':MontantPrevu', $noteDeFrais->getMontantPrevu(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':EtatNDF', $noteDeFrais->getEtatNDF(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':Commentaire', $noteDeFrais->getCommentaire(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':NbreNuiteesSiHotellerie', $noteDeFrais->getNbreNuiteesSiHotellerie(), PDO::PARAM_INT);
@@ -57,7 +57,7 @@ class NoteDeFraisManager extends Manager {
     $this->pdoStatement->bindValue(':IntituleNDF', $noteDeFrais->getIntituleNDF(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':DateNDF', $noteDeFrais->getDateNDF(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':MotifNDF', $noteDeFrais->getMotifNDF(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':MontantPrevu', $noteDeFrais->getMontantPrevu(), PDO::PARAM_INT);
+    $this->pdoStatement->bindValue(':MontantPrevu', $noteDeFrais->getMontantPrevu(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':EtatNDF', $noteDeFrais->getEtatNDF(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':Commentaire', $noteDeFrais->getCommentaire(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':NbreNuiteesSiHotellerie', $noteDeFrais->getNbreNuiteesSiHotellerie(), PDO::PARAM_INT);
