@@ -41,8 +41,8 @@ header('Content-Type: application/json');
 
 //                              /*TABLE client*/
 
-// /*$client1 = new Client([
-// 	//'IdClient' => 144,
+// $client1 = new Client([
+//     'IdClient' => 102,
 //     'NomClient' => 'DUPOND',
 //     'PrenomClient' => 'Jean',
 //     'Adresse1Client' => '8 rue bon accueil',
@@ -53,12 +53,17 @@ header('Content-Type: application/json');
 //     'TelephoneMobileClient' => '0686047638',
 //     'MailClient' => 'contact@mickaelduprat.fr',
 //     'BudgetMaxRemboursementClient' => 200
-// ]);*/
+//  ]);
 
 
 
 
-//  /*$client = new ClientManager(); */
+// $client = new ClientManager();
+// //$client->create($client1);
+// //
+
+// $client->delete($client1);
+
 
 
 //  $client = new ClientManager();
@@ -158,7 +163,7 @@ $justificatif1 = new Justificatif([
 ]);
 */
 
-$justificatifs = new JustificatifManager();
+//$client = new ClientManager();
 //json_encode($justificatifs->jsonRead());
 
 
