@@ -29,7 +29,7 @@ class Justificatif extends Entity {
         if (strlen($IntituleJustificatif)<= 200) {
             $this->IntituleJustificatif = $IntituleJustificatif;
         } else {
-            $this->addErreur('L\'IntituleJustificatif doit comporter moins de 200 caractères');
+            $this->addErreur('L\'Intitule justificatif doit comporter moins de 200 caracteres');
         }
     }
     
@@ -37,17 +37,28 @@ class Justificatif extends Entity {
         if (strlen($URLNomFichier)<= 200) {
             $this->URLNomFichier = $URLNomFichier;
         } else {
-            $this->addErreur('L\'URLNomFichier doit comporter moins de 200 caractères');
+            $this->addErreur('L\'URL Nom Fichier doit comporter moins de 200 caracteres');
         }
     }
     
       public function setMontantJustificatif($MontantJustificatif) {
         if (strlen($MontantJustificatif)) {
+
+            $preg_match ="^[+]?([0-9]{1,2})*[.,]([0-9]{1,1})?$^";
+        if(preg_match($preg_match,$MontantJustificatif)){
             $this->MontantJustificatif = $MontantJustificatif;
+            }elseif(filter_var($MontantJustificatif, FILTER_VALIDATE_INT)){
+                  $this->MontantJustificatif = $MontantJustificatif;
+              }else{
+                  $this->addErreurFiltre('Le montant prevu doit être un entier ou un decimal');
+              }
+                                         
         } else {
-            $this->addErreur('Le MontantJustificatif doit être un nombre entier');
+            $this->addErreur('Le montant justificatif doit être un nombre entier');
         }
     }
+          
+      
     
     
     

@@ -14,8 +14,9 @@
 abstract class Entity {
 
     protected $erreur = [];
+    protected $erreurFiltre=[];
 
-    protected function __construct($data = NULL) {
+    protected function __construct($data) {
         if (is_array($data)) {
             $this->hydrate($data);
         }
@@ -23,6 +24,10 @@ abstract class Entity {
     
     public function addErreur($erreur){
         $this->erreur = $erreur;
+    }
+    
+    public function addErreurFiltre($erreurFiltre){
+        $this->erreurFiltre = $erreurFiltre;
     }
 
     protected function hydrate(array $data) {
