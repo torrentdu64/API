@@ -4,6 +4,8 @@ require_once 'init.php';
 
 
 // On définit les constantes de connexion à la base de donnée.
+
+
 define('_dbHost', 'localhost');
 
 define('_dbName', 'expense_manager2');

@@ -1,6 +1,7 @@
 <?php
-header('Content-Type: application/json');//Forcer au fichier php de reconnaître le format Json
 require_once 'global/init.php';
+header('Content-Type: application/json');//Forcer au fichier php de reconnaître le format Json
+
 
 
 
@@ -8,17 +9,7 @@ require_once 'global/init.php';
 //$pdo = new PDO('mysql:host=localhost;dbname=expense_manager2;', 'root', '');
 
 
-
-$requete=$pdo->prepare("SELECT * FROM justificatifs");
-$requete->execute();
-
-$retour["success"]=true;
-$retour["message"]="Les justificatifs";
-
-
-$retour["results"]["justificatifs"]=$requete->fetchAll();
-
-echo json_encode($retour);//Mettre au format Json    //On a un doublon
+//Mettre au format Json    //On a un doublon*/
 
 
                              /*TABLE client*/
@@ -173,17 +164,17 @@ $tarifsremboursements->delete($tarifsremboursement1);*/
     //'IdJustificatif' =>5,
     'IntituleJustificatif' =>'Restauration',
     'URLNomFichier' => '/justificatif/restauration/id=13',
-    'MontantJustificatif' => '120,5'
+    'MontantJustificatif' => '12,5'
 ]);*/
       
-/*$justificatifs = new JustificatifManager();*/
+$justificatifs = new JustificatifManager();
 
                   /*Ajout*/
-/*$justificatifs->create($justificatif1);*/
+$justificatifs->create($justificatif1);
 
 
                 /*Modification*/
-/*$justificatif1->setMontantJustificatif('1');
+/*$justificatif1->setMontantJustificatif('1,5');
 $justificatifs->update($justificatif1);*/
 
 
