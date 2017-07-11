@@ -27,7 +27,7 @@ class JustificatifManager extends Manager {
         
   public function create( &$justificatifs) {
       var_dump($justificatifs);
-       $this->pdoStatement = $this->pdo->prepare("INSERT INTO Justificatifs(IntituleJustificatif, URLNomFichier,MontantJustificatif) VALUES(:IntituleJustificatif, :URLNomFichier,:MontantJustificatif)");
+       $this->pdoStatement = $this->pdo->prepare("INSERT INTO justificatifs(IntituleJustificatif, URLNomFichier,MontantJustificatif) VALUES(:IntituleJustificatif, :URLNomFichier,:MontantJustificatif)");
     $this->pdoStatement->bindValue(':IntituleJustificatif', $justificatifs->getIntituleJustificatif(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':URLNomFichier', $justificatifs->getURLNomFichier(), PDO::PARAM_STR);
       $this->pdoStatement->bindValue(':MontantJustificatif', $justificatifs->getMontantJustificatif(), PDO::PARAM_STR);
@@ -62,21 +62,6 @@ class JustificatifManager extends Manager {
     var_dump($justificatifs);
     return $justificatifs;
   }
-    
-    public function JsonTRead($justificatifs) {
-         $requete-=$this->pdoStatement->$this->pdo->prepare("SELECT * FROM justificatifs");
-         $requete-=$this->pdoStatement->execute();
-
-        $requete-=$this->pdoStatement->["success"]=true;
-         $requete-=$this->pdoStatement->["message"]="Les justificatifs";
-
-
-        $this->pdoStatement->["results"]["justificatifs"]=$requete->fetchAll();
-
-        retour json_encode($requete);
-  }
-    
-    
     
     
     
