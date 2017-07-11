@@ -13,11 +13,16 @@ abstract class Manager {
     protected $pdoException;
 
     public function __construct() {
-        $dbHost = _dbHost;
-        $dbName = _dbName;
-        $dbUser = _dbUser;
-        $dbPassW = _dbPassW;
-        $this->pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8", "$dbUser", "$dbPassW");
-        $this->pdoException = $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        try{
+            $dbHost = _dbHost;
+            $dbName = _dbName;
+            $dbUser = _dbUser;
+            $dbPassW = _dbPassW;
+            $this->pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8",$dbUser,$dbPassW);
+        }
+        catch(Exception $e){
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }
     }
 }
