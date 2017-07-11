@@ -5,7 +5,7 @@ require_once 'global/init.php';
 
 
 
-$pdo = new PDO('mysql:host=localhost;dbname=expense_manager2;', 'root', '');
+//$pdo = new PDO('mysql:host=localhost;dbname=expense_manager2;', 'root', '');
 
 
 
