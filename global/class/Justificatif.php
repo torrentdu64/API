@@ -6,6 +6,7 @@
  * @author Micka
  */
 class Justificatif extends Entity {
+    
     private $IdJustificatif;
     private $IntituleJustificatif;
     private $URLNomFichier;

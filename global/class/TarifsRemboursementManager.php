@@ -61,6 +61,15 @@ class TarifsRemboursementManager extends Manager {
     return $tarifsRemboursements;
   }
     
+    public function jsonRead() {
+        $requete = $this->pdo->prepare("SELECT * FROM tarifsremboursements");
+        $requete->execute();
+        $res["success"] = true;
+        $res["message"] = "Les tarifs remboursements";
+        $res["results"]["Tarifs remboursements"] = $requete->fetchAll();
+        return json_encode($res); //Mettre au format Json    //On a un doublon
+    }
+    
     
     
 }

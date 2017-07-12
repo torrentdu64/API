@@ -3,11 +3,10 @@ require_once 'global/init.php';
 
 header('Content-Type: application/json');//Forcer au fichier php de reconnaître le format Json
 
-header('Content-Type: application/json');
 
 
 
-$pdo = new PDO('mysql:host=localhost;dbname=expense_manager;', 'root', 'root');
+
 
 
 
@@ -117,9 +116,10 @@ $notedefrais->update($notedefrais1);*/
 ]);*/
 
         
-//    *$users=new UserManager();*/
+    /*$users=new UserManager();
 
-
+   $returnJson=$users->jsonRead();
+   echo $returnJson;*/
 
 
              /*Ajout*/
@@ -166,24 +166,24 @@ $tarifsremboursements->delete($tarifsremboursement1);*/
 
 
                                         /*TABLE justificatifs*/
-/*
-$justificatif1 = new Justificatif([
+
+/*$justificatif1 = new Justificatif([
     //'IdJustificatif' =>5,
     'IntituleJustificatif' =>'Restauration',
     'URLNomFichier' => '/justificatif/restauration/id=13',
 <<<<<<< HEAD
     'MontantJustificatif' => '12,5'
 ]);
-      
-$justificatifs = new JustificatifManager();
-
-
+      */
 
 
 $justificatifs = new JustificatifManager();
+$returnJson=$justificatifs->jsonRead();
+echo $returnJson;
 
-json_encode($justificatifs->jsonRead());
-*/
+
+
+
 
                 /*Ajout*/
 

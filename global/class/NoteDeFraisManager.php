@@ -83,6 +83,15 @@ class NoteDeFraisManager extends Manager {
     return $noteDeFrais;
   }
     
+     public function jsonRead() {
+        $requete = $this->pdo->prepare("SELECT * FROM NoteDeFraisManager");
+        $requete->execute();
+        $res["success"] = true;
+        $res["message"] = "Les Note De Frais Manager";
+        $res["results"]["Note De Frais Manager"] = $requete->fetchAll();
+        return json_encode($res); //Mettre au format Json    //On a un doublon
+    }
+    
     }
 
 /*
