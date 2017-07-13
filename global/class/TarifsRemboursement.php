@@ -5,7 +5,7 @@
  *
  * @author Micka
  */
-class TarifsRemboursements extends Entity {
+class TarifsRemboursement extends Entity {
     private $TypeDeFrais;
     private $MontantRemboursement;
     private $Unites;
