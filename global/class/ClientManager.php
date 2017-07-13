@@ -50,6 +50,33 @@ class ClientManager extends Manager {
     return $client;
   }
 
+  public function readAll(Client $client) {
+    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM Client");
+    $listClients = $this->pdoStatement->execute();
+
+    $tabClients[] = ['IdClient' => $clients->getIdClient(),
+                           'NomClient' => $clients->getNomClient(),
+                           'PrenomClient' => $clients->getPrenomClient(),
+                           'Adresse1Client' => $clients->getAdresse1Client(),
+                           'Adresse2Client' => $clients->getAdresse2Client(),
+                           'CodePostalClient' => $clients->getCodePostalClient(),
+                           'VilleClient' => $clients->getVilleClient(),
+                           'TelephoneBureauClient' => $clients->getTelephoneBureauClient(),
+                           'TelephoneMobileClient' => $clients->getTelephoneMobileClient(),
+                           'MailClient' => $clients->getMailClient(),
+                           'BudgetMaxRemboursementClient' => $clients->getBudgetMaxRemboursementClient(),
+                ];
+
+    foreach ($tabClients as $key => $clients) {
+          $json .= $key.' '.$clients;
+        }
+
+    $data = $this->pdoStatement->fetch();
+    $client = new Client($data);
+
+    return $json;
+  }
+
    //  !! TODO : change PDO::PARAM_ to good params !!
 
 
