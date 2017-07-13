@@ -54,7 +54,7 @@ class ClientManager extends Manager {
    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM Client");
     $this->pdoStatement->execute();
     $data = $this->pdoStatement->fetchAll();
-
+    
     $objectClient = [];
 
     foreach ($data as $clients) {
