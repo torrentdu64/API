@@ -7,54 +7,14 @@ header('Content-Type: application/json');//Forcer au fichier php de reconnaître
 
 
 
-//$pdo = new PDO('mysql:host=localhost;dbname=expense_manager;', 'root', 'root');
+
+                              /*TABLE client*/
 
 
 
+/*
+$client1 = new Client([
 
-
-
-
-
-
-//$pdo = new PDO('mysql:host=localhost;dbname=expense_manager2;', 'root', '');
-
-
-//Mettre au format Json    //On a un doublon*/
-
-//define('_dbName', 'expense_manager'); // u596614644_dev
-//define('_dbUser', 'root'); // u596614644_user
-//define('_dbPassW', 'root'); // Omb3qCt8]$yUtFN
-
-
-
-
-// header('Content-Type: application/json');//Forcer au fichier php de reconnaître le format Json
-// require_once 'global/init.php';
-
-
-
-
-// //$pdo = new PDO('mysql:host=localhost;dbname=expense_manager2;', 'root', '');
-
-
-
-
-// $requete=$pdo->prepare("SELECT * FROM justificatifs");
-// $requete->execute();
-
-// $retour["success"]=true;
-// $retour["message"]="Les justificatifs";
-
-
-// $retour["results"]["justificatifs"]=$requete->fetchAll();
-
-// echo json_encode($retour);//Mettre au format Json    //On a un doublon
-
-
-//                              /*TABLE client*/
-
-/*$client1 = new Client([
     //'IdClient' => 102,
     'NomClient' => 'DUPOND',
     'PrenomClient' => 'Jean',
@@ -198,6 +158,7 @@ var_dump( $json);*/
                                         /*TABLE justificatifs*/
 
 /*$justificatif1 = new Justificatif([
+<<<<<<< HEAD
     //'IdJustificatif' =>5,
     'IntituleJustificatif' =>'Restauration',
     'URLNomFichier' => '/justificatif/restauration/id=13',
@@ -207,19 +168,58 @@ var_dump( $json);*/
       */
 
 
-
+/*
 $justificatifs = new JustificatifManager();
 $returnJson=$justificatifs->jsonRead();
 echo $returnJson;
 
 
 
-//$client = new ClientManager();
-//json_encode($justificatifs->jsonRead());
+    // 'IdJustificatif' =>32,
+    'IntituleJustificatif' =>'Restauration',
+    'URLNomFichier' => '/justificatif/restauration/id=13',
+    'MontantJustificatif' => '126,5'
+]);*/
+
+
+$justificatifs = new JustificatifManager();
+// echo $justificatifs->jsonRead();
+
+
+ 
+               /*Lire*/
+
+$just = $justificatifs->read(1);
+
+$jsonTab = [
+    "success" => ["true"],
+    "message" => ["Les justificatifs"],
+    "justificatifs"=> [
+        "IdJustificatif" => $just->getIdJustificatif(),
+        "IntituleJustificatif" => $just->getIntituleJustificatif(),
+        "URLNomFichier" => $just->getURLNomFichier(),
+        "MontantJustificatif" => $just->getMontantJustificatif()
+        ],
+    ];
+
+
+$jsonTab = json_encode($jsonTab);
+echo $jsonTab;
+ 
+
+
+/*foreach ($jsonTab as $key => $value) {
+    $json .= $key.' : '.$value;
+}*/
+
+
+
+
 
 
 
                 /*Ajout*/
+
 
 // $justificatifs->create($justificatif1);
 
@@ -280,12 +280,10 @@ $justificatifs->update($justificatif1);*/
 //     //'IdJustificatif' =>5,
 //     'IntituleJustificatif' =>'Restauration',
 //     'URLNomFichier' => '/justificatif/restauration/id=13',
-// <<<<<<< HEAD
 //     'MontantJustificatif' => '120'
 // ]);
 
 // $justificatifs = new JustificatifManager();
-// =======
 //     'MontantJustificatif' => '120,5'
 // ]);*/
 
@@ -301,8 +299,8 @@ $justificatifs->update($justificatif1);*/
 // $justificatifs->update($justificatif1);*/
 
 
-//                 /*Suppression*/
-// /*$justificatifs->delete($justificatif1);*/
+                /*Suppression*/
+// $justificatifs->delete($justificatif1);
 
 
 
