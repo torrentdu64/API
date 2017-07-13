@@ -63,13 +63,21 @@ class JustificatifManager extends Manager {
     return $justificatifs;
   }
     
-    public function jsonRead() {
-        $requete = $this->pdo->prepare("SELECT * FROM justificatifs");
-        $requete->execute();
-        $res["success"] = true;
-        $res["message"] = "Les justificatifs";
-        $res["results"]["justificatifs"] = $requete->fetchAll();
-        return json_encode($res); //Mettre au format Json    //On a un doublon
+    public function jsonRead($just) {
+       $jsonTab = [
+    "success" => ["true"],
+    "message" => ["Les justificatifs"],
+    "justificatifs"=> [
+        "IdJustificatif" => $just->getIdJustificatif(),
+        "IntituleJustificatif" => $just->getIntituleJustificatif(),
+        "URLNomFichier" => $just->getURLNomFichier(),
+        "MontantJustificatif" => $just->getMontantJustificatif()
+        ],
+    ];
+
+
+return json_encode($jsonTab);
+
        
     }
     

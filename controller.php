@@ -158,11 +158,11 @@ var_dump( $json);*/
                                         /*TABLE justificatifs*/
 
 /*$justificatif1 = new Justificatif([
-<<<<<<< HEAD
+
     //'IdJustificatif' =>5,
     'IntituleJustificatif' =>'Restauration',
     'URLNomFichier' => '/justificatif/restauration/id=13',
-<<<<<<< HEAD
+
     'MontantJustificatif' => '12,5'
 ]);
       */
@@ -189,22 +189,12 @@ $justificatifs = new JustificatifManager();
  
                /*Lire*/
 
-$just = $justificatifs->read(1);
-
-$jsonTab = [
-    "success" => ["true"],
-    "message" => ["Les justificatifs"],
-    "justificatifs"=> [
-        "IdJustificatif" => $just->getIdJustificatif(),
-        "IntituleJustificatif" => $just->getIntituleJustificatif(),
-        "URLNomFichier" => $just->getURLNomFichier(),
-        "MontantJustificatif" => $just->getMontantJustificatif()
-        ],
-    ];
+$just = $justificatifs->read(2);
+echo $justificatifs->jsonRead($just);
 
 
-$jsonTab = json_encode($jsonTab);
-echo $jsonTab;
+
+
  
 
 
