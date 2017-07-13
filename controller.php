@@ -21,6 +21,7 @@ header('Content-Type: application/json');
 
 //                              /*TABLE client*/
 
+/*
 $client1 = new Client([
     //'IdClient' => 102,
     'NomClient' => 'DUPOND',
@@ -156,12 +157,12 @@ var_dump( $json);
 
                                         /*TABLE justificatifs*/
 
-$justificatif1 = new Justificatif([
+/*$justificatif1 = new Justificatif([
     // 'IdJustificatif' =>32,
     'IntituleJustificatif' =>'Restauration',
     'URLNomFichier' => '/justificatif/restauration/id=13',
     'MontantJustificatif' => '126,5'
-]);
+]);*/
 
 
 $justificatifs = new JustificatifManager();
@@ -172,10 +173,31 @@ $justificatifs = new JustificatifManager();
                /*Lire*/
 
 $just = $justificatifs->read(1);
-echo $just->getIntituleJustificatif();
-echo $just->getURLNomFichier();
-echo $just->getMontantJustificatif();
-echo json_encode($just);
+
+$jsonTab = [
+    "success" => ["true"],
+    "message" => ["Les justificatifs"],
+    "justificatifs"=> [
+        "IdJustificatif" => $just->getIdJustificatif(),
+        "IntituleJustificatif" => $just->getIntituleJustificatif(),
+        "URLNomFichier" => $just->getURLNomFichier(),
+        "MontantJustificatif" => $just->getMontantJustificatif()
+        ],
+    ];
+
+
+$jsonTab = json_encode($jsonTab);
+echo $jsonTab;
+ 
+
+
+/*foreach ($jsonTab as $key => $value) {
+    $json .= $key.' : '.$value;
+}*/
+
+ 
+
+
 
                /*Ajout*/
 

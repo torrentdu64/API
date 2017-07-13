@@ -60,7 +60,7 @@ class JustificatifManager extends Manager {
     }
 
     public function jsonRead() {
-        $requete = $pdo->prepare("ELESCT * FROM Justificatifs");
+        $requete = $pdo->prepare("SELECT * FROM Justificatifs");
         $requete->execute();
 
         $res["success"] = true;
