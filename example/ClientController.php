@@ -12,19 +12,20 @@ class CLientController
 	}
 
 
+
+
     /**
-     * Gets the user by id or current user
+     * Logs in a user with the given username and password POSTed. Though true
+     * REST doesn't believe in sessions, it is often desirable for an AJAX server.
      *
      * @url GET /client/$id
-     * 
      */
   
 
-    public function getOneClients($id)
+    public function getListClients($id)
     {       
-
-    	$listeClients = $this->clientManager->read($id);
-        // var_dump($listeClients);
+        $listeClients = $this->clientManager->read($id);
+        //var_dump($listeClients);
 
         $tabClients = [];
 
@@ -42,14 +43,14 @@ class CLientController
                            'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient(),
                 ];
             //var_dump($listeClients);
-            $tabClients[] = $tabClients;
+            $tabClients[] = $listeClients;
             
         }
 
         // var_dump($tabClients);
-        return $tabClients;
-
+        return $listeClients;
     }
+
 
 }
 
