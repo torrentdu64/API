@@ -54,7 +54,7 @@ header('Content-Type: application/json');//Forcer au fichier php de reconnaître
 
 //                              /*TABLE client*/
 
-$client1 = new Client([
+/*$client1 = new Client([
     //'IdClient' => 102,
     'NomClient' => 'DUPOND',
     'PrenomClient' => 'Jean',
@@ -72,8 +72,7 @@ $client1 = new Client([
 
 
 $client = new ClientManager();
-$val = $client->read(1);
-
+$val = $client->read(1);*/
 
 
 // echo $val->getPrenomClient();
@@ -82,12 +81,13 @@ $val = $client->read(1);
 // echo $val->getTelephoneBureauClient();
 // echo $val->getAdresse1Client();
 
+/*
 foreach ($client1 as $res ) {
  $json .=[  $res['IdClient'] => "get" . $res()
  ];
 }
 
-var_dump( $json);
+var_dump( $json);*/
 
 
 
@@ -145,7 +145,7 @@ var_dump( $json);
 //     'Login' => 21,
 //     'IdClient' => 3
 // ]);*/
->>>>>>> 378ecc4de3cb6fc8201dda276b2e328fca92b01d
+
 
 // /*$notedefrais = new NoteDeFraisManager();*/
 
