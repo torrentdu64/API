@@ -21,6 +21,23 @@ class CLientController
     {       
     	$listeClients = $this->clientManager->readAll();
     	
+        foreach ($listeClients as $key => $client) {
+                     $tabClients = ['IdClient' => $client->getIdClient(),
+                                    'NomClient' => $client->getNomClient(),
+                                    'PrenomClient' => $client->getPrenomClient(),
+                                    'Adresse1Client' => $client->getAdresse1Client(),
+                                    'Adresse2Client' => $client->getAdresse2Client(),
+                                    'CodePostalClient' => $client->getCodePostalClient(),
+                                    'VilleClient' => $client->getVilleClient(),
+                                    'TelephoneBureauClient' => $client->getTelephoneBureauClient(),
+                                    'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
+                                    'MailClient' => $client->getMailClient(),
+                                    'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
+                ];
+            //var_dump($listeClients);
+            $tabClients[] = $listeClients;
+         }
+
         return $listeClients;
     }
 
