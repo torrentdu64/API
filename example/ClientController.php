@@ -2,7 +2,7 @@
 
 use \Jacwright\RestServer\RestException;
 
-class CLientController
+class ClientController
 {
 
 	private $clientManager;
@@ -10,6 +10,19 @@ class CLientController
 	public function __construct(){
 		$this->clientManager = new ClientManager();
 	}
+
+
+    /**
+     * Get hello kikou
+     *
+     * @url GET /
+     *
+     */
+
+    public function hellokikou(){
+        $tab[] = ["success" => "Hello kikou ! :)"];
+        return $tab;
+    }
 
     /**
      * Gets all users
@@ -90,6 +103,44 @@ class CLientController
 
     }
 
+    /**
+     * Post one user
+     *
+     * @url POST /client
+     *
+     */
+
+
+    public function createOneClient(){
+      $champ = ["NomClient", "PrenomClient", "Adresse1Client", "Adresse2Client","CodePostalClient", "VilleClient" , "TelephoneBureauClient", "TelephoneMobileClient", "MailClient", "BudgetMaxRemboursementClient"];
+      foreach ($champ as $key) {
+           if(isset($_POST[$key])){
+            $data = [ 'NomClient' => $_POST["NomClient"],
+                       'PrenomClient'  => $_POST["PrenomClient"],
+                       'Adresse1Client' => $_POST["Adresse1Client"],
+                       'Adresse2Client' => $_POST["Adresse2Client"],
+                       'CodePostalClient' => $_POST["CodePostalClient"],
+                       'VilleClient' => $_POST["VilleClient"],
+                       'TelephoneBureauClient' => $_POST["TelephoneBureauClient"],
+                       'TelephoneMobileClient' => $_POST["TelephoneMobileClient"],
+                       'MailClient' => $_POST["MailClient"],
+                       'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
+                        ];
+                        $clientJSON = new Client($data);
+                        $ok = $this->clientManager->create($clientJSON);
+                        return $result = ['success' => $ok];
+
+           }
+         // if(isset($_POST["NomClient"]) && isset($_POST["PrenomClient"]) && isset($_POST["Adresse1Client"]) && isset($_POST["Adresse2Client"]) && isset($_POST["CodePostalClient"]) && isset($_POST["VilleClient"]), isset($_POST["TelephoneBureauClient"]) && isset($_POST["TelephoneMobileClient"]) && isset($_POST["MailClient"]) && isset($_POST["BudgetMaxRemboursementClient"]) ){
+
+
+
+         // }else{
+         //  return "nop";
+         // }
+      //}
+  }
+
 
     /**
      * Delete one user
@@ -110,30 +161,6 @@ class CLientController
         return $result;
     }
 
-    /**
-     * Saves a user to the database
-     *
-     * @url POST /client
-     * @url PUT /users/$id
-     */
-    public function saveClient($id = null, $data)
-    {
-
-      $varr = [ "NomClient" => $_POST['NomClient']];
-
-      return $varr;
-
-
-      //return var_dump($json);
-      // $data = [var_dump($_POST['NomClient'])  ];
-      // $client = new Client($data);
-      // var_dump($client);
-        // ... validate $data properties such as $data->username, $data->firstName, etc.
-        // $data->id = $id;
-        // $user = User::saveUser($data); // saving the user to the database
-        //$user = array("id" => $id, "name" => null);
-       // return $user; // returning the updated or newly created user object
-    }
 
 
 }
