@@ -2,7 +2,7 @@
 
 use \Jacwright\RestServer\RestException;
 
-class CLientController
+class ClientController
 {
 
 	private $clientManager;
@@ -132,6 +132,47 @@ class CLientController
 
         } 
     
+
+    /**
+     * Update one user
+     *
+     * @url PUT /client/$id
+     * 
+     */
+
+    public function updateOneClient($id){       
+
+        // foreach ($clientJSON as $key) {
+        //     $json = $key;
+        // }
+
+        // var_dump($json);
+
+    
+            $data = [ 'IdClient' => $id,
+                      'NomClient' => $_POST["NomClient"],
+                      'PrenomClient' => $_POST["PrenomClient"],
+                      'Adresse1Client' => $_POST["Adresse1Client"],
+                      'Adresse2Client' => $_POST["Adresse2Client"],
+                      'CodePostalClient' => $_POST["CodePostalClient"],
+                      'VilleClient' => $_POST["VilleClient"],
+                      'TelephoneBureauClient' => $_POST["TelephoneBureauClient"],
+                      'TelephoneMobileClient' => $_POST["TelephoneMobileClient"],
+                      'MailClient' => $_POST["MailClient"],
+                      'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
+                    ];
+
+        $client = new Client($data);   
+        $ok = $this->clientManager->update($client);
+
+        
+        return $result = ['success' => $ok];
+
+        // return $result;
+
+        } 
+
+
 
     /**
      * Delete one user
