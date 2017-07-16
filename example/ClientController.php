@@ -110,6 +110,31 @@ class CLientController
         return $result;
     }
 
+    /**
+     * Saves a user to the database
+     *
+     * @url POST /client
+     * @url PUT /users/$id
+     */
+    public function saveClient($id = null, $data)
+    {
+
+      $varr = [ "NomClient" => $_POST['NomClient']];
+
+      return $varr;
+
+
+      //return var_dump($json);
+      // $data = [var_dump($_POST['NomClient'])  ];
+      // $client = new Client($data);
+      // var_dump($client);
+        // ... validate $data properties such as $data->username, $data->firstName, etc.
+        // $data->id = $id;
+        // $user = User::saveUser($data); // saving the user to the database
+        //$user = array("id" => $id, "name" => null);
+       // return $user; // returning the updated or newly created user object
+    }
+
 
 }
 
