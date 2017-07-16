@@ -11,47 +11,107 @@ class CLientController
 		$this->clientManager = new ClientManager();
 	}
 
-
-
-
     /**
-     * Logs in a user with the given username and password POSTed. Though true
-     * REST doesn't believe in sessions, it is often desirable for an AJAX server.
+     * Gets all users
      *
-     * @url GET /client/$id
+     * @url GET /client
+     * 
      */
   
 
-    public function getListClients($id)
-    {       
-        $listeClients = $this->clientManager->read($id);
-        //var_dump($listeClients);
+    public function getAllClients(){       
 
-        $tabClients = [];
+        $listeClients = $this->clientManager->readAll();
+        
+        $tabAllClient = [];
 
-    foreach ($listeClients as $key => $client) {
-                    $tabClients = ['IdClient' => $client->getIdClient(),
-                           'NomClient' => $client->getNomClient(),
-                           'PrenomClient' => $client->getPrenomClient(),
-                           'Adresse1Client' => $client->getAdresse1Client(),
-                           'Adresse2Client' => $client->getAdresse2Client(),
-                           'CodePostalClient' => $client->getCodePostalClient(),
-                           'VilleClient' => $client->getVilleClient(),
-                           'TelephoneBureauClient' => $client->getTelephoneBureauClient(),
-                           'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
-                           'MailClient' => $client->getMailClient(),
-                           'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient(),
-                ];
-            //var_dump($listeClients);
-            $tabClients[] = $listeClients;
-            
+        foreach ($listeClients as $key => $client) {
+                $data = ['IdClient' => $client->getIdClient(),
+                         'NomClient' => $client->getNomClient(),
+                         'PrenomClient' => $client->getPrenomClient(),
+                         'Adresse1Client' => $client->getAdresse1Client(),
+                         'Adresse2Client' => $client->getAdresse2Client(),
+                         'CodePostalClient' => $client->getCodePostalClient(),
+                         'VilleClient' => $client->getVilleClient(),
+                         'TelephoneBureauClient' => $client->getTelephoneBureauClient(),
+                         'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
+                         'MailClient' => $client->getMailClient(),
+                         'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
+                ];      
+
+                $tabAllClient[] = $data;
         }
 
-        // var_dump($tabClients);
-        return $listeClients;
+        return $tabAllClient;
+
     }
 
 
+    /**
+     * Gets the user by id or current user
+     *
+     * @url GET /client/$id
+     * 
+     */
+  
+
+    public function getOneClient($id){       
+
+    	$selectedClients = $this->clientManager->read($id);
+        // var_dump($selectedClients);
+
+        $tabSelectedClients = ['IdClient' => $selectedClients->getIdClient(),
+                         'NomClient' => $selectedClients->getNomClient(),
+                         'PrenomClient' => $selectedClients->getPrenomClient(),
+                         'Adresse1Client' => $selectedClients->getAdresse1Client(),
+                         'Adresse2Client' => $selectedClients->getAdresse2Client(),
+                         'CodePostalClient' => $selectedClients->getCodePostalClient(),
+                         'VilleClient' => $selectedClients->getVilleClient(),
+                         'TelephoneBureauClient' => $selectedClients->getTelephoneBureauClient(),
+                         'TelephoneMobileClient' => $selectedClients->getTelephoneMobileClient(),
+                         'MailClient' => $selectedClients->getMailClient(),
+                         'BudgetMaxRemboursementClient' => $selectedClients->getBudgetMaxRemboursementClient()
+                ];    
+
+        return $tabSelectedClients;
+
+    }
+
+
+    /**
+     * Delete one user
+     *
+     * @url DELETE /client/$id
+     * 
+     */
+  
+
+    public function deleteOneClient(){       
+
+        $listeClients = $this->clientManager->readAll();
+        
+        $tabAllClient = [];
+
+        foreach ($listeClients as $key => $client) {
+                $data = ['IdClient' => $client->getIdClient(),
+                         'NomClient' => $client->getNomClient(),
+                         'PrenomClient' => $client->getPrenomClient(),
+                         'Adresse1Client' => $client->getAdresse1Client(),
+                         'Adresse2Client' => $client->getAdresse2Client(),
+                         'CodePostalClient' => $client->getCodePostalClient(),
+                         'VilleClient' => $client->getVilleClient(),
+                         'TelephoneBureauClient' => $client->getTelephoneBureauClient(),
+                         'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
+                         'MailClient' => $client->getMailClient(),
+                         'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
+                ];      
+
+                $tabAllClient[] = $data;
+        }
+
+        return $tabAllClient;
+
+    }
 }
 
   
