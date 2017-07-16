@@ -15,14 +15,14 @@ class CLientController
      * Gets all users
      *
      * @url GET /client
-     * 
+     *
      */
-  
 
-    public function getAllClients(){       
+
+    public function getAllClients(){
 
         $listeClients = $this->clientManager->readAll();
-        
+
         $tabAllClient = [];
 
         foreach ($listeClients as $key => $client) {
@@ -37,7 +37,7 @@ class CLientController
                          'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
                          'MailClient' => $client->getMailClient(),
                          'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
-                ];      
+                ];
 
                 $tabAllClient[] = $data;
         }
@@ -48,14 +48,25 @@ class CLientController
 
 
     /**
+     * Returns a JSON string object to the browser when hitting the root of the domain
+     *
+     * @url GET /
+     */
+    public function test()
+    {
+        return "Hello World";
+    }
+
+
+    /**
      * Gets the user by id or current user
      *
      * @url GET /client/$id
-     * 
+     *
      */
-  
 
-    public function getOneClient($id){       
+
+    public function getOneClient($id){
 
     	$selectedClients = $this->clientManager->read($id);
         // var_dump($selectedClients);
@@ -71,7 +82,7 @@ class CLientController
                          'TelephoneMobileClient' => $selectedClients->getTelephoneMobileClient(),
                          'MailClient' => $selectedClients->getMailClient(),
                          'BudgetMaxRemboursementClient' => $selectedClients->getBudgetMaxRemboursementClient()
-                ];    
+                ];
 
         return $tabSelectedClients;
 
@@ -82,14 +93,14 @@ class CLientController
      * Delete one user
      *
      * @url DELETE /client/$id
-     * 
+     *
      */
-  
 
-    public function deleteOneClient(){       
+
+    public function deleteOneClient(){
 
         $listeClients = $this->clientManager->readAll();
-        
+
         $tabAllClient = [];
 
         foreach ($listeClients as $key => $client) {
@@ -104,7 +115,7 @@ class CLientController
                          'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
                          'MailClient' => $client->getMailClient(),
                          'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
-                ];      
+                ];
 
                 $tabAllClient[] = $data;
         }
@@ -114,4 +125,4 @@ class CLientController
     }
 }
 
-  
+
