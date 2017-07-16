@@ -112,16 +112,37 @@ class ClientManager extends Manager {
     return $client;
   }
 
-  public function delete(Client $client) {
-    var_dump($client);
-    $this->pdoStatement = $this->pdo->prepare("DELETE FROM Client WHERE IdClient = :IdClient");
-    $this->pdoStatement->bindValue(':IdClient', $client->getIdClient(), PDO::PARAM_INT);
+  public function delete($IdClient) {
+    $this->pdoStatement = $this->pdo->prepare("DELETE FROM Client WHERE IdClient = $IdClient");
     $this->pdoStatement->execute();
-    var_dump($client);
-    return $client;
-  }
     
+    //return $this->checkBDD($IdClient);
+    $check = $this->checkBDD($IdClient);
+    if ($check == NULL) {
+      // $destroy[] = $this->pdoStatement->execute();
+      return $false;
+    } else {
+      $destroy[] = $this->pdoStatement->execute();
+      return $destroy;
+    }  
+  }
       
+
+   public function checkBDD($IdClient) {
+    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM Client WHERE IdClient = $IdClient");
+    $this->pdoStatement->execute();
+    $data = $this->pdoStatement->fetch();
+    $client = new Client($data);
+    $client->getIdClient();
+    $tab[] = $client->getIdClient();
+    return $tab;
+    // if ($client->getIdClient() == NULL) {
+    //   return false;
+    // } else {
+    //   return true;
+    // }
+  }
+
     public function jsonRead() {
         $requete = $this->pdo->prepare("SELECT * FROM client");
         $requete->execute();
@@ -130,14 +151,6 @@ class ClientManager extends Manager {
         $res["results"]["justificatifs"] = $requete->fetchAll();
         return json_encode($res); //Mettre au format Json    //On a un doublon
     }
-
-
-//   private function json($data){
-//    if(is_array($data)){
-//      return json_encode($data);
-//    }
- 
-
 }
 
 
