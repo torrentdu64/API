@@ -11,6 +11,19 @@ class CLientController
 		$this->clientManager = new ClientManager();
 	}
 
+
+    /**
+     * Get hello kikou
+     *
+     * @url GET /
+     * 
+     */
+
+    public function hellokikou(){  
+        $tab[] = ["success" => "Hello kikou ! :)"]; 
+        return $tab;
+    }
+
     /**
      * Gets all users
      *
@@ -77,6 +90,42 @@ class CLientController
 
     }
 
+    /**
+     * Post one user
+     *
+     * @url POST /client
+     * 
+     */
+  
+
+    public function createOneClient($clientJSON){       
+
+         $data = [ 'NomClient' => $_POST["NomClient"],
+                   'PrenomClient' => $_POST["PrenomClient"],
+                   'Adresse1Client' => $_POST["Adresse1Client"],
+                   'Adresse2Client' => $_POST["Adresse2Client"],
+                   'CodePostalClient' => $_POST["CodePostalClient"],
+                   'VilleClient' => $_POST["VilleClient"],
+                   'TelephoneBureauClient' => $_POST["TelephoneBureauClient"],
+                   'TelephoneMobileClient' => $_POST["TelephoneMobileClient"],
+                   'MailClient' => $_POST["MailClient"],
+                   'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
+                ];    
+
+        $clientJSON = new Client($data);
+
+        $ok = $this->clientManager->create($clientJSON);
+        
+        if ($ok == false) {
+            return "Error";
+        } else {
+            return "Success";
+        }
+
+        // $result = ['success' => $ok];
+
+        // return $result;
+    }
 
     /**
      * Delete one user
