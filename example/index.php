@@ -10,7 +10,7 @@ require 'ClientController.php';
 // require 'UserController.php';
 
 $server = new \Jacwright\RestServer\RestServer('debug');
-$client = new Client();
+
 $server->addClass('ClientController');
 // $server->addClass('JustificatifController');
 // $server->addClass('NoteDeFraisController');

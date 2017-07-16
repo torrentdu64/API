@@ -61,16 +61,16 @@ class CLientController
         // var_dump($selectedClients);
 
         $tabSelectedClients = ['IdClient' => $selectedClients->getIdClient(),
-                         'NomClient' => $selectedClients->getNomClient(),
-                         'PrenomClient' => $selectedClients->getPrenomClient(),
-                         'Adresse1Client' => $selectedClients->getAdresse1Client(),
-                         'Adresse2Client' => $selectedClients->getAdresse2Client(),
-                         'CodePostalClient' => $selectedClients->getCodePostalClient(),
-                         'VilleClient' => $selectedClients->getVilleClient(),
-                         'TelephoneBureauClient' => $selectedClients->getTelephoneBureauClient(),
-                         'TelephoneMobileClient' => $selectedClients->getTelephoneMobileClient(),
-                         'MailClient' => $selectedClients->getMailClient(),
-                         'BudgetMaxRemboursementClient' => $selectedClients->getBudgetMaxRemboursementClient()
+                               'NomClient' => $selectedClients->getNomClient(),
+                               'PrenomClient' => $selectedClients->getPrenomClient(),
+                               'Adresse1Client' => $selectedClients->getAdresse1Client(),
+                               'Adresse2Client' => $selectedClients->getAdresse2Client(),
+                               'CodePostalClient' => $selectedClients->getCodePostalClient(),
+                               'VilleClient' => $selectedClients->getVilleClient(),
+                               'TelephoneBureauClient' => $selectedClients->getTelephoneBureauClient(),
+                               'TelephoneMobileClient' => $selectedClients->getTelephoneMobileClient(),
+                               'MailClient' => $selectedClients->getMailClient(),
+                               'BudgetMaxRemboursementClient' => $selectedClients->getBudgetMaxRemboursementClient()
                 ];    
 
         return $tabSelectedClients;
@@ -86,32 +86,18 @@ class CLientController
      */
   
 
-    public function deleteOneClient(){       
+    public function deleteOneClient($id){       
 
-        $listeClients = $this->clientManager->readAll();
+
+        // return "Le client n° ".$deleteClient->getIdClient()." au nom de ".$deleteClient->getNomClient()." a bien été supprimé !";
+
+        $ok = $this->clientManager->delete($id);
+        $result = ['success' => $ok];
         
-        $tabAllClient = [];
-
-        foreach ($listeClients as $key => $client) {
-                $data = ['IdClient' => $client->getIdClient(),
-                         'NomClient' => $client->getNomClient(),
-                         'PrenomClient' => $client->getPrenomClient(),
-                         'Adresse1Client' => $client->getAdresse1Client(),
-                         'Adresse2Client' => $client->getAdresse2Client(),
-                         'CodePostalClient' => $client->getCodePostalClient(),
-                         'VilleClient' => $client->getVilleClient(),
-                         'TelephoneBureauClient' => $client->getTelephoneBureauClient(),
-                         'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
-                         'MailClient' => $client->getMailClient(),
-                         'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
-                ];      
-
-                $tabAllClient[] = $data;
-        }
-
-        return $tabAllClient;
-
+        return $result;
     }
+
+    
 }
 
   
