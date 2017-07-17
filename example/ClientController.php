@@ -60,15 +60,7 @@ class ClientController
     }
 
 
-    /**
-     * Returns a JSON string object to the browser when hitting the root of the domain
-     *
-     * @url GET /
-     */
-    public function test()
-    {
-        return "Hello World";
-    }
+
 
 
     /**
@@ -84,19 +76,19 @@ class ClientController
     	$selectedClients = $this->clientManager->read($id);
         // var_dump($selectedClients);
 
-        $tabSelectedClients = ['IdClient' => $selectedClients->getIdClient(),
-
-                               'NomClient' => $selectedClients->getNomClient(),
-                               'PrenomClient' => $selectedClients->getPrenomClient(),
-                               'Adresse1Client' => $selectedClients->getAdresse1Client(),
-                               'Adresse2Client' => $selectedClients->getAdresse2Client(),
-                               'CodePostalClient' => $selectedClients->getCodePostalClient(),
-                               'VilleClient' => $selectedClients->getVilleClient(),
-                               'TelephoneBureauClient' => $selectedClients->getTelephoneBureauClient(),
-                               'TelephoneMobileClient' => $selectedClients->getTelephoneMobileClient(),
-                               'MailClient' => $selectedClients->getMailClient(),
-                               'BudgetMaxRemboursementClient' => $selectedClients->getBudgetMaxRemboursementClient()
-                ];
+        $tabSelectedClients =
+        ['IdClient' => $selectedClients->getIdClient(),
+         'NomClient' => $selectedClients->getNomClient(),
+         'PrenomClient' => $selectedClients->getPrenomClient(),
+         'Adresse1Client' => $selectedClients->getAdresse1Client(),
+         'Adresse2Client' => $selectedClients->getAdresse2Client(),
+         'CodePostalClient' => $selectedClients->getCodePostalClient(),
+         'VilleClient' => $selectedClients->getVilleClient(),
+         'TelephoneBureauClient' => $selectedClients->getTelephoneBureauClient(),
+         'TelephoneMobileClient' => $selectedClients->getTelephoneMobileClient(),
+         'MailClient' => $selectedClients->getMailClient(),
+         'BudgetMaxRemboursementClient' => $selectedClients->getBudgetMaxRemboursementClient()
+          ];
 
 
         return $tabSelectedClients;
@@ -112,9 +104,9 @@ class ClientController
 
 
     public function createOneClient(){
-      $champ = ["NomClient", "PrenomClient", "Adresse1Client", "Adresse2Client","CodePostalClient", "VilleClient" , "TelephoneBureauClient", "TelephoneMobileClient", "MailClient", "BudgetMaxRemboursementClient"];
-      foreach ($champ as $key) {
-           if(isset($_POST[$key])){
+      // $champ = ["NomClient", "PrenomClient", "Adresse1Client", "Adresse2Client","CodePostalClient", "VilleClient" , "TelephoneBureauClient", "TelephoneMobileClient", "MailClient", "BudgetMaxRemboursementClient"];
+      // foreach ($champ as $key) {
+           // if(isset($_POST[$key])){
             $data = [ 'NomClient' => $_POST["NomClient"],
                        'PrenomClient'  => $_POST["PrenomClient"],
                        'Adresse1Client' => $_POST["Adresse1Client"],
@@ -130,7 +122,7 @@ class ClientController
                         $ok = $this->clientManager->create($clientJSON);
                         return $result = ['success' => $ok];
 
-           }
+           // }
          // if(isset($_POST["NomClient"]) && isset($_POST["PrenomClient"]) && isset($_POST["Adresse1Client"]) && isset($_POST["Adresse2Client"]) && isset($_POST["CodePostalClient"]) && isset($_POST["VilleClient"]), isset($_POST["TelephoneBureauClient"]) && isset($_POST["TelephoneMobileClient"]) && isset($_POST["MailClient"]) && isset($_POST["BudgetMaxRemboursementClient"]) ){
 
 
