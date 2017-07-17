@@ -106,39 +106,36 @@ class ClientController
 
         // var_dump($json);
 
-        
-            if ($_POST == null){
-                return "caca";
-            } else {
-            $data = [ 'NomClient' => $_POST["NomClient"],
-                           'PrenomClient' => $_POST["PrenomClient"],
-                           'Adresse1Client' => $_POST["Adresse1Client"],
-                           'Adresse2Client' => $_POST["Adresse2Client"],
-                           'CodePostalClient' => $_POST["CodePostalClient"],
-                           'VilleClient' => $_POST["VilleClient"],
-                           'TelephoneBureauClient' => $_POST["TelephoneBureauClient"],
-                           'TelephoneMobileClient' => $_POST["TelephoneMobileClient"],
-                           'MailClient' => $_POST["MailClient"],
-                           'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
-                        ];
-                        $clientJSON = new Client($data);   
-                        $ok = $this->clientManager->create($clientJSON);
+        var_dump($_POST);
 
-              }
-        
-        return $result = ['success' => $ok];
+            $data = [ 'NomClient' => $_POST["NomClient"],
+                       'PrenomClient'  => $_POST["PrenomClient"],
+                       'Adresse1Client' => $_POST["Adresse1Client"],
+                       'Adresse2Client' => $_POST["Adresse2Client"],
+                       'CodePostalClient' => $_POST["CodePostalClient"],
+                       'VilleClient' => $_POST["VilleClient"],
+                       'TelephoneBureauClient' => $_POST["TelephoneBureauClient"],
+                       'TelephoneMobileClient' => $_POST["TelephoneMobileClient"],
+                       'MailClient' => $_POST["MailClient"],
+                       'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
+                        ];
+                        
+        $clientJSON = new Client($data);
+
+
+        return $this->clientManager->create($clientJSON);
 
         // return $result;
 
         } 
     
 
-    /**
-     * Update one user
-     *
-     * @url PUT /client/$id
-     * 
-     */
+        /**
+         * Update one user
+         *
+         * @url PUT /client/$id
+         * 
+         */
 
     public function updateOneClient($id){       
 
@@ -146,32 +143,36 @@ class ClientController
         //     $json = $key;
         // }
 
-        // var_dump($json);
+        // var_dump($_POST);
 
-    
-            $data = [ 'IdClient' => $id,
-                      'NomClient' => $_POST["NomClient"],
-                      'PrenomClient' => $_POST["PrenomClient"],
-                      'Adresse1Client' => $_POST["Adresse1Client"],
-                      'Adresse2Client' => $_POST["Adresse2Client"],
-                      'CodePostalClient' => $_POST["CodePostalClient"],
-                      'VilleClient' => $_POST["VilleClient"],
-                      'TelephoneBureauClient' => $_POST["TelephoneBureauClient"],
-                      'TelephoneMobileClient' => $_POST["TelephoneMobileClient"],
-                      'MailClient' => $_POST["MailClient"],
-                      'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
+        $method = $_SERVER['REQUEST_METHOD'];
+            if ('PUT' === $method) {
+                parse_str(file_get_contents('php://input'), $_PUT);
+                 //var_dump($_PUT); //$_PUT contains put fields 
+        }
+
+         $data = [ 'IdClient' => $id,
+                      'NomClient' => $_PUT["NomClient"],
+                      'PrenomClient' => $_PUT["PrenomClient"],
+                      'Adresse1Client' => $_PUT["Adresse1Client"],
+                      'Adresse2Client' => $_PUT["Adresse2Client"],
+                      'CodePostalClient' => $_PUT["CodePostalClient"],
+                      'VilleClient' => $_PUT["VilleClient"],
+                      'TelephoneBureauClient' => $_PUT["TelephoneBureauClient"],
+                      'TelephoneMobileClient' => $_PUT["TelephoneMobileClient"],
+                      'MailClient' => $_PUT["MailClient"],
+                      'BudgetMaxRemboursementClient' => $_PUT["BudgetMaxRemboursementClient"]
                     ];
 
-        $client = new Client($data);   
-        $ok = $this->clientManager->update($client);
+        $clientObject = new Client($data);
 
-        
-        return $result = ['success' => $ok];
+        return $this->clientManager->update($clientObject);
 
         // return $result;
 
         } 
 
+    
 
 
     /**

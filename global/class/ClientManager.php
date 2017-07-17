@@ -93,7 +93,7 @@ class ClientManager extends Manager {
 
   //  !! TODO : change PDO::PARAM_ to good params !!
 
-  public function update(Client $client) {
+  public function update(Client &$client) {
     $this->pdoStatement = $this->pdo->prepare("UPDATE Client SET NomCLient = :NomClient, PrenomClient =:PrenomClient, Adresse1Client =:Adresse1Client , Adresse2Client = :Adresse2Client , CodePostalClient = :CodePostalClient , VilleClient = :VilleClient, TelephoneBureauClient = :TelephoneBureauClient, TelephoneMobileClient = :TelephoneMobileClient, MailClient = :MailClient, BudgetMaxRemboursementClient = :BudgetMaxRemboursementClient WHERE IdClient = :IdClient");
     $this->pdoStatement->bindValue(':IdClient', $client->getIdClient(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
