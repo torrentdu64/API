@@ -38,7 +38,7 @@ class ClientController
 
         $tabAllClient = [];
 
-        foreach ($listeClients as $key => $client) {
+        //foreach ($listeClients as $key => $client) {
                 $data = ['IdClient' => $client->getIdClient(),
                          'NomClient' => $client->getNomClient(),
                          'PrenomClient' => $client->getPrenomClient(),
@@ -53,7 +53,7 @@ class ClientController
                 ];
 
                 $tabAllClient[] = $data;
-        }
+       // }
 
         return $tabAllClient;
 
@@ -107,6 +107,7 @@ class ClientController
       // $champ = ["NomClient", "PrenomClient", "Adresse1Client", "Adresse2Client","CodePostalClient", "VilleClient" , "TelephoneBureauClient", "TelephoneMobileClient", "MailClient", "BudgetMaxRemboursementClient"];
       // foreach ($champ as $key) {
            // if(isset($_POST[$key])){
+
             $data = [ 'NomClient' => $_POST["NomClient"],
                        'PrenomClient'  => $_POST["PrenomClient"],
                        'Adresse1Client' => $_POST["Adresse1Client"],
@@ -118,6 +119,7 @@ class ClientController
                        'MailClient' => $_POST["MailClient"],
                        'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
                         ];
+
                         $clientJSON = new Client($data);
                         $ok = $this->clientManager->create($clientJSON);
                         return $result = ['success' => $ok];
@@ -131,7 +133,61 @@ class ClientController
          //  return "nop";
          // }
       //}
-  }
+
+
+
+        $clientJSON = new Client($data);
+
+
+        return $this->clientManager->create($clientJSON);
+
+        // return $result;
+
+        }
+
+
+        /**
+         * Update one user
+         *
+         * @url PUT /client/$id
+         *
+         */
+
+    public function updateOneClient($id){
+
+        // foreach ($clientJSON as $key) {
+        //     $json = $key;
+        // }
+
+        // var_dump($_POST);
+
+        $method = $_SERVER['REQUEST_METHOD'];
+            if ('PUT' === $method) {
+                parse_str(file_get_contents('php://input'), $_PUT);
+                 //var_dump($_PUT); //$_PUT contains put fields
+        }
+
+         $data = [ 'IdClient' => $id,
+                      'NomClient' => $_PUT["NomClient"],
+                      'PrenomClient' => $_PUT["PrenomClient"],
+                      'Adresse1Client' => $_PUT["Adresse1Client"],
+                      'Adresse2Client' => $_PUT["Adresse2Client"],
+                      'CodePostalClient' => $_PUT["CodePostalClient"],
+                      'VilleClient' => $_PUT["VilleClient"],
+                      'TelephoneBureauClient' => $_PUT["TelephoneBureauClient"],
+                      'TelephoneMobileClient' => $_PUT["TelephoneMobileClient"],
+                      'MailClient' => $_PUT["MailClient"],
+                      'BudgetMaxRemboursementClient' => $_PUT["BudgetMaxRemboursementClient"]
+                    ];
+
+        $clientObject = new Client($data);
+
+        return $this->clientManager->update($clientObject);
+
+        // return $result;
+
+        }
+
 
 
     /**
