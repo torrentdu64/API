@@ -106,39 +106,34 @@ class ClientController
 
         // var_dump($json);
 
-        
-            if ($_POST == null){
-                return "caca";
-            } else {
-            $data = [ 'NomClient' => $_POST["NomClient"],
-                           'PrenomClient' => $_POST["PrenomClient"],
-                           'Adresse1Client' => $_POST["Adresse1Client"],
-                           'Adresse2Client' => $_POST["Adresse2Client"],
-                           'CodePostalClient' => $_POST["CodePostalClient"],
-                           'VilleClient' => $_POST["VilleClient"],
-                           'TelephoneBureauClient' => $_POST["TelephoneBureauClient"],
-                           'TelephoneMobileClient' => $_POST["TelephoneMobileClient"],
-                           'MailClient' => $_POST["MailClient"],
-                           'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
-                        ];
-                        $clientJSON = new Client($data);   
-                        $ok = $this->clientManager->create($clientJSON);
+        var_dump($_POST);
 
-              }
-        
-        return $result = ['success' => $ok];
+            $data = [ 'NomClient' => $_POST["NomClient"],
+                       'PrenomClient'  => $_POST["PrenomClient"],
+                       'Adresse1Client' => $_POST["Adresse1Client"],
+                       'Adresse2Client' => $_POST["Adresse2Client"],
+                       'CodePostalClient' => $_POST["CodePostalClient"],
+                       'VilleClient' => $_POST["VilleClient"],
+                       'TelephoneBureauClient' => $_POST["TelephoneBureauClient"],
+                       'TelephoneMobileClient' => $_POST["TelephoneMobileClient"],
+                       'MailClient' => $_POST["MailClient"],
+                       'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
+                        ];
+                        $clientJSON = new Client($data);
+                        $ok = $this->clientManager->create($clientJSON);
+                        return $result = ['success' => $ok];
 
         // return $result;
 
         } 
     
 
-    /**
-     * Update one user
-     *
-     * @url PUT /client/$id
-     * 
-     */
+        /**
+         * Update one user
+         *
+         * @url PUT /client/$id
+         * 
+         */
 
     public function updateOneClient($id){       
 
@@ -146,7 +141,7 @@ class ClientController
         //     $json = $key;
         // }
 
-        // var_dump($json);
+        var_dump($_POST);
 
     
             $data = [ 'IdClient' => $id,
@@ -172,6 +167,7 @@ class ClientController
 
         } 
 
+    
 
 
     /**
