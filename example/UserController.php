@@ -26,8 +26,10 @@ class UserController
         
         $tabAllUser = [];
 
+
+
         foreach ($listeUser as $key => $user) {
-                $data = ['login' => $user->getlogin(),
+                 $data = ['login' => $user->getlogin(),
                          'NomReps' => $user->getNomReps(),
                          'PrenomReps' => $user->getPrenomReps(),
                          'Adresse1Reps' => $user->getAdresse1Reps(),
@@ -46,7 +48,6 @@ class UserController
 
                 $tabAllUser[] = $data;
         }
-
 
         if ($listeUser){
             return ['users' => $tabAllUser];
@@ -68,7 +69,7 @@ class UserController
      $selectedUser = $this->userManager->read($id);
         // var_dump($selectedClients);
 
-     $tabSelectedUser = ['login' => $selectedUser->getlogin(),
+     $tabSelectedUser = ['login' => $selectedUser->getLogin(),
                          'NomReps' => $selectedUser->getNomReps(),
                          'PrenomReps' => $selectedUser->getPrenomReps(),
                          'Adresse1Reps' => $selectedUser->getAdresse1Reps(),

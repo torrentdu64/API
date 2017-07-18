@@ -7,7 +7,7 @@
  */
 class User extends Entity {
 
-    private $Login;
+    private $login;
     private $NomReps;
     private $PrenomReps;
     private $Adresse1Reps;
@@ -30,9 +30,9 @@ class User extends Entity {
         }
     }
 
-    public function setLogin($Login) {
-        if (is_integer(intval($Login))) {
-            $this->Login = $Login;
+    public function setlogin($login) {
+        if (is_integer(intval($login))) {
+            $this->login = $login;
         } else {
             $this->addErreur('L\'Id User doit être un nombre entier');
         }
@@ -190,8 +190,8 @@ class User extends Entity {
     }
 
 
-    function getLogin() {
-        return $this->Login;
+    function getlogin() {
+        return $this->login;
     }
 
     function getNomReps() {
