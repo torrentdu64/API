@@ -28,14 +28,14 @@ class UserManager extends Manager {
     $this->pdoStatement->execute();
     $data = $this->pdoStatement->fetchAll();
 
-    $objectClient = [];
+    $objectUser = [];
 
 
-    foreach ($data as $clients) {
-          $objectClient[] = new Client($clients);
+    foreach ($data as $user) {
+          $objectUser[] = new User($user);
         }
 
-    return $objectClient;
+    return $objectUser;
   }
 
   public function create(User &$user) {
