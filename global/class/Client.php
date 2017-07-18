@@ -128,15 +128,14 @@ class Client extends Entity {
 
       // !! TODO change strlen to Interger  !!
     public function setBudgetMaxRemboursementClient($BudgetMaxRemboursementClient) {
-        // Vérifier si c'est un entier et le multiplier par 100 (pour convertir centimes en €)
-        if (strlen($BudgetMaxRemboursementClient) <= 25) {
-          // $calcul = intval($BudgetMaxRemboursementClient);
-          // $convert = $calcul * 100;
-            $convert = is_float(floatval($BudgetMaxRemboursementClient*100));
-            $this->BudgetMaxRemboursementClient = $convert;
-        } else {
-            $this->addErreur('Le BudgetMaxRemboursementClient doit comporter moins de 25 caractères');
+        if(isset($BudgetMaxRemboursementClient)){
+            $this->BudgetMaxRemboursementClient = $BudgetMaxRemboursementClient*100;
+        }else{
+          $this->addErreur('Veuillez entrer un budget');
         }
+
+
+
     }
 
 //============================================================================//
@@ -195,17 +194,6 @@ class Client extends Entity {
     }
 
     function getBudgetMaxRemboursementClient() {
-        // $convert="";
-        // // Le diviser par 100 (pour convertir centimes en €)
-        // if (isset($BudgetMaxRemboursementClient)) {
-        //     $convert = $BudgetMaxRemboursementClient;
-        //     var_dump($convert);
-        // }
-
-        // if(is_float(floatval($BudgetMaxRemboursementClient))){
-        //     $this->BudgetMaxRemboursementClient = $BudgetMaxRemboursementClient;
-        // }
-
-        return $this->BudgetMaxRemboursementClient/100;
+        return $this->BudgetMaxRemboursementClient;
     }
 }

@@ -88,7 +88,7 @@ class ClientManager extends Manager {
       $client = $this->read($id);
     } else {
       return false;
-    }  
+    }
   }
 
   //  !! TODO : change PDO::PARAM_ to good params !!
@@ -113,7 +113,7 @@ class ClientManager extends Manager {
   public function delete($IdClient) {
     $this->pdoStatement = $this->pdo->prepare("DELETE FROM Client WHERE IdClient = $IdClient");
     $this->pdoStatement->execute();
-    
+
     //return $this->checkBDD($IdClient);
     $check = $this->checkBDD($IdClient);
     if ($check == NULL) {
@@ -122,9 +122,9 @@ class ClientManager extends Manager {
     } else {
       $destroy[] = $this->pdoStatement->execute();
       return $destroy;
-    }  
+    }
   }
-      
+
 
    public function checkBDD($IdClient) {
     $this->pdoStatement = $this->pdo->prepare("SELECT * FROM Client WHERE IdClient = $IdClient");
