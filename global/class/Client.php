@@ -61,7 +61,7 @@ class Client extends Entity {
     }
 
     public function setAdresse1Client($Adresse1Client) {
-        if (strlen($Adresse1Client) <= 50) {
+        if (strlen($Adresse1Client) <= 150) {
             $this->Adresse1Client = $Adresse1Client;
         } else {
             $this->addErreur('Le Adresse1Client doit comporter moins de 25 caractères');
@@ -69,7 +69,7 @@ class Client extends Entity {
     }
 
     public function setAdresse2Client($Adresse2Client) {
-        if (strlen($Adresse2Client) <= 50) {
+        if (strlen($Adresse2Client) <= 150) {
             $this->Adresse2Client = $Adresse2Client;
         } else {
             $this->addErreur('Le Adresse2Client doit comporter moins de 25 caractères');
@@ -79,27 +79,27 @@ class Client extends Entity {
         //  !! TODO => change filter to code postal !!
 
     public function setCodePostalClient($CodePostalClient) {
-        if (strlen($CodePostalClient) <= 25){
-            if (FILTER_VALIDATE_EMAIL == true) {
-                $this->CodePostalClient = $CodePostalClient;
-            } else {
-                $this->addErreur('L\'CodePostalClient est incorrect !');
-            }
-        }
+      $preg_match ="/^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$/";
+      if(preg_match($preg_match,$CodePostalClient)){
+          $this->CodePostalClient = $CodePostalClient;
+      } else {
+      $this->addErreur('L\'CodePostalClient est incorrect !');
+      }
     }
 
-        // !! TODO strlen change to array who check ville !!
 
+        // !! TODO strlen change to array who check ville !!
     public function setVilleClient($VilleClient) {
-        if (strlen($VilleClient) <= 25) {
+        $preg_match ="/[a-zA-Z-éèà']/";
+      if(preg_match($preg_match,$VilleClient)){
             $this->VilleClient = $VilleClient;
         } else {
-            $this->addErreur('Le VilleClient doit comporter moins de 25 caractères');
+            $this->addErreur('Votre ville est incorrect');
         }
     }
 
         // !! TODO strlen change to integer !!
-
+        // pensez a faire l ville en majuscule
     public function setTelephoneBureauClient($TelephoneBureauClient) {
         if (strlen($TelephoneBureauClient) <= 25) {
             $this->TelephoneBureauClient = $TelephoneBureauClient;
