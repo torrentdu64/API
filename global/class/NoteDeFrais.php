@@ -68,19 +68,14 @@ class NoteDeFrais extends Entity {
     }
 
     public function setMontantPrevu($MontantPrevu) {
-        if (strlen($MontantPrevu)) {
             $preg_match ="^[+]?([0-9]{1,2})*[.,]([0-9]{1,1})?$^";
         if(preg_match($preg_match,$MontantPrevu)){
             $this->MontantPrevu = $MontantPrevu;  
         }elseif(filter_var($MontantPrevu, FILTER_VALIDATE_INT)){
                 $this->MontantPrevu = $MontantPrevu; 
             }else{
-                $this->addErreurFiltre('Le montant prevu doit etre un entier ou un decimal');
+                $this->addErreur('Le montant prevu doit etre un entier ou un decimal');
             }
-        
-        } else {
-            $this->addErreur('Le montant prevu doit etre un entier ou un decimal');
-        }
     }
         
     
@@ -95,30 +90,23 @@ class NoteDeFrais extends Entity {
     }
 
     public function setNbreNuiteesSiHotellerie($NbreNuiteesSiHotellerie) {
-        if (is_integer($NbreNuiteesSiHotellerie) <= 25) {
-            if ( $NbreNuiteesSiHotellerie > 0 && $NbreNuiteesSiHotellerie <=10 ){
+            if ( $NbreNuiteesSiHotellerie > 0){
                 $this->NbreNuiteesSiHotellerie = $NbreNuiteesSiHotellerie;
             }else{
-                $this->addErreurFiltre('Le nombre de nuit en hotel doit etre compris entre 0 et 7');
+                $this->addErreur('Le nombre de nuitees doit etre superieur a 0');
             }
-        } else {
-            $this->addErreur('Le nombre de nuit doit comporter moins de 11 caracteres');
-        }
     }
 
     public function setNbreRepasSiRestauration($NbreRepasSiRestauration) {
-        if (is_integer($NbreRepasSiRestauration) <= 11) {
-            if ( $NbreRepasSiRestauration > 0 && $NbreRepasSiRestauration <=20 ){
+            if ( $NbreRepasSiRestauration > 0){
                 $this->NbreRepasSiRestauration = $NbreRepasSiRestauration;
             }else{
-                $this->addErreurFiltre('Le nombre de repas doit être compris entre 0 et 20');
-            }
-            }else {
-                $this->addErreur('Le nombre de repas doit comporter moins de 11 caracteres');
+                $this->addErreur('Le nombre de repas doit etre superieur a 0');
             }
         }
 
         public function setCoordonneesGPSDepartSiTransport($CoordonneesGPSDepartSiTransport) {
+            // Vérifier que c'est un integer 
             if (strlen($CoordonneesGPSDepartSiTransport) <= 40) {
                 $this->CoordonneesGPSDepartSiTransport = $CoordonneesGPSDepartSiTransport;
             } else {

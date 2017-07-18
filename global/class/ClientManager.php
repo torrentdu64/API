@@ -124,22 +124,9 @@ class ClientManager extends Manager {
       return $destroy;
     }  
   }
-      
 
-   public function checkBDD($IdClient) {
-    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM Client WHERE IdClient = $IdClient");
-    $this->pdoStatement->execute();
-    $data = $this->pdoStatement->fetch();
-    $client = new Client($data);
-    $client->getIdClient();
-    $tab[] = $client->getIdClient();
-    return $tab;
-    // if ($client->getIdClient() == NULL) {
-    //   return false;
-    // } else {
-    //   return true;
-    // }
-  }
+
+      
 }
 
 
