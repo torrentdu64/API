@@ -1,5 +1,5 @@
 <?php
-//require_once 'Manager.php';
+
 /**
  * Description of ClientManager
  *
@@ -40,18 +40,30 @@ class ClientManager extends Manager {
     $client = new Client($data);
     return $client;
   }
+
+
   public function readAll() {
+
     $this->pdoStatement = $this->pdo->prepare("SELECT * FROM Client");
     $this->pdoStatement->execute();
     $data = $this->pdoStatement->fetchAll();
+
     $objectClient = [];
+
+
     foreach ($data as $clients) {
           $objectClient[] = new Client($clients);
         }
+
     return $objectClient;
   }
+
    //  !! TODO : change PDO::PARAM_ to good params !!
+
+
   public function create(Client &$client) {
+
+
     $this->pdoStatement = $this->pdo->prepare("INSERT INTO Client( NomClient, PrenomClient, Adresse1Client, Adresse2Client, CodePostalClient, VilleClient, TelephoneBureauClient, TelephoneMobileClient, MailClient, BudgetMaxRemboursementClient) VALUES(:NomClient, :PrenomClient, :Adresse1Client , :Adresse2Client , :CodePostalClient , :VilleClient, :TelephoneBureauClient, :TelephoneMobileClient, :MailClient, :BudgetMaxRemboursementClient)");
     $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':PrenomClient', $client->getPrenomClient(), PDO::PARAM_STR);
@@ -72,8 +84,10 @@ class ClientManager extends Manager {
     }  
   }
   //  !! TODO : change PDO::PARAM_ to good params !!
-  public function update(Client $client) {
-    var_dump($client);
+
+
+  public function update(Client &$client) {
+
     $this->pdoStatement = $this->pdo->prepare("UPDATE Client SET NomCLient = :NomClient, PrenomClient =:PrenomClient, Adresse1Client =:Adresse1Client , Adresse2Client = :Adresse2Client , CodePostalClient = :CodePostalClient , VilleClient = :VilleClient, TelephoneBureauClient = :TelephoneBureauClient, TelephoneMobileClient = :TelephoneMobileClient, MailClient = :MailClient, BudgetMaxRemboursementClient = :BudgetMaxRemboursementClient WHERE IdClient = :IdClient");
     $this->pdoStatement->bindValue(':IdClient', $client->getIdClient(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
@@ -86,8 +100,9 @@ class ClientManager extends Manager {
     $this->pdoStatement->bindValue(':TelephoneMobileClient', $client->getTelephoneMobileClient(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':MailClient', $client->getMailClient(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':BudgetMaxRemboursementClient', $client->getBudgetMaxRemboursementClient(), PDO::PARAM_INT);
-    $result = $this->pdoStatement->execute();
-    var_dump($result);
+
+    $this->pdoStatement->execute();
+
     return $client;
   }
   public function delete($IdClient) {
@@ -103,8 +118,10 @@ class ClientManager extends Manager {
       $destroy[] = $this->pdoStatement->execute();
       return $destroy;
     }  
+
   }
       
+
    public function checkBDD($IdClient) {
     $this->pdoStatement = $this->pdo->prepare("SELECT * FROM Client WHERE IdClient = $IdClient");
     $this->pdoStatement->execute();
@@ -119,12 +136,7 @@ class ClientManager extends Manager {
     //   return true;
     // }
   }
-    public function jsonRead() {
-        $requete = $this->pdo->prepare("SELECT * FROM client");
-        $requete->execute();
-        $res["success"] = true;
-        $res["message"] = "Les Clients";
-        $res["results"]["justificatifs"] = $requete->fetchAll();
-        return json_encode($res); //Mettre au format Json    //On a un doublon
-    }
 }
+
+
+

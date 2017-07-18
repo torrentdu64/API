@@ -1,6 +1,7 @@
 <?php
 
-require_once 'params.php';
+
+require_once __DIR__ . '/params.php';
 
 // "spl_autoload_register" nous permet de définir le nom de la fonction pour l'autoloader.
 spl_autoload_register('classAutoloader');

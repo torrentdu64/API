@@ -61,7 +61,7 @@ class Client extends Entity {
     }
 
     public function setAdresse1Client($Adresse1Client) {
-        if (strlen($Adresse1Client) <= 25) {
+        if (strlen($Adresse1Client) <= 50) {
             $this->Adresse1Client = $Adresse1Client;
         } else {
             $this->addErreur('Le Adresse1Client doit comporter moins de 25 caractères');
@@ -69,7 +69,8 @@ class Client extends Entity {
     }
 
     public function setAdresse2Client($Adresse2Client) {
-        if (strlen($Adresse2Client) <= 25) {
+
+        if (strlen($Adresse2Client) <= 50) {
             $this->Adresse2Client = $Adresse2Client;
         } else {
             $this->addErreur('Le Adresse2Client doit comporter moins de 25 caractères');
@@ -79,7 +80,7 @@ class Client extends Entity {
         //  !! TODO => change filter to code postal !!
 
     public function setCodePostalClient($CodePostalClient) {
-        if (filter_var($CodePostalClient, FILTER_VALIDATE_EMAIL)) {
+        if (strlen($CodePostalClient) <= 25){
             if (FILTER_VALIDATE_EMAIL == true) {
                 $this->CodePostalClient = $CodePostalClient;
             } else {
@@ -128,8 +129,12 @@ class Client extends Entity {
 
       // !! TODO change strlen to Interger  !!
     public function setBudgetMaxRemboursementClient($BudgetMaxRemboursementClient) {
+        // Vérifier si c'est un entier et le multiplier par 100 (pour convertir centimes en €)
         if (strlen($BudgetMaxRemboursementClient) <= 25) {
-            $this->BudgetMaxRemboursementClient = $BudgetMaxRemboursementClient;
+          // $calcul = intval($BudgetMaxRemboursementClient);
+          // $convert = $calcul * 100;
+            $convert = is_float(floatval($BudgetMaxRemboursementClient*100));
+            $this->BudgetMaxRemboursementClient = $convert;
         } else {
             $this->addErreur('Le BudgetMaxRemboursementClient doit comporter moins de 25 caractères');
         }
@@ -191,6 +196,17 @@ class Client extends Entity {
     }
 
     function getBudgetMaxRemboursementClient() {
-        return $this->BudgetMaxRemboursementClient;
+        // $convert="";
+        // // Le diviser par 100 (pour convertir centimes en €)
+        // if (isset($BudgetMaxRemboursementClient)) {
+        //     $convert = $BudgetMaxRemboursementClient;
+        //     var_dump($convert);
+        // }
+
+        // if(is_float(floatval($BudgetMaxRemboursementClient))){
+        //     $this->BudgetMaxRemboursementClient = $BudgetMaxRemboursementClient;
+        // }
+
+        return $this->BudgetMaxRemboursementClient/100;
     }
 }
