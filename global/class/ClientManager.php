@@ -140,15 +140,6 @@ class ClientManager extends Manager {
     //   return true;
     // }
   }
-
-    public function jsonRead() {
-        $requete = $this->pdo->prepare("SELECT * FROM client");
-        $requete->execute();
-        $res["success"] = true;
-        $res["message"] = "Les Clients";
-        $res["results"]["justificatifs"] = $requete->fetchAll();
-        return json_encode($res); //Mettre au format Json    //On a un doublon
-    }
 }
 
 
