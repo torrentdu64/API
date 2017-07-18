@@ -22,6 +22,22 @@ class NoteDeFraisManager extends Manager {
       return $noteDeFrais;
   }
 
+  public function readAll() {
+
+    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM notedefrais");
+    $this->pdoStatement->execute();
+    $data = $this->pdoStatement->fetchAll();
+
+    $objectNotedefrais = [];
+
+
+    foreach ($data as $noteDeFrais) {
+          $objectNotedefrais[] = new NoteDeFrais($noteDeFrais);
+        }
+
+    return $objectNotedefrais;
+  }
+
   public function create(NoteDeFrais &$noteDeFrais) {
       var_dump($noteDeFrais);
        $this->pdoStatement = $this->pdo->prepare("INSERT INTO notedefrais( IntituleNDF, DateNDF, MotifNDF, MontantPrevu, EtatNDF, Commentaire, NbreNuiteesSiHotellerie, NbreRepasSiRestauration, CoordonneesGPSDepartSiTransport, CoordonneesGPSArriveeSiTransport,TypeDeTransport,DistanceSiTransport,Login,IdClient) VALUES(:IntituleNDF, :DateNDF, :MotifNDF , :MontantPrevu , :EtatNDF , :Commentaire, :NbreNuiteesSiHotellerie, :NbreRepasSiRestauration, :CoordonneesGPSDepartSiTransport, :CoordonneesGPSArriveeSiTransport, :TypeDeTransport, :DistanceSiTransport, :Login, :IdClient )");
@@ -82,15 +98,7 @@ class NoteDeFraisManager extends Manager {
     var_dump($noteDeFrais);
     return $noteDeFrais;
   }
-    
-     public function jsonRead() {
-        $requete = $this->pdo->prepare("SELECT * FROM NoteDeFraisManager");
-        $requete->execute();
-        $res["success"] = true;
-        $res["message"] = "Les Note De Frais Manager";
-        $res["results"]["Note De Frais Manager"] = $requete->fetchAll();
-        return json_encode($res); //Mettre au format Json    //On a un doublon
-    }
+  
     
     }
 

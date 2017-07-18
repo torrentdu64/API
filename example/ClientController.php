@@ -50,13 +50,16 @@ class ClientController
                          'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
                          'MailClient' => $client->getMailClient(),
                          'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
-                ];      
+                ];     
 
                 $tabAllClient[] = $data;
         }
 
-        return $tabAllClient;
 
+        if ($listeClients){
+            return ['clients' => $tabAllClient];
+        }
+    
     }
 
 
@@ -73,6 +76,8 @@ class ClientController
     	$selectedClients = $this->clientManager->read($id);
         // var_dump($selectedClients);
 
+
+
         $tabSelectedClients = ['IdClient' => $selectedClients->getIdClient(),
                                'NomClient' => $selectedClients->getNomClient(),
                                'PrenomClient' => $selectedClients->getPrenomClient(),
@@ -84,10 +89,13 @@ class ClientController
                                'TelephoneMobileClient' => $selectedClients->getTelephoneMobileClient(),
                                'MailClient' => $selectedClients->getMailClient(),
                                'BudgetMaxRemboursementClient' => $selectedClients->getBudgetMaxRemboursementClient()
-                ];    
+                ];   
+                
+                 $tab[] = $tabSelectedClients; 
 
-        return $tabSelectedClients;
-
+        if ($selectedClients){
+            return ['client' => $tab];
+        }
     }
 
     /**
