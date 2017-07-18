@@ -14,27 +14,22 @@ class JustificatifController
 
 
     /**
-     * Gets all users
+     * Gets all justificatif
      *
-     * @url GET /justificatift
+     * @url GET /justificatif
      *
      */
 
 
-    public function getAllClients(){
-
+    public function getAllJustificatif(){
         $listeJusticatif = $this->justificatifManager->readAll();
-
         $tabAlljusticatif = [];
 
-
-
         //foreach ($listeClients as $key => $client) {
-                $data = ['IdJustificatif' => $justificatif->getIdJustificatif(),
-                         'IntituleJustificatif' => $justificatif->getIntituleJustificatif(),
-                         'URLNomFichier' => $justificatif->getURLNomFichier(),
-                         'MontantJustificatif' => $justificatif->getMontantJustificatif(),
-
+        $data = ['IdJustificatif' => $justificatif->getIdJustificatif(),
+                 'IntituleJustificatif' => $justificatif->getIntituleJustificatif(),
+                 'URLNomFichier' => $justificatif->getURLNomFichier(),
+                 'MontantJustificatif' => $justificatif->getMontantJustificatif(),
                 ];
 
                 $tabAlljustificatif[] = $data;
@@ -51,7 +46,7 @@ class JustificatifController
     /**
      * Gets the MontantJustificatif by id or current user
      *
-     * @url GET /montantjustificatif/$id
+     * @url GET /justificatif/$id
      *
      */
 
@@ -78,7 +73,7 @@ class JustificatifController
     /**
      * Post one user
      *
-     * @url POST /Justificatif
+     * @url POST /justificatif
      *
      */
 

@@ -39,18 +39,18 @@ class ClientController
         $tabAllClient = [];
 
         //foreach ($listeClients as $key => $client) {
-                $data = ['IdClient' => $client->getIdClient(),
-                         'NomClient' => $client->getNomClient(),
-                         'PrenomClient' => $client->getPrenomClient(),
-                         'Adresse1Client' => $client->getAdresse1Client(),
-                         'Adresse2Client' => $client->getAdresse2Client(),
-                         'CodePostalClient' => $client->getCodePostalClient(),
-                         'VilleClient' => $client->getVilleClient(),
-                         'TelephoneBureauClient' => $client->getTelephoneBureauClient(),
-                         'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
-                         'MailClient' => $client->getMailClient(),
-                         'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
-                ];
+        $data = ['IdClient' => $client->getIdClient(),
+                 'NomClient' => $client->getNomClient(),
+                 'PrenomClient' => $client->getPrenomClient(),
+                 'Adresse1Client' => $client->getAdresse1Client(),
+                 'Adresse2Client' => $client->getAdresse2Client(),
+                 'CodePostalClient' => $client->getCodePostalClient(),
+                 'VilleClient' => $client->getVilleClient(),
+                 'TelephoneBureauClient' => $client->getTelephoneBureauClient(),
+                 'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
+                 'MailClient' => $client->getMailClient(),
+                 'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
+                 ];
 
                 $tabAllClient[] = $data;
        // }
