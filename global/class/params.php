@@ -22,7 +22,7 @@ define('_dbPassW', 'Wayspeis64'); // root*/
 
 
 //Définition du répertoire de base.
-define('_dirRoot', $_SERVER['DOCUMENT_ROOT'] . 'API/global');
+define('_dirRoot', $_SERVER['DOCUMENT_ROOT'] . '/API/global');
 
 
 

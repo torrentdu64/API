@@ -21,11 +21,27 @@ class JustificatifManager extends Manager {
       $justificatifs = new Justificatif($data);
       return $justificatifs;
   }
-    
+
+  public function readAll() {
+
+    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM Justificatifs");
+    $this->pdoStatement->execute();
+    $data = $this->pdoStatement->fetchAll();
+
+    $objectJustificatif = [];
 
 
-        
-  public function create( &$justificatifs) {
+    foreach ($data as $justificatif) {
+          $objectJustificatif[] = new Justificatif($justificatif);
+        }
+
+    return $objectJustificatif;
+  }
+
+
+
+
+  public function create(Justificatifs &$justificatifs) {
       var_dump($justificatifs);
        $this->pdoStatement = $this->pdo->prepare("INSERT INTO Justificatifs(IntituleJustificatif, URLNomFichier,MontantJustificatif) VALUES(:IntituleJustificatif, :URLNomFichier,:MontantJustificatif)");
     $this->pdoStatement->bindValue(':IntituleJustificatif', $justificatifs->getIntituleJustificatif(), PDO::PARAM_INT);
@@ -38,9 +54,9 @@ class JustificatifManager extends Manager {
       $justificatifs = $this->read($IdJustificatif);
     } else {
       return false;
-    }  
+    }
   }
-    
+
       public function update($justificatifs) {
           var_dump($justificatifs);
     $this->pdoStatement = $this->pdo->prepare("UPDATE Justificatifs SET IntituleJustificatif = :IntituleJustificatif, URLNomFichier = :URLNomFichier, MontantJustificatif = :MontantJustificatif WHERE IdJustificatif = :IdJustificatif");
@@ -52,8 +68,8 @@ class JustificatifManager extends Manager {
     var_dump($result);
     return $justificatifs;
   }
-    
-    
+
+
   public function delete($justificatifs) {
     var_dump($justificatifs);
     $this->pdoStatement = $this->pdo->prepare("DELETE FROM Justificatifs WHERE IdJustificatif = :IdJustificatif");
@@ -62,27 +78,27 @@ class JustificatifManager extends Manager {
     var_dump($justificatifs);
     return $justificatifs;
   }
-    
-    public function jsonRead($just) {
-       $jsonTab = [
-    "success" => ["true"],
-    "message" => ["Les justificatifs"],
-    "justificatifs"=> [
-        "IdJustificatif" => $just->getIdJustificatif(),
-        "IntituleJustificatif" => $just->getIntituleJustificatif(),
-        "URLNomFichier" => $just->getURLNomFichier(),
-        "MontantJustificatif" => $just->getMontantJustificatif()
-        ],
-    ];
+
+//     public function jsonRead($just) {
+//        $jsonTab = [
+//     "success" => ["true"],
+//     "message" => ["Les justificatifs"],
+//     "justificatifs"=> [
+//         "IdJustificatif" => $just->getIdJustificatif(),
+//         "IntituleJustificatif" => $just->getIntituleJustificatif(),
+//         "URLNomFichier" => $just->getURLNomFichier(),
+//         "MontantJustificatif" => $just->getMontantJustificatif()
+//         ],
+//     ];
 
 
-return json_encode($jsonTab);
+// return json_encode($jsonTab);
 
-       
-    }
-    
-    
-    
+
+    //}
+
+
+
     }
 
 /*

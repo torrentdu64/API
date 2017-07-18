@@ -195,13 +195,13 @@ class Client extends Entity {
     }
 
     function getBudgetMaxRemboursementClient() {
-        // $convert=""; 
+        // $convert="";
         // // Le diviser par 100 (pour convertir centimes en €)
         // if (isset($BudgetMaxRemboursementClient)) {
         //     $convert = $BudgetMaxRemboursementClient;
         //     var_dump($convert);
         // }
-        
+
         // if(is_float(floatval($BudgetMaxRemboursementClient))){
         //     $this->BudgetMaxRemboursementClient = $BudgetMaxRemboursementClient;
         // }
