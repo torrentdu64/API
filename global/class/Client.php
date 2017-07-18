@@ -208,4 +208,8 @@ class Client extends Entity {
 
         return $this->BudgetMaxRemboursementClient/100;
     }
+
+    function erreur() {
+        return $this->getErreur();
+    }
 }
