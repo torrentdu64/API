@@ -19,10 +19,25 @@ class TarifsRemboursementManager extends Manager {
       $this->pdoStatement->bindValue(':TypeDeFrais', $TypeDeFrais, PDO::PARAM_INT);
       $this->pdoStatement->execute();
       $data = $this->pdoStatement->fetch();
-      $tarifsRemboursements = new TarifsRemboursements($data);
+      $tarifsRemboursements = new TarifsRemboursement($data);
       return $tarifsRemboursements;
   }
 
+    public function readAll() {
+
+    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM tarifsremboursements");
+    $this->pdoStatement->execute();
+    $data = $this->pdoStatement->fetchAll();
+
+    $objectTarifsRemboursement = [];
+
+
+    foreach ($data as $tarifsRemboursement) {
+          $objectTarifsRemboursement[] = new TarifsRemboursement($tarifsRemboursement);
+        }
+
+    return $objectTarifsRemboursement;
+  }
     
   public function create(TarifsRemboursements &$tarifsRemboursements) {
       var_dump($tarifsRemboursements);
@@ -32,8 +47,8 @@ class TarifsRemboursementManager extends Manager {
     $result = $this->pdoStatement->execute();
        var_dump($result);
     if($result){
-      $id = $this->pdo->lastInsertId();
-      $tarifsRemboursements = $this->read($id);
+      $TypeDeFrais = $this->pdo->lastInsertId();
+      $tarifsRemboursements = $this->read($TypeDeFrais);
     } else {
       return false;
     }  

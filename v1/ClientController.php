@@ -1,9 +1,9 @@
 <?php
 use \Jacwright\RestServer\RestException;
 class ClientController{
-	private $clientManager;
+	private $manager;
 	public function __construct(){
-		$this->clientManager = new ClientManager();
+		$this->manager = new ClientManager();
 	}
 
   /**
@@ -26,7 +26,7 @@ class ClientController{
    */
 
   public function getAllClients(){
-    $listeClients = $this->clientManager->readAll();
+    $listeClients = $this->manager->readAll();
     $tabAllClient = [];
     foreach ($listeClients as $key => $client) {
       $data = ['IdClient' => $client->getIdClient(),
@@ -56,7 +56,7 @@ class ClientController{
 
 
   public function getOneClient($id){
-    $selectedClients = $this->clientManager->read($id);
+    $selectedClients = $this->manager->read($id);
         // var_dump($selectedClients);
       $tabSelectedClients = ['IdClient' => $selectedClients->getIdClient(),
       'NomClient' => $selectedClients->getNomClient(),
@@ -99,7 +99,7 @@ class ClientController{
          'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
           ];
   $clientJSON = new Client($data);
-  $ok = $this->clientManager->create($clientJSON);
+  $ok = $this->manager->create($clientJSON);
   return $result = ['success' => $ok];
 
      // }
@@ -113,7 +113,7 @@ class ClientController{
   //}
 
   $clientJSON = new Client($data);
-  return $this->clientManager->create($clientJSON);
+  return $this->manager->create($clientJSON);
 
   // return $result;
 
@@ -152,8 +152,22 @@ class ClientController{
             'MailClient' => $_PUT["MailClient"],
             'BudgetMaxRemboursementClient' => $_PUT["BudgetMaxRemboursementClient"]
           ];
-    $clientObject = new Client($data);
-    return $this->clientManager->update($clientObject);
+    $object = new Client($data);
+
+    $erreur = $object->erreur();
+
+    if ($erreur == []) {
+        $this->manager->update($object);
+        return [
+            'success' => true,
+            'client' => $data
+            ];
+    } else {
+        return [
+            'success' => false,
+            'error' => $erreur
+            ];
+    }
     // return $result;
   }
 
@@ -166,9 +180,27 @@ class ClientController{
 
   public function deleteOneClient($id){
   // return "Le client n° ".$deleteClient->getIdClient()." au nom de ".$deleteClient->getNomClient()." a bien été supprimé !";
-  $ok = $this->clientManager->delete($id);
+  $ok = $this->manager->delete($id);
   $result = ['success' => $ok];
   return $result;
+  }
+
+    public function checkErreur($object){
+
+    $erreur = $object->erreur();
+
+    if ($erreur == []) {
+        $this->manager->update($object);
+        return [
+            'success' => true,
+            'client' => $data
+            ];
+    } else {
+        return [
+            'success' => false,
+            'error' => $erreur
+            ];
+    }
   }
 }
 
