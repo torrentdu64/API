@@ -1,6 +1,8 @@
 <?php
 
-require_once 'global/params.php';
+require_once __DIR__ . '/params.php';
+
+
 
 /**
  * Description of Manager

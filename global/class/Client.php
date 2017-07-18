@@ -69,7 +69,7 @@ class Client extends Entity {
     }
 
     public function setAdresse2Client($Adresse2Client) {
-        if (strlen($Adresse1Client) <= 25) {
+        if (strlen($Adresse2Client) <= 25) {
             $this->Adresse2Client = $Adresse2Client;
         } else {
             $this->addErreur('Le Adresse2Client doit comporter moins de 25 caractères');
