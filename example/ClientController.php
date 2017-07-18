@@ -153,6 +153,7 @@ class ClientController{
             'BudgetMaxRemboursementClient' => $_PUT["BudgetMaxRemboursementClient"]
           ];
     $clientObject = new Client($data);
+
     return $this->clientManager->update($clientObject);
     // return $result;
   }
