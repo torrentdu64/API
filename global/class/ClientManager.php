@@ -88,12 +88,13 @@ class ClientManager extends Manager {
       $client = $this->read($id);
     } else {
       return false;
-    }  
+    }
   }
 
   //  !! TODO : change PDO::PARAM_ to good params !!
 
-  public function update(Client &$client) {
+  public function update( $client) {
+    var_dump($client);
     $this->pdoStatement = $this->pdo->prepare("UPDATE Client SET NomCLient = :NomClient, PrenomClient =:PrenomClient, Adresse1Client =:Adresse1Client , Adresse2Client = :Adresse2Client , CodePostalClient = :CodePostalClient , VilleClient = :VilleClient, TelephoneBureauClient = :TelephoneBureauClient, TelephoneMobileClient = :TelephoneMobileClient, MailClient = :MailClient, BudgetMaxRemboursementClient = :BudgetMaxRemboursementClient WHERE IdClient = :IdClient");
     $this->pdoStatement->bindValue(':IdClient', $client->getIdClient(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
@@ -113,7 +114,7 @@ class ClientManager extends Manager {
   public function delete($IdClient) {
     $this->pdoStatement = $this->pdo->prepare("DELETE FROM Client WHERE IdClient = $IdClient");
     $this->pdoStatement->execute();
-    
+
     //return $this->checkBDD($IdClient);
     $check = $this->checkBDD($IdClient);
     if ($check == NULL) {
@@ -122,11 +123,10 @@ class ClientManager extends Manager {
     } else {
       $destroy[] = $this->pdoStatement->execute();
       return $destroy;
-    }  
+    }
   }
 
 
-      
 }
 
 

@@ -1,0 +1,10 @@
+// tester un code postale américain (AL42PT)^[A-Z]{1,2}([0-9]{1,2}|[0-9]{1,1}[A-Z]{1,1})( |)[0-9]{1,1}[A-Z]{2,2}$
+
+      // tester un code postale anglais (55416) ^[0-9]{5,5}$
+
+// tester un numéro de téléphone anglais (01614840484) ^[0-9]{11,11}$
+
+      // tester un numéro de téléphone américain (333-333-3333) ^[0-9]{3,3}[-]{1,1}[0-9]{3,3}[-]{1,1}[0-9]{4,4}$
+
+      // regex code postal ^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$
+      // regex telephone ^+33s?[1-9]d{8}$
