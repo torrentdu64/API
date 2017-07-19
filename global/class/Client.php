@@ -166,7 +166,7 @@ class Client extends Entity {
       }
     }
 
-
+// verifier les espace des du montant
     public function setBudgetMaxRemboursementClient($BudgetMaxRemboursementClient) {
       if($BudgetMaxRemboursementClient == ''){
          $this->addErreur('le budget  n\'est pas remplit');
