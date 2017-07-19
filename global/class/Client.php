@@ -45,97 +45,138 @@ class Client extends Entity {
     }
 
     public function setNomClient($NomClient) {
+      if ($NomClient == ''){
+         $this->addErreur('le Nom n\'est pas remplit');
+      }else{
         if (strlen($NomClient) <= 25) {
             $this->NomClient = $NomClient;
         } else {
             $this->addErreur('Le NomClient doit comporter moins de 25 caractères');
         }
+
+      }
     }
 
     public function setPrenomClient($PrenomClient) {
+      if($PrenomClient == ''){
+         $this->addErreur('le Nom n\'est pas remplit');
+      }else{
         if (strlen($PrenomClient) <= 25) {
             $this->PrenomClient = $PrenomClient;
         } else {
             $this->addErreur('Le PrenomClient doit comporter moins de 25 caractères');
         }
+      }
     }
 
     public function setAdresse1Client($Adresse1Client) {
+      if($Adresse1Client == ''){
+         $this->addErreur('l\'Adresse n\'est pas remplit');
+      }else{
         if (strlen($Adresse1Client) <= 150) {
             $this->Adresse1Client = $Adresse1Client;
         } else {
             $this->addErreur('Le Adresse1Client doit comporter moins de 25 caractères');
         }
+      }
     }
 
     public function setAdresse2Client($Adresse2Client) {
+      if($Adresse2Client == ''){
+         $this->addErreur('l\'Adresse complementaire n\'est pas remplit');
+      }else{
         if (strlen($Adresse2Client) <= 150) {
             $this->Adresse2Client = $Adresse2Client;
         } else {
             $this->addErreur('Le Adresse2Client doit comporter moins de 25 caractères');
         }
-    }
-
-        //  !! TODO => change filter to code postal !!
-
-    public function setCodePostalClient($CodePostalClient) {
-      $preg_match ="/^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$/";
-      if(preg_match($preg_match,$CodePostalClient)){
-          $this->CodePostalClient = $CodePostalClient;
-      } else {
-      $this->addErreur('L\'CodePostalClient est incorrect !');
       }
     }
 
 
-        // !! TODO strlen change to array who check ville !!
+
+    public function setCodePostalClient($CodePostalClient) {
+      if($CodePostalClient == ''){
+         $this->addErreur('le code postal n\'est pas remplit');
+      }else{
+        $preg_match ="/^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$/";
+        if(preg_match($preg_match,$CodePostalClient)){
+            $this->CodePostalClient = $CodePostalClient;
+        } else {
+          $this->addErreur('L\'CodePostalClient est incorrect !');
+       }
+      }
+    }
+
+
+
     public function setVilleClient($VilleClient) {
+      if($VilleClient == ''){
+         $this->addErreur('la ville  n\'est pas remplit');
+      }else{
         $preg_match ="/[a-zA-Z-éèà']/";
       if(preg_match($preg_match,$VilleClient)){
-            $this->VilleClient = $VilleClient;
+            $this->VilleClient = ucfirst($VilleClient);
         } else {
             $this->addErreur('Votre ville est incorrect');
         }
+      }
     }
 
-        // !! TODO strlen change to integer !!
-        // pensez a faire l ville en majuscule
+
+
     public function setTelephoneBureauClient($TelephoneBureauClient) {
-        if (strlen($TelephoneBureauClient) <= 25) {
+      if($TelephoneBureauClient == ''){
+         $this->addErreur('le telephone bureau  n\'est pas remplit');
+      }else{
+         $preg_match = "/([+33]|(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4})/";
+      if((preg_match($preg_match,$TelephoneBureauClient)) && strlen($TelephoneBureauClient) <= 18){
             $this->TelephoneBureauClient = $TelephoneBureauClient;
         } else {
-            $this->addErreur('Le TelephoneBureauClient doit comporter moins de 25 caractères');
+            $this->addErreur("Le Numero telephone n'pas valide");
         }
+      }
     }
-        //  !! TODO strlen change to integer !!
+
    public function setTelephoneMobileClient($TelephoneMobileClient) {
-        if (strlen($TelephoneMobileClient) <= 25) {
+    if($TelephoneMobileClient == ''){
+         $this->addErreur('le telephone mobile n\'est pas remplit');
+      }else{
+        $preg_match = "/([+33]|(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4})/";
+      if((preg_match($preg_match,$TelephoneMobileClient)) && strlen($TelephoneMobileClient) <= 18){
             $this->TelephoneMobileClient = $TelephoneMobileClient;
         } else {
-            $this->addErreur('Le TelephoneMobileClient doit comporter moins de 25 caractères');
+            $this->addErreur("Le Numero telephone n'pas valide");
         }
+      }
     }
 
 
-      // !! TODO change strlen to filter regex to check mail valid? !!
+
     public function setMailClient($MailClient) {
-        if (strlen($MailClient) <= 25) {
+      if($MailClient == ''){
+         $this->addErreur('le mail n\'est pas remplit');
+      }else{
+         $preg_match ="/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/";
+      if(preg_match($preg_match,$MailClient)){
             $this->MailClient = $MailClient;
         } else {
-            $this->addErreur('Le MailClient doit comporter moins de 25 caractères');
+            $this->addErreur("Le Mail n'est pas valide");
         }
+      }
     }
 
-      // !! TODO change strlen to Interger  !!
+
     public function setBudgetMaxRemboursementClient($BudgetMaxRemboursementClient) {
-        if(isset($BudgetMaxRemboursementClient)){
+      if($BudgetMaxRemboursementClient == ''){
+         $this->addErreur('le budget  n\'est pas remplit');
+      }else{
+        if(is_float($BudgetMaxRemboursementClient) || is_numeric($BudgetMaxRemboursementClient)){
             $this->BudgetMaxRemboursementClient = $BudgetMaxRemboursementClient*100;
         }else{
-          $this->addErreur('Veuillez entrer un budget');
+          $this->addErreur("le budget n'est pas valide");
         }
-
-
-
+      }
     }
 
 //============================================================================//
