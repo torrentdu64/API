@@ -27,31 +27,41 @@ class Justificatif extends Entity {
     }
 
     public function setIntituleJustificatif($IntituleJustificatif) {
-        if (strlen($IntituleJustificatif)<= 200) {
+      if($IntituleJustificatif == ''){
+         $this->addErreur('le justificatif  n\'est pas remplit');
+      }else{
+        if (strlen($IntituleJustificatif) <= 250) {
             $this->IntituleJustificatif = $IntituleJustificatif;
         } else {
-            $this->addErreur('L\'Intitule justificatif doit comporter moins de 200 caracteres');
+            $this->addErreur('Votre  justificatif est trop grand');
         }
+      }
     }
 
      public function setURLNomFichier($URLNomFichier) {
+      if($URLNomFichier == ''){
+         $this->addErreur('le URL  n\'est pas remplit');
+      }else{
         if (strlen($URLNomFichier)<= 200) {
             $this->URLNomFichier = $URLNomFichier;
         } else {
             $this->addErreur('L\'URL Nom Fichier doit comporter moins de 200 caracteres');
         }
+      }
     }
-
-      public function setMontantJustificatif($MontantJustificatif) {
-           $preg_match ="^[+]?([0-9]{1,2})*[.,]([0-9]{1,1})?$^";
-        if(preg_match($preg_match,$MontantJustificatif)){
+  // verifier les espace !!!!!!!!!!!!!!!!!!!!!!
+    public function setMontantJustificatif($MontantJustificatif) {
+        if($MontantJustificatif == ''){
+         $this->addErreur('le Montant  n\'est pas remplit');
+      }else{
+          if(is_float($MontantJustificatif) || is_numeric($MontantJustificatif)){
             $this->MontantJustificatif = $MontantJustificatif;
             }elseif(filter_var($MontantJustificatif, FILTER_VALIDATE_INT)){
                   $this->MontantJustificatif = $MontantJustificatif;
               }else{
                   $this->addErreur('Le montant prevu doit etre un entier ou un decimal');
               }
-
+      }
     }
 
 
@@ -73,9 +83,6 @@ class Justificatif extends Entity {
      function getMontantJustificatif() {
         return $this->MontantJustificatif;
     }
-
-
-
 
 
 }
