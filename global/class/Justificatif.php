@@ -49,20 +49,20 @@ class Justificatif extends Entity {
         }
       }
     }
-  // verifier les espace !!!!!!!!!!!!!!!!!!!!!!
+  // verifier les espace !!!!!!!!!!!!!!!!!!!!!! ^[0-9]*[.,]*[0-9]*$
     public function setMontantJustificatif($MontantJustificatif) {
-        if($MontantJustificatif == ''){
+      if($MontantJustificatif == ''){
          $this->addErreur('le Montant  n\'est pas remplit');
       }else{
-          if(is_float($MontantJustificatif) || is_numeric($MontantJustificatif)){
-            $this->MontantJustificatif = $MontantJustificatif;
-            }elseif(filter_var($MontantJustificatif, FILTER_VALIDATE_INT)){
+        $preg_match ="/^[0-9]*[.,]*[0-9]*$/";
+        if(preg_match($preg_match,$MontantJustificatif)){
+          //if(is_float($MontantJustificatif) || is_numeric($MontantJustificatif)){
                   $this->MontantJustificatif = $MontantJustificatif;
-              }else{
-                  $this->addErreur('Le montant prevu doit etre un entier ou un decimal');
-              }
-      }
+             }else{
+              $this->addErreur('Le montant prevu doit etre un entier ou un decimal');
+             }
     }
+  }
 
 
 
