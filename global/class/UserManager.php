@@ -101,6 +101,8 @@ class UserManager extends Manager {
     }
 }
 
+}
+
 
 
 
