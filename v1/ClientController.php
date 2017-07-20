@@ -1,7 +1,11 @@
 <?php
+
 use \Jacwright\RestServer\RestException;
+
 class ClientController{
+
 	private $manager;
+
 	public function __construct(){
 		$this->manager = new ClientManager();
     $this->erreur = new Erreur();
@@ -21,46 +25,57 @@ class ClientController{
   }
 
   /**
-   * Gets all users
+   * Gets all clients
    *
    * @url GET /client
    *
    */
 
   public function getAllClients(){
+
     $listeClients = $this->manager->readAll();
+
     $tabAllClient = [];
+
     foreach ($listeClients as $key => $client) {
-      $data = ['IdClient' => $client->getIdClient(),
-               'NomClient' => $client->getNomClient(),
-               'PrenomClient' => $client->getPrenomClient(),
-               'Adresse1Client' => $client->getAdresse1Client(),
-               'Adresse2Client' => $client->getAdresse2Client(),
-               'CodePostalClient' => $client->getCodePostalClient(),
-               'VilleClient' => $client->getVilleClient(),
-               'TelephoneBureauClient' => $client->getTelephoneBureauClient(),
-               'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
-               'MailClient' => $client->getMailClient(),
-               'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
-               ];
-              $tabAllClient[] = $data;
+        $data = [
+        'IdClient' => $client->getIdClient(),
+        'NomClient' => $client->getNomClient(),
+        'PrenomClient' => $client->getPrenomClient(),
+        'Adresse1Client' => $client->getAdresse1Client(),
+        'Adresse2Client' => $client->getAdresse2Client(),
+        'CodePostalClient' => $client->getCodePostalClient(),
+        'VilleClient' => $client->getVilleClient(),
+        'TelephoneBureauClient' => $client->getTelephoneBureauClient(),
+        'TelephoneMobileClient' => $client->getTelephoneMobileClient(),
+        'MailClient' => $client->getMailClient(),
+        'BudgetMaxRemboursementClient' => $client->getBudgetMaxRemboursementClient()
+       ];
+              
+       $tabAllClient[] = $data;
+
     }
+
     if ($listeClients){
         return ['clients' => $tabAllClient];
     }
+
   }
+
   /**
-   * Gets the user by id or current user
+   * Get one client by id
    *
-   * @url GET /client/$id
+   * @url GET /client/$IdClient
    *
    */
 
 
-  public function getOneClient($id){
-    $selectedClients = $this->manager->read($id);
-        // var_dump($selectedClients);
-      $tabSelectedClients = ['IdClient' => $selectedClients->getIdClient(),
+  public function getOneClient($IdClient){
+
+    $selectedClients = $this->manager->read($IdClient);
+
+      $tabSelectedClients = [
+      'IdClient' => $selectedClients->getIdClient(),
       'NomClient' => $selectedClients->getNomClient(),
       'PrenomClient' => $selectedClients->getPrenomClient(),
       'Adresse1Client' => $selectedClients->getAdresse1Client(),
@@ -72,125 +87,95 @@ class ClientController{
       'MailClient' => $selectedClients->getMailClient(),
       'BudgetMaxRemboursementClient' => $selectedClients->getBudgetMaxRemboursementClient()
       ];
+
       $tab[] = $tabSelectedClients;
+
       if ($selectedClients){
           return ['client' => $tab];
       }
+
   }
 
   /**
-   * Post one user
+   * Create one client
    *
    * @url POST /client
    *
    */
 
   public function createOneClient(){
-  // $champ = ["NomClient", "PrenomClient", "Adresse1Client", "Adresse2Client","CodePostalClient", "VilleClient" , "TelephoneBureauClient", "TelephoneMobileClient", "MailClient", "BudgetMaxRemboursementClient"];
-  // foreach ($champ as $key) {
-       // if(isset($_POST[$key])){
-  $data = [ 'NomClient' => $_POST["NomClient"],
-         'PrenomClient'  => $_POST["PrenomClient"],
-         'Adresse1Client' => $_POST["Adresse1Client"],
-         'Adresse2Client' => $_POST["Adresse2Client"],
-         'CodePostalClient' => $_POST["CodePostalClient"],
-         'VilleClient' => $_POST["VilleClient"],
-         'TelephoneBureauClient' => $_POST["TelephoneBureauClient"],
-         'TelephoneMobileClient' => $_POST["TelephoneMobileClient"],
-         'MailClient' => $_POST["MailClient"],
-         'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
-          ];
-  $clientJSON = new Client($data);
-  $ok = $this->manager->create($clientJSON);
-  return $result = ['success' => $ok];
 
-     // }
-   // if(isset($_POST["NomClient"]) && isset($_POST["PrenomClient"]) && isset($_POST["Adresse1Client"]) && isset($_POST["Adresse2Client"]) && isset($_POST["CodePostalClient"]) && isset($_POST["VilleClient"]), isset($_POST["TelephoneBureauClient"]) && isset($_POST["TelephoneMobileClient"]) && isset($_POST["MailClient"]) && isset($_POST["BudgetMaxRemboursementClient"]) ){
+    $data = [
+    'NomClient' => $_POST["NomClient"],
+    'PrenomClient'  => $_POST["PrenomClient"],
+    'Adresse1Client' => $_POST["Adresse1Client"],
+    'Adresse2Client' => $_POST["Adresse2Client"],
+    'CodePostalClient' => $_POST["CodePostalClient"],
+    'VilleClient' => $_POST["VilleClient"],
+    'TelephoneBureauClient' => $_POST["TelephoneBureauClient"],
+    'TelephoneMobileClient' => $_POST["TelephoneMobileClient"],
+    'MailClient' => $_POST["MailClient"],
+    'BudgetMaxRemboursementClient' => $_POST["BudgetMaxRemboursementClient"]
+    ];
 
+    $object = new Client($data);
+    $libelle = "client";
 
-
-   // }else{
-   //  return "nop";
-   // }
-  //}
-
-  $clientJSON = new Client($data);
-  return $this->manager->create($clientJSON);
-
-  // return $result;
+    return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
 
   }
 
 
-        /**
-         * Update one user
-         *
-         * @url PUT /client/$id
-         *
-         */
+  /**
+   * Update one client
+   *
+   * @url PUT /client/$IdClient
+   *
+   */
 
-  public function updateOneClient($id){
+  public function updateOneClient($IdClient){
 
-    // foreach ($clientJSON as $key) {
-    //     $json = $key;
-    // }
+       $method = $_SERVER['REQUEST_METHOD'];
+          if ('PUT' === $method) {
+            parse_str(file_get_contents('php://input'), $_PUT);
+          }
 
-    // var_dump($_POST);
+       $data = [ 
+       'IdClient' => $IdClient,
+       'NomClient' => $_PUT["NomClient"],
+       'PrenomClient' => $_PUT["PrenomClient"],
+       'Adresse1Client' => $_PUT["Adresse1Client"],
+       'Adresse2Client' => $_PUT["Adresse2Client"],
+       'CodePostalClient' => $_PUT["CodePostalClient"],
+       'VilleClient' => $_PUT["VilleClient"],
+       'TelephoneBureauClient' => $_PUT["TelephoneBureauClient"],
+       'TelephoneMobileClient' => $_PUT["TelephoneMobileClient"],
+       'MailClient' => $_PUT["MailClient"],
+       'BudgetMaxRemboursementClient' => $_PUT["BudgetMaxRemboursementClient"]
+       ];
 
-    $method = $_SERVER['REQUEST_METHOD'];
-    if ('PUT' === $method) {
-        parse_str(file_get_contents('php://input'), $_PUT);
-         //var_dump($_PUT); //$_PUT contains put fields
-    }
-   $data = [ 'IdClient' => $id,
-            'NomClient' => $_PUT["NomClient"],
-            'PrenomClient' => $_PUT["PrenomClient"],
-            'Adresse1Client' => $_PUT["Adresse1Client"],
-            'Adresse2Client' => $_PUT["Adresse2Client"],
-            'CodePostalClient' => $_PUT["CodePostalClient"],
-            'VilleClient' => $_PUT["VilleClient"],
-            'TelephoneBureauClient' => $_PUT["TelephoneBureauClient"],
-            'TelephoneMobileClient' => $_PUT["TelephoneMobileClient"],
-            'MailClient' => $_PUT["MailClient"],
-            'BudgetMaxRemboursementClient' => $_PUT["BudgetMaxRemboursementClient"]
-          ];
-    $object = new Client($data);
+      $object = new Client($data);
+      $libelle = "client";
 
-    return $this->erreur->getErreur($this->manager, $object, $data);
-    // return $result;
+      return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+
   }
 
     /**
-     * Delete one user
+     * Delete one client
      *
-     * @url DELETE /client/$id
+     * @url DELETE /client/$IdClient
      *
      */
 
-  public function deleteOneClient($id){
-  // return "Le client n° ".$deleteClient->getIdClient()." au nom de ".$deleteClient->getNomClient()." a bien été supprimé !";
-  $ok = $this->manager->delete($id);
-  $result = ['success' => $ok];
-  return $result;
+  public function deleteOneClient($IdClient){
+
+    $result = $this->manager->delete($IdClient);
+
+    return ['success' => $result];
+
   }
 
-    public function checkErreur($object){
-
-    $erreur = $object->erreur();
-
-    if ($erreur == []) {
-        $this->manager->update($object);
-        return [
-            'success' => true,
-            'client' => $data
-            ];
-    } else {
-        return [
-            'success' => false,
-            'error' => $erreur
-            ];
-    }
-  }
 }
 
 

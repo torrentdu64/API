@@ -5,7 +5,7 @@
  *
  * @author Micka
  */
-class TarifsRemboursement extends Entity {
+class TarifsRemboursement extends Erreur {
     private $TypeDeFrais;
     private $MontantRemboursement;
     private $Unites;

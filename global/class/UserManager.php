@@ -13,9 +13,9 @@ class UserManager extends Manager {
       parent::__construct();
   }
 
-  public function read($login) {
-      $this->pdoStatement = $this->pdo->prepare("SELECT * FROM user WHERE login = :login");
-      $this->pdoStatement->bindValue(':login', $login, PDO::PARAM_INT);
+  public function read($IdUser) {
+      $this->pdoStatement = $this->pdo->prepare("SELECT * FROM user WHERE login = :IdUser");
+      $this->pdoStatement->bindValue(':IdUser', $IdUser, PDO::PARAM_INT);
       $this->pdoStatement->execute();
       $data = $this->pdoStatement->fetch();
       $user = new User($data);
@@ -90,17 +90,16 @@ class UserManager extends Manager {
   }
     
     
-  public function delete(User $user) {
-    var_dump($user);
-    $this->pdoStatement = $this->pdo->prepare("DELETE FROM user WHERE login = :login");
-    $this->pdoStatement->bindValue(':login', $user->getlogin(), PDO::PARAM_INT);
+  public function delete($IdUser) {
+    $this->pdoStatement = $this->pdo->prepare("DELETE FROM user WHERE login = $IdUser");
     $this->pdoStatement->execute();
-    var_dump($user);
-
-    return $user;
-  }
-    
+    $count = $this->pdoStatement->rowCount();
+    if ($count == 0) {
+      return false;
+    } else {
+      return true;
     }
+}
 
 
 
