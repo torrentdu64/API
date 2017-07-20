@@ -5,6 +5,7 @@ use \Jacwright\RestServer\RestException;
 class ClientController{
 
 	private $manager;
+  private $erreur;
 
 	public function __construct(){
 		$this->manager = new ClientManager();

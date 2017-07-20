@@ -1,12 +1,11 @@
 <?php
 
-require_once 'Manager.php';
-
 /**
  * Description of FraisManager
  *
  * @author Micka
  */
+
 class UserManager extends Manager {
 
   public function __construct() {

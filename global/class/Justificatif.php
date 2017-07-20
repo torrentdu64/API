@@ -5,6 +5,7 @@
  *
  * @author Micka
  */
+
 class Justificatif extends Erreur {
 
     private $IdJustificatif;
@@ -49,6 +50,7 @@ class Justificatif extends Erreur {
         }
       }
     }
+    
   // verifier les espace !!!!!!!!!!!!!!!!!!!!!! ^[0-9]*[.,]*[0-9]*$
     public function setMontantJustificatif($MontantJustificatif) {
       if($MontantJustificatif == ''){
