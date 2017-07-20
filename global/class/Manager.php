@@ -25,4 +25,5 @@ abstract class Manager {
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
     }
+
 }

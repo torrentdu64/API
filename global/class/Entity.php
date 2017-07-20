@@ -20,14 +20,6 @@ abstract class Entity {
             $this->hydrate($data);
         }
     }
-    
-    public function addErreur($erreur){
-        $this->erreur[] = $erreur;
-    } 
-
-    public function getErreur(){
-        return $this->erreur;
-    }
 
     protected function hydrate(array $data) {
         foreach ($data as $key => $value) {

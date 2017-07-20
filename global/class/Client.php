@@ -5,7 +5,7 @@
  *
  * @author Micka
  */
-class Client extends Entity {
+class Client extends Erreur {
 
 // * Attribut to sync db
 
@@ -59,7 +59,7 @@ class Client extends Entity {
 
     public function setPrenomClient($PrenomClient) {
       if($PrenomClient == ''){
-         $this->addErreur('le Nom n\'est pas remplit');
+         $this->addErreur('Le Prenom n\'est pas remplit');
       }else{
         if (strlen($PrenomClient) <= 25) {
             $this->PrenomClient = $PrenomClient;
@@ -71,7 +71,7 @@ class Client extends Entity {
 
     public function setAdresse1Client($Adresse1Client) {
       if($Adresse1Client == ''){
-         $this->addErreur('l\'Adresse n\'est pas remplit');
+         $this->addErreur('L\'Adresse n\'est pas remplit');
       }else{
         if (strlen($Adresse1Client) <= 150) {
             $this->Adresse1Client = $Adresse1Client;
@@ -83,7 +83,7 @@ class Client extends Entity {
 
     public function setAdresse2Client($Adresse2Client) {
       if($Adresse2Client == ''){
-         $this->addErreur('l\'Adresse complementaire n\'est pas remplit');
+         $this->addErreur('L\'Adresse complementaire n\'est pas remplit');
       }else{
         if (strlen($Adresse2Client) <= 150) {
             $this->Adresse2Client = $Adresse2Client;
@@ -97,7 +97,7 @@ class Client extends Entity {
 
     public function setCodePostalClient($CodePostalClient) {
       if($CodePostalClient == ''){
-         $this->addErreur('le code postal n\'est pas remplit');
+         $this->addErreur('Le code postal n\'est pas remplit');
       }else{
         $preg_match ="/^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$/";
         if(preg_match($preg_match,$CodePostalClient)){
@@ -112,7 +112,7 @@ class Client extends Entity {
 
     public function setVilleClient($VilleClient) {
       if($VilleClient == ''){
-         $this->addErreur('la ville  n\'est pas remplit');
+         $this->addErreur('La ville  n\'est pas remplit');
       }else{
         $preg_match ="/[a-zA-Z-éèà']/";
       if(preg_match($preg_match,$VilleClient)){
@@ -127,7 +127,7 @@ class Client extends Entity {
 
     public function setTelephoneBureauClient($TelephoneBureauClient) {
       if($TelephoneBureauClient == ''){
-         $this->addErreur('le telephone bureau  n\'est pas remplit');
+         $this->addErreur('Le telephone bureau  n\'est pas remplit');
       }else{
          $preg_match = "/([+33]|(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4})/";
       if((preg_match($preg_match,$TelephoneBureauClient)) && strlen($TelephoneBureauClient) <= 18){
@@ -140,7 +140,7 @@ class Client extends Entity {
 
    public function setTelephoneMobileClient($TelephoneMobileClient) {
     if($TelephoneMobileClient == ''){
-         $this->addErreur('le telephone mobile n\'est pas remplit');
+         $this->addErreur('Le telephone mobile n\'est pas remplit');
       }else{
         $preg_match = "/([+33]|(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4})/";
       if((preg_match($preg_match,$TelephoneMobileClient)) && strlen($TelephoneMobileClient) <= 18){
@@ -155,7 +155,7 @@ class Client extends Entity {
 
     public function setMailClient($MailClient) {
       if($MailClient == ''){
-         $this->addErreur('le mail n\'est pas remplit');
+         $this->addErreur('Le mail n\'est pas remplit');
       }else{
          $preg_match ="/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/";
       if(preg_match($preg_match,$MailClient)){
@@ -169,12 +169,12 @@ class Client extends Entity {
 // verifier les espace des du montant
     public function setBudgetMaxRemboursementClient($BudgetMaxRemboursementClient) {
       if($BudgetMaxRemboursementClient == ''){
-         $this->addErreur('le budget  n\'est pas remplit');
+         $this->addErreur('Le budget  n\'est pas remplit');
       }else{
         if(is_float($BudgetMaxRemboursementClient) || is_numeric($BudgetMaxRemboursementClient)){
             $this->BudgetMaxRemboursementClient = $BudgetMaxRemboursementClient*100;
         }else{
-          $this->addErreur("le budget n'est pas valide");
+          $this->addErreur("Le budget n'est pas valide");
         }
       }
     }
@@ -236,9 +236,5 @@ class Client extends Entity {
 
     function getBudgetMaxRemboursementClient() {
         return $this->BudgetMaxRemboursementClient;
-    }
-
-    function erreur() {
-        return $this->getErreur();
     }
 }
