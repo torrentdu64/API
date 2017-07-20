@@ -5,7 +5,8 @@ use \Jacwright\RestServer\RestException;
 class UserController
 {
 
-	private $userManager;
+	private $manager;
+    private $erreur;
 
 	public function __construct(){
 		$this->manager = new UserManager();
