@@ -5,7 +5,7 @@
  *
  * @author Micka
  */
-class Justificatif extends Entity {
+class Justificatif extends Erreur {
 
     private $IdJustificatif;
     private $IntituleJustificatif;

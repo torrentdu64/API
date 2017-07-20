@@ -90,31 +90,19 @@ class NoteDeFraisManager extends Manager {
   }
     
     
-  public function delete(NoteDeFrais $noteDeFrais) {
-    var_dump($noteDeFrais);
-    $this->pdoStatement = $this->pdo->prepare("DELETE FROM notedefrais WHERE IdNoteDeFrais = :IdNoteDeFrais");
-    $this->pdoStatement->bindValue(':IdNoteDeFrais', $noteDeFrais->getIdNoteDeFrais(), PDO::PARAM_INT);
+  public function delete($IdNoteDeFrais) {
+    $this->pdoStatement = $this->pdo->prepare("DELETE FROM notedefrais WHERE IdNoteDeFrais = $IdNoteDeFrais");
     $this->pdoStatement->execute();
-    var_dump($noteDeFrais);
-    return $noteDeFrais;
+    $count = $this->pdoStatement->rowCount();
+    if ($count == 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
   
     
     }
-
-/*
-  public function delete($id) {
-    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM frais WHERE id = :id");
-    $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
-    $this->pdoStatement->execute();
-    $data = $this->pdoSatement->fetch();
-    $frais = new Frais($data);
-    return $frais;
-  }
-
-}
-
-*/
 
 
 

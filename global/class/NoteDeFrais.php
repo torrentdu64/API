@@ -1,6 +1,6 @@
 <?php
 
-class NoteDeFrais extends Entity {
+class NoteDeFrais extends Erreur {
 
     private $IdNoteDeFrais;
     private $IntituleNDF;

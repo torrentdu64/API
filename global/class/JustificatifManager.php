@@ -70,50 +70,17 @@ class JustificatifManager extends Manager {
   }
 
 
-  public function delete($justificatifs) {
-    var_dump($justificatifs);
-    $this->pdoStatement = $this->pdo->prepare("DELETE FROM Justificatifs WHERE IdJustificatif = :IdJustificatif");
-    $this->pdoStatement->bindValue(':IdJustificatif',$justificatifs->getIdJustificatif(), PDO::PARAM_INT);
+  public function delete($IdJustificatif) {
+    $this->pdoStatement = $this->pdo->prepare("DELETE FROM Justificatifs WHERE IdJustificatif = $IdJustificatif");
     $this->pdoStatement->execute();
-    var_dump($justificatifs);
-    return $justificatifs;
-  }
-
-//     public function jsonRead($just) {
-//        $jsonTab = [
-//     "success" => ["true"],
-//     "message" => ["Les justificatifs"],
-//     "justificatifs"=> [
-//         "IdJustificatif" => $just->getIdJustificatif(),
-//         "IntituleJustificatif" => $just->getIntituleJustificatif(),
-//         "URLNomFichier" => $just->getURLNomFichier(),
-//         "MontantJustificatif" => $just->getMontantJustificatif()
-//         ],
-//     ];
-
-
-// return json_encode($jsonTab);
-
-
-    //}
-
-
-
+    $count = $this->pdoStatement->rowCount();
+    if ($count == 0) {
+      return false;
+    } else {
+      return true;
     }
-
-/*
-  public function delete($id) {
-    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM frais WHERE id = :id");
-    $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
-    $this->pdoStatement->execute();
-    $data = $this->pdoSatement->fetch();
-    $frais = new Frais($data);
-    return $frais;
   }
 
-}
-
-*/
 
 
 

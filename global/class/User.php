@@ -5,7 +5,7 @@
  *
  * @author Micka
  */
-class User extends Entity {
+class User extends Erreur {
 
     private $login;
     private $NomReps;

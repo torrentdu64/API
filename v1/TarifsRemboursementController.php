@@ -8,161 +8,132 @@ class TarifsRemboursementController
 	private $remboursementManager;
 
 	public function __construct(){
-		$this->remboursementManager = new TarifsRemboursementManager();
+		$this->manager = new TarifsRembourssementManager();
+        $this->erreur = new Erreur();
 	}
 
-
     /**
-     * Gets all tarifsremboursements
+     * Gets all tarifsRemboursement
      *
      * @url GET /tarifsremboursement
      * 
      */
-  
 
     public function getAllTarifRemboursement(){       
 
-        $listeTarifsRemboursement = $this->remboursementManager->readAll();
+        $listeTarifsRemboursement = $this->manager->readAll();
         
         $tabAllTarifsRemboursement = [];
 
-
-
         foreach ($listeTarifsRemboursement as $key => $tarifsRemboursement) {
-                 $data = ['TypeDeFrais' => $tarifsRemboursement->getTypeDeFrais(),
-                         'MontantRemboursement' => $tarifsRemboursement->getMontantRemboursement(),
-                         'Unites' => $tarifsRemboursement->getUnites()
+
+                $data = [
+                'TypeDeFrais' => $tarifsRemboursement->getTypeDeFrais(),
+                'MontantRemboursement' => $tarifsRemboursement->getMontantRemboursement(),
+                'Unites' => $tarifsRemboursement->getUnites()
                 ];     
 
                 $tabAllTarifsRemboursement[] = $data;
+
         }
 
         if ($listeTarifsRemboursement){
-            return ['tarifsremboursements' => $tabAllTarifsRemboursement];
+            return ['tarifsRemboursements' => $tabAllTarifsRemboursement];
         }
     
     }
 
-
     /**
-     * Gets the tarifsremboursement by TypeDeFrais or current tarifsremboursement
+     * Get one tarifsRemboursement by id
      *
-     * @url GET /tarifsremboursement/$TypeDeFrais
+     * @url GET /tarifsremboursement/$IdTypeDeFrais
      * 
      */
   
+    public function getOneTarifRemboursement($IdTypeDeFrais){       
 
-    public function getOneTarifRemboursement($TypeDeFrais){       
+        $selectedTarifsRemboursement = $this->manager->read($IdTypeDeFrais);
 
-     $selectedTarifsRemboursement = $this->remboursementManager->read($TypeDeFrais);
-        // var_dump($selectedClients);
-
-
-        $tabselectedTarifsRemboursement = ['TypeDeFrais' => $selectedTarifsRemboursement->getTypeDeFrais(),
-                                           'MontantRemboursement' => $selectedTarifsRemboursement->getMontantRemboursement(),
-                                           'Unites' => $selectedTarifsRemboursement->getUnites()
-                                          ];
+        $tabselectedTarifsRemboursement = [
+        'TypeDeFrais' => $selectedTarifsRemboursement->getTypeDeFrais(),
+        'MontantRemboursement' => $selectedTarifsRemboursement->getMontantRemboursement(),
+        'Unites' => $selectedTarifsRemboursement->getUnites()
+        ];
 
                 
-                 $tab[] = $tabselectedTarifsRemboursement; 
+        $tab[] = $tabselectedTarifsRemboursement; 
 
         if ($selectedTarifsRemboursement){
-            return ['tarifsremboursement' => $tab];
+            return ['tarifsRemboursement' => $tab];
         }
+
     }
 
     /**
-     * Post one tarifsremboursement
+     * Create one tarifsRemboursement
      *
      * @url POST /tarifsremboursement
      * 
      */
   
-
     public function createOneTarifRemboursement(){       
 
-        // foreach ($clientJSON as $key) {
-        //     $json = $key;
-        // }
-
-        // var_dump($json);
-
-        var_dump($_POST);
-
-
-            $data = [ 'TypeDeFrais' => $_POST["TypeDeFrais"],
-                       'MontantRemboursement'  => $_POST["MontantRemboursement"],
-                       'Unites' => $_POST["Unites"]
-                    ];
+        $data = [ 
+        'TypeDeFrais' => $_POST["TypeDeFrais"],
+        'MontantRemboursement'  => $_POST["MontantRemboursement"],
+        'Unites' => $_POST["Unites"]
+        ];
 
                         
-        $tarifsremboursementJSON = new tarifsremboursement($data);
+        $object = new TarifsRemboursement($data);
+        $libelle = "tarifsRemboursement";
 
+        return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
 
-        return $this->remboursementManager->create($tarifsremboursementJSON);
-
-        // return $result;
-
-        } 
+    } 
     
+    /**
+     * Update one tarifsRemboursement
+     *
+     * @url PUT /tarifsremboursement/$IdTypeDeFrais
+     * 
+     */
 
-        /**
-         * Update one tarifsremboursement
-         *
-         * @url PUT /tarifsremboursement/$TypeDeFrais
-         * 
-         */
-
-    public function updateOneTarifRemboursement($TypeDeFrais){       
-
-        // foreach ($clientJSON as $key) {
-        //     $json = $key;
-        // }
-
-        // var_dump($_POST);
+    public function updateOneTarifRemboursement($IdTypeDeFrais){       
 
         $method = $_SERVER['REQUEST_METHOD'];
             if ('PUT' === $method) {
                 parse_str(file_get_contents('php://input'), $_PUT);
-                 //var_dump($_PUT); //$_PUT contains put fields 
-        }
+            }
 
-        $data = [ 'TypeDeFrais' => $_PUT["TypeDeFrais"],
-                       'MontantRemboursement'  => $_PUT["MontantRemboursement"],
-                       'Unites' => $_PUT["Unites"]
-                    ];
+        $data = [
+        'TypeDeFrais' => $IdTypeDeFrais,
+        'MontantRemboursement'  => $_PUT["MontantRemboursement"],
+        'Unites' => $_PUT["Unites"]
+        ];
 
 
-        $tarifsremboursement = new TarifsRemboursement($data);
+        $object = new TarifsRemboursement($data);
+        $libelle = "tarifsRemboursement";
 
-        return $this->remboursementManager->update($tarifsremboursement);
+        return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
 
-        // return $result;
-
-        } 
-
-    
-
+    }
 
     /**
-     * Delete one tarifsremboursement
+     * Delete one tarifsRemboursement
      *
-     * @url DELETE /tarifsremboursement/$TypeDeFrais
+     * @url DELETE /tarifsremboursement/$IdTypeDeFrais
      * 
      */
   
+    public function deleteOneTarifRemboursement($IdTypeDeFrais){       
 
-    public function deleteOneTarifRemboursement($TypeDeFrais){       
+        $result = $this->manager->delete($IdNoteDeFrais);
 
+        return ['success' => $result];
 
-        // return "Le tarifsremboursement n° ".$deleteClient->getTypeDeFraisClient()." au nom de ".$deleteClient->getNomClient()." a bien été supprimé !";
-
-        $ok = $this->remboursementManager->delete($TypeDeFrais);
-        $result = ['success' => $ok];
-        
-        return $result;
     }
-
     
 }
 
