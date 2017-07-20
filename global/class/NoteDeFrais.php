@@ -51,7 +51,8 @@ class NoteDeFrais extends Entity {
       if($DateNDF == ''){
          $this->addErreur('la date  n\'est pas remplit');
       }else{
-        if (strlen($DateNDF)) {
+        // date('d/m/Y')
+        if ($DateNDF  ) {
             $this->DateNDF = $DateNDF;
         } else {
             $this->addErreur('Date=>Chaine de caractere');
