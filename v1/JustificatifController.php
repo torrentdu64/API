@@ -4,7 +4,8 @@ use \Jacwright\RestServer\RestException;
 
 class JustificatifController{
 
-  private $justificatifManager;
+  private $manager;
+  private $erreur;
 
   public function __construct(){
     $this->manager = new JustificatifManager();
@@ -16,7 +17,7 @@ class JustificatifController{
    *
    * @url GET /justificatif
    *
-   */
+   **/
 
 
   public function getAllJustificatif(){

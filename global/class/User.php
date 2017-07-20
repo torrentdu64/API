@@ -50,7 +50,7 @@ class User extends Erreur {
             if (preg_match('/^[A-Za-z]*$/', $NomReps)) {
             $this->NomReps = $NomReps;
             }else{
-               $this->addErreurFiltre('Le Nom User ne doit pas contenir des donnees chiffrees ');
+               $this->addErreur('Le Nom User ne doit pas contenir des donnees chiffrees ');
             }
         } else {
             $this->addErreur('Le Nom User doit comporter moins de 25 caracteres');
@@ -68,7 +68,7 @@ class User extends Erreur {
              if (preg_match('/^[A-Za-z]*$/', $PrenomReps)) {
             $this->PrenomReps = $PrenomReps;
              }else{
-                  $this->addErreurFiltre('Le Prenom User ne doit pas contenir des donnees chiffrees ');
+                  $this->addErreur('Le Prenom User ne doit pas contenir des donnees chiffrees ');
              }
         } else {
             $this->addErreur('Le Prenom User doit comporter moins de 25 caracteres');
@@ -112,7 +112,7 @@ class User extends Erreur {
             if (preg_match($preg_match, $CodePostalReps)) {
                 $this->CodePostalReps = $CodePostalReps;
             }else {
-                $this->addErreurFiltre('le format du Code Postal User doit être en format belge ou français');
+                $this->addErreur('le format du Code Postal User doit être en format belge ou français');
             }
 
         } else {
@@ -130,7 +130,7 @@ class User extends Erreur {
             if (preg_match('/^[A-Za-z]*$/', $VilleReps)) {
             $this->VilleReps = $VilleReps;
             }else{
-                $this->addErreurFiltre('La Ville ne doit pas contenir des données chiffrees');
+                $this->addErreur('La Ville ne doit pas contenir des données chiffrees');
             }
         } else {
             $this->addErreur('La Ville doit comporter moins de 25 caracteres');
@@ -149,7 +149,7 @@ class User extends Erreur {
             if (filter_var($EmailReps, FILTER_VALIDATE_EMAIL)){
                 $this->EmailReps = $EmailReps;
             }else{
-                $this->addErreurFiltre('L\'Email est invalide');
+                $this->addErreur('L\'Email est invalide');
             }
         } else {
             $this->addErreur('L\'Email  doit comporter moins de 50 caracteres');
@@ -169,7 +169,7 @@ class User extends Erreur {
             if ((preg_match($format_tel,$TelephoneReps))) {
                 $this->TelephoneReps = $TelephoneReps;
             }else{
-                $this->addErreurFiltre('Le Telephone format n\'est pas respecte');
+                $this->addErreur('Le Telephone format n\'est pas respecte');
             }
         } else {
             $this->addErreur('Le Telephone doit comporter moins de 25 caracteres');

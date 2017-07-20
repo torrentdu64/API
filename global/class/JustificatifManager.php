@@ -80,7 +80,7 @@ class JustificatifManager extends Manager {
       return true;
     }
   }
-
+}
 
 
 

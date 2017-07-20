@@ -49,12 +49,12 @@ class UserManager extends Manager {
     $this->pdoStatement->bindValue(':VilleReps',$user->getVilleReps(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':EmailReps',$user->getEmailReps(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':TelephoneReps',$user->getTelephoneReps(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':Commentaires',$user->getCommentaires(), PDO::PARAM_STR); 
-    $this->pdoStatement->bindValue(':DateEmbauche',$user->getDateEmbauche(), PDO::PARAM_STR);  
-    $this->pdoStatement->bindValue(':TypeDeDroits',$user->getTypeDeDroits(), PDO::PARAM_STR); 
+    $this->pdoStatement->bindValue(':Commentaires',$user->getCommentaires(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':DateEmbauche',$user->getDateEmbauche(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':TypeDeDroits',$user->getTypeDeDroits(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':MotDePasseUser',$user->getMotDePasseUser(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':CategorieUser',$user->getCategorieUser(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':IdType', $user->getIdType(), PDO::PARAM_INT);   
+    $this->pdoStatement->bindValue(':IdType', $user->getIdType(), PDO::PARAM_INT);
     $result = $this->pdoStatement->execute();
        var_dump($result);
     if($result){
@@ -62,12 +62,12 @@ class UserManager extends Manager {
       $user = $this->read($login);
     } else {
       return false;
-    }  
+    }
   }
 
-    
+
     public function update(User $user) {
-    var_dump($user);          
+    var_dump($user);
     $this->pdoStatement = $this->pdo->prepare("UPDATE user SET NomReps = :NomReps, PrenomReps = :PrenomReps, Adresse1Reps = :Adresse1Reps, Adresse2Reps = :Adresse2Reps , CodePostalReps = :CodePostalReps , VilleReps = :VilleReps, EmailReps = :EmailReps, TelephoneReps = :TelephoneReps, Commentaires = :Commentaires, DateEmbauche = :DateEmbauche,  TypeDeDroits = :TypeDeDroits, MotDePasseUser = :MotDePasseUser,CategorieUser = :CategorieUser,IdType = :IdType WHERE login = :login");
     $this->pdoStatement->bindValue(':login',$user->getlogin(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':NomReps', $user->getNomReps(), PDO::PARAM_STR);
@@ -78,18 +78,18 @@ class UserManager extends Manager {
     $this->pdoStatement->bindValue(':VilleReps',$user->getVilleReps(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':EmailReps',$user->getEmailReps(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':TelephoneReps',$user->getTelephoneReps(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':Commentaires',$user->getCommentaires(), PDO::PARAM_STR); 
-    $this->pdoStatement->bindValue(':DateEmbauche',$user->getDateEmbauche(), PDO::PARAM_STR);  
-    $this->pdoStatement->bindValue(':TypeDeDroits',$user->getTypeDeDroits(), PDO::PARAM_STR); 
+    $this->pdoStatement->bindValue(':Commentaires',$user->getCommentaires(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':DateEmbauche',$user->getDateEmbauche(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':TypeDeDroits',$user->getTypeDeDroits(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':MotDePasseUser',$user->getMotDePasseUser(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':CategorieUser',$user->getCategorieUser(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':IdType', $user->getIdType(), PDO::PARAM_INT);   
-    $result = $this->pdoStatement->execute();     
+    $this->pdoStatement->bindValue(':IdType', $user->getIdType(), PDO::PARAM_INT);
+    $result = $this->pdoStatement->execute();
     var_dump($result);
     return $user;
   }
-    
-    
+
+
   public function delete($IdUser) {
     $this->pdoStatement = $this->pdo->prepare("DELETE FROM user WHERE login = $IdUser");
     $this->pdoStatement->execute();
@@ -99,6 +99,7 @@ class UserManager extends Manager {
     } else {
       return true;
     }
+  }
 }
 
 
