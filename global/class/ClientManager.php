@@ -114,15 +114,11 @@ class ClientManager extends Manager {
   public function delete($IdClient) {
     $this->pdoStatement = $this->pdo->prepare("DELETE FROM Client WHERE IdClient = $IdClient");
     $this->pdoStatement->execute();
-
-    //return $this->checkBDD($IdClient);
-    $check = $this->checkBDD($IdClient);
-    if ($check == NULL) {
-      // $destroy[] = $this->pdoStatement->execute();
-      return $false;
+    $count = $this->pdoStatement->rowCount();
+    if ($count == 0) {
+      return false;
     } else {
-      $destroy[] = $this->pdoStatement->execute();
-      return $destroy;
+      return true;
     }
   }
 

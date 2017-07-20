@@ -14,9 +14,9 @@ class TarifsRemboursementManager extends Manager {
       parent::__construct();
   }
 
-  public function read($TypeDeFrais) {
-      $this->pdoStatement = $this->pdo->prepare("SELECT * FROM tarifsremboursements WHERE TypeDeFrais = :TypeDeFrais");
-      $this->pdoStatement->bindValue(':TypeDeFrais', $TypeDeFrais, PDO::PARAM_INT);
+  public function read($IdTypeDeFrais) {
+      $this->pdoStatement = $this->pdo->prepare("SELECT * FROM tarifsremboursements WHERE TypeDeFrais = :IdTypeDeFrais");
+      $this->pdoStatement->bindValue(':IdTypeDeFrais', $IdTypeDeFrais, PDO::PARAM_INT);
       $this->pdoStatement->execute();
       $data = $this->pdoStatement->fetch();
       $tarifsRemboursements = new TarifsRemboursement($data);
@@ -67,26 +67,16 @@ class TarifsRemboursementManager extends Manager {
   }
     
     
-  public function delete(TarifsRemboursements $tarifsRemboursements) {
-    var_dump($tarifsRemboursements);
-    $this->pdoStatement = $this->pdo->prepare("DELETE FROM tarifsremboursements WHERE TypeDeFrais = :TypeDeFrais");
-    $this->pdoStatement->bindValue(':TypeDeFrais', $tarifsRemboursements->getTypeDeFrais(), PDO::PARAM_INT);
+  public function delete($IdTypeDeFrais) {
+    $this->pdoStatement = $this->pdo->prepare("DELETE FROM tarifsremboursements WHERE TypeDeFrais = $IdTypeDeFrais");
     $this->pdoStatement->execute();
-    var_dump($tarifsRemboursements);
-    return $tarifsRemboursements;
-  }
-    
-    public function jsonRead() {
-        $requete = $this->pdo->prepare("SELECT * FROM tarifsremboursements");
-        $requete->execute();
-        $res["success"] = true;
-        $res["message"] = "Les tarifs remboursements";
-        $res["results"]["Tarifs remboursements"] = $requete->fetchAll();
-        return json_encode($res); //Mettre au format Json    //On a un doublon
+    $count = $this->pdoStatement->rowCount();
+    if ($count == 0) {
+      return false;
+    } else {
+      return true;
     }
-    
-    
-    
+  }    
 }
 
 
