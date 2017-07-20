@@ -5,7 +5,7 @@
  *
  * @author Micka
  */
-class Client extends Entity {
+class Client extends Erreur {
 
 // * Attribut to sync db
 
@@ -59,7 +59,7 @@ class Client extends Entity {
 
     public function setPrenomClient($PrenomClient) {
       if($PrenomClient == ''){
-         $this->addErreur('Le Nom n\'est pas remplit');
+         $this->addErreur('Le Prenom n\'est pas remplit');
       }else{
         if (strlen($PrenomClient) <= 25) {
             $this->PrenomClient = $PrenomClient;
@@ -236,9 +236,5 @@ class Client extends Entity {
 
     function getBudgetMaxRemboursementClient() {
         return $this->BudgetMaxRemboursementClient;
-    }
-
-    function erreur() {
-        return $this->getErreur();
     }
 }

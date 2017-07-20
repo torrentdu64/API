@@ -4,6 +4,7 @@ class ClientController{
 	private $manager;
 	public function __construct(){
 		$this->manager = new ClientManager();
+    $this->erreur = new Erreur();
 	}
 
   /**
@@ -154,20 +155,7 @@ class ClientController{
           ];
     $object = new Client($data);
 
-    $erreur = $object->erreur();
-
-    if ($erreur == []) {
-        $this->manager->update($object);
-        return [
-            'success' => true,
-            'client' => $data
-            ];
-    } else {
-        return [
-            'success' => false,
-            'error' => $erreur
-            ];
-    }
+    return $this->erreur->getErreur($this->manager, $object, $data);
     // return $result;
   }
 
