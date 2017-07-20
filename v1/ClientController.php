@@ -16,6 +16,7 @@ class ClientController{
 
   public function hellokikou(){
       $tab[] = ["success" => "Hello kikou ! :)"];
+
       return $tab;
   }
 

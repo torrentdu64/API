@@ -1,6 +1,6 @@
 <?php
 
-class NoteDeFrais extends Entity {
+class NoteDeFrais extends Erreur {
 
     private $IdNoteDeFrais;
     private $IntituleNDF;
@@ -277,6 +277,6 @@ class NoteDeFrais extends Entity {
             // Le diviser par 100 (pour convertir centimes en €)
             return $this->IdClient;
         }
-    }
+}
 
 

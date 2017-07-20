@@ -5,7 +5,8 @@ use \Jacwright\RestServer\RestException;
 class JustificatifController{
   private $justificatifManager;
   public function __construct(){
-    $this->justificatifManager = new JustificatifManager();
+    $this->manager = new JustificatifManager();
+    $this->erreur = new Erreur();
   }
 
   /**
@@ -17,13 +18,14 @@ class JustificatifController{
 
 
   public function getAllJustificatif(){
-      $listeJusticatif = $this->justificatifManager->readAll();
+      $listeJusticatif = $this->manager->readAll();
       $tabAlljusticatif = [];
       foreach ($listeJusticatif as $key => $justificatif) {
-        $data = ['IdJustificatif' => $justificatif->getIdJustificatif(),
-                 'IntituleJustificatif' => $justificatif->getIntituleJustificatif(),
-                 'URLNomFichier' => $justificatif->getURLNomFichier(),
-                 'MontantJustificatif' => $justificatif->getMontantJustificatif(),
+        $data = [
+        'IdJustificatif' => $justificatif->getIdJustificatif(),
+         'IntituleJustificatif' => $justificatif->getIntituleJustificatif(),
+          'URLNomFichier' => $justificatif->getURLNomFichier(),
+           'MontantJustificatif' => $justificatif->getMontantJustificatif(),
                 ];
       $tabAlljustificatif[] = $data;
       }
@@ -32,7 +34,7 @@ class JustificatifController{
     }
   }
 
-  
+
   /**
    * Gets the MontantJustificatif by id or current user
    *
@@ -41,7 +43,7 @@ class JustificatifController{
    */
 
   public function getOneJustifictif($id){
-    $selectedJustificatif = $this->justificatifManager->read($id);
+    $selectedJustificatif = $this->manager->read($id);
       // var_dump($selectedClients);
     $tabSelectedJustificatif =
       ['IdJustificatif' => $selectedJustificatif->getIdJustificatif(),
@@ -71,7 +73,7 @@ class JustificatifController{
                'MontantJustificatif' => $_POST["MontantJustificatif"]
             ];
     $justificatifJSON = new Justificatif($data);
-    $ok = $this->justificatifManager->create($justificatifJSON);
+    $ok = $this->manager->create($justificatifJSON);
     return $result = ['success' => $ok];
            // }
          // if(isset($_POST["NomClient"]) && isset($_POST["PrenomClient"]) && isset($_POST["Adresse1Client"]) && isset($_POST["Adresse2Client"]) && isset($_POST["CodePostalClient"]) && isset($_POST["VilleClient"]), isset($_POST["TelephoneBureauClient"]) && isset($_POST["TelephoneMobileClient"]) && isset($_POST["MailClient"]) && isset($_POST["BudgetMaxRemboursementClient"]) ){
@@ -80,7 +82,7 @@ class JustificatifController{
          // }
       //}
     $justificatifJSON = new Justificatif($data);
-    return $this->justificatifManager->create($clientJSON);
+    return $this->manager->create($clientJSON);
         // return $result;
   }
 
@@ -109,7 +111,7 @@ class JustificatifController{
              'MontantJustificatif' => $_PUT["MontantJustificatif"]
                 ];
     $justificatifObject = new Justificatif($data);
-    return $this->justificatifManager->update($justificatifObject);
+    return $this->manager->update($justificatifObject);
         // return $result;
   }
 
@@ -122,7 +124,7 @@ class JustificatifController{
 
   public function deleteOneJustificatif($id){
     // return "Le client n° ".$deleteClient->getIdClient()." au nom de ".$deleteClient->getNomClient()." a bien été supprimé !";
-    $ok = $this->justificatifManager->delete($id);
+    $ok = $this->manager->delete($id);
     $result = ['success' => $ok];
     return $result;
     }

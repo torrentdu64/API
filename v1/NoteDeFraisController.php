@@ -9,6 +9,7 @@ class NoteDeFraisController
 
 	public function __construct(){
 		$this->noteDeFrais = new NoteDeFraisManager();
+    $this->erreur = new Erreur();
 	}
 
 
@@ -16,14 +17,14 @@ class NoteDeFraisController
      * Gets all notedefrais
      *
      * @url GET /notedefrais
-     * 
+     *
      */
-  
 
-    public function getAllNoteDeFrais(){       
+
+    public function getAllNoteDeFrais(){
 
         $listeNoteDeFrais = $this->noteDeFrais->readAll();
-        
+
         $tabAllNoteDeFrais = [];
 
         foreach ($listeNoteDeFrais as $key => $note) {
@@ -42,16 +43,16 @@ class NoteDeFraisController
                          'DistanceSiTransport' => $note->getDistanceSiTransport(),
                          'login' => $note->getlogin(),
                          'IdClient' => $note->getIdClient()
-                ];     
+                ];
 
                 $tabAllNoteDeFrais[] = $data;
         }
 
 
-        if ($listeNoteDeFrais){
+        if ($tabAllNoteDeFrais){
             return ['noteDeFrais' => $tabAllNoteDeFrais];
         }
-    
+
     }
 
 
@@ -59,35 +60,36 @@ class NoteDeFraisController
      * Gets the user by id or current notedefrais
      *
      * @url GET /notedefrais/$id
-     * 
+     *
      */
-  
 
-    public function getOneNoteDeFrais($id){       
+
+    public function getOneNoteDeFrais($id){
 
     	$selectedNoteDeFrais = $this->noteDeFrais->read($id);
         // var_dump($selectedClients);
 
 
-      $tabSelectedNoteDeFrais = ['IdNoteDeFrais' => $selectedNoteDeFrais->getIdNoteDeFrais(),
-                                 'IntituleNDF' => $selectedNoteDeFrais->getIntituleNDF(),
-                                 'DateNDF' => $selectedNoteDeFrais->getDateNDF(),
-                                 'MotifNDF' => $selectedNoteDeFrais->getMotifNDF(),
-                                 'MontantPrevu' => $selectedNoteDeFrais->getMontantPrevu(),
-                                 'EtatNDF' => $selectedNoteDeFrais->getEtatNDF(),
-                                 'Commentaire' => $selectedNoteDeFrais->getCommentaire(),
-                                 'NbreNuiteesSiHotellerie' => $selectedNoteDeFrais->getNbreNuiteesSiHotellerie(),
-                                 'NbreRepasSiRestauration' => $selectedNoteDeFrais->getNbreRepasSiRestauration(),
-                                 'CoordonneesGPSDepartSiTransport' => $selectedNoteDeFrais->getCoordonneesGPSDepartSiTransport(),
-                                 'CoordonneesGPSArriveeSiTransport' => $selectedNoteDeFrais->getCoordonneesGPSArriveeSiTransport(),
-                                 'TypeDeTransport' => $selectedNoteDeFrais->getTypeDeTransport(),
-                                 'DistanceSiTransport' => $selectedNoteDeFrais->getDistanceSiTransport(),
-                                 'login' => $selectedNoteDeFrais->getlogin(),
-                                 'IdClient' => $selectedNoteDeFrais->getIdClient()
-                        ];     
+      $tabSelectedNoteDeFrais = [
+        'IdNoteDeFrais' => $selectedNoteDeFrais->getIdNoteDeFrais(),
+       'IntituleNDF' => $selectedNoteDeFrais->getIntituleNDF(),
+       'DateNDF' => $selectedNoteDeFrais->getDateNDF(),
+       'MotifNDF' => $selectedNoteDeFrais->getMotifNDF(),
+       'MontantPrevu' => $selectedNoteDeFrais->getMontantPrevu(),
+       'EtatNDF' => $selectedNoteDeFrais->getEtatNDF(),
+       'Commentaire' => $selectedNoteDeFrais->getCommentaire(),
+       'NbreNuiteesSiHotellerie' => $selectedNoteDeFrais->getNbreNuiteesSiHotellerie(),
+       'NbreRepasSiRestauration' => $selectedNoteDeFrais->getNbreRepasSiRestauration(),
+       'CoordonneesGPSDepartSiTransport' => $selectedNoteDeFrais->getCoordonneesGPSDepartSiTransport(),
+       'CoordonneesGPSArriveeSiTransport' => $selectedNoteDeFrais->getCoordonneesGPSArriveeSiTransport(),
+       'TypeDeTransport' => $selectedNoteDeFrais->getTypeDeTransport(),
+       'DistanceSiTransport' => $selectedNoteDeFrais->getDistanceSiTransport(),
+       'login' => $selectedNoteDeFrais->getlogin(),
+       'IdClient' => $selectedNoteDeFrais->getIdClient()
+                                ];
 
-                
-                 $tab[] = $tabSelectedNoteDeFrais; 
+
+                 $tab[] = $tabSelectedNoteDeFrais;
 
         if ($selectedNoteDeFrais){
             return ['noteDeFrais' => $tab];
@@ -98,11 +100,11 @@ class NoteDeFraisController
      * Post one notedefrais
      *
      * @url POST /notedefrais
-     * 
+     *
      */
-  
 
-    public function createOneNoteDeFrais(){       
+
+    public function createOneNoteDeFrais(){
 
         // foreach ($clientJSON as $key) {
         //     $json = $key;
@@ -129,7 +131,7 @@ class NoteDeFraisController
                        'IdClient' => $_POST["IdClient"]
                         ];
 
-                        
+
         $noteDeFraisJSON = new NoteDeFrais($data);
 
 
@@ -137,29 +139,23 @@ class NoteDeFraisController
 
         // return $result;
 
-        } 
-    
+        }
+
 
         /**
          * Update one user
          *
          * @url PUT /notedefrais/$id
-         * 
+         *
          */
 
-    public function updateOneNoteDeFrais($id){       
-
-        // foreach ($clientJSON as $key) {
-        //     $json = $key;
-        // }
-
+    public function updateOneNoteDeFrais($id){
         // var_dump($_POST);
-
         $method = $_SERVER['REQUEST_METHOD'];
             if ('PUT' === $method) {
                 parse_str(file_get_contents('php://input'), $_PUT);
-                 //var_dump($_PUT); //$_PUT contains put fields 
-        }
+                 //var_dump($_PUT); //$_PUT contains put fields
+            }
 
          $data = [ 'IdNoteDeFrais' => $_PUT["IdNoteDeFrais"],
                    'IntituleNDF'  => $_PUT["IntituleNDF"],
@@ -184,31 +180,31 @@ class NoteDeFraisController
 
         // return $result;
 
-        } 
+        }
 
-    
+
 
 
     /**
      * Delete one user
      *
      * @url DELETE /notedefrais/$id
-     * 
+     *
      */
-  
 
-    public function deleteOneNoteDeFrais($id){       
+
+    public function deleteOneNoteDeFrais($id){
 
 
         // return "La notedefrais n° ".$deleteClient->getIdClient()." au nom de ".$deleteClient->getNomClient()." a bien été supprimé !";
 
         $ok = $this->noteDeFrais->delete($id);
         $result = ['success' => $ok];
-        
+
         return $result;
     }
 
-    
+
 }
 
-  
+
