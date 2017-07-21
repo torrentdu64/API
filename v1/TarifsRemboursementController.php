@@ -17,13 +17,13 @@ class TarifsRemboursementController
      * Gets all tarifsRemboursement
      *
      * @url GET /tarifsremboursement
-     * 
+     *
      */
 
     public function getAllTarifsRemboursement(){       
 
         $listeTarifsRemboursement = $this->manager->readAll();
-        
+
         $tabAllTarifsRemboursement = [];
 
         foreach ($listeTarifsRemboursement as $key => $tarifsRemboursement) {
@@ -32,7 +32,7 @@ class TarifsRemboursementController
                 'TypeDeFrais' => $tarifsRemboursement->getTypeDeFrais(),
                 'MontantRemboursement' => $tarifsRemboursement->getMontantRemboursement(),
                 'Unites' => $tarifsRemboursement->getUnites()
-                ];     
+                ];
 
                 $tabAllTarifsRemboursement[] = $data;
 
@@ -41,15 +41,16 @@ class TarifsRemboursementController
         if ($listeTarifsRemboursement){
             return ['tarifsRemboursements' => $tabAllTarifsRemboursement];
         }
-    
+
     }
 
     /**
      * Get one tarifsRemboursement by id
      *
      * @url GET /tarifsremboursement/$IdTypeDeFrais
-     * 
+     *
      */
+
   
     public function getOneTarifsRemboursement($IdTypeDeFrais){       
 
@@ -61,8 +62,8 @@ class TarifsRemboursementController
         'Unites' => $selectedTarifsRemboursement->getUnites()
         ];
 
-                
-        $tab[] = $tabselectedTarifsRemboursement; 
+
+        $tab[] = $tabselectedTarifsRemboursement;
 
         if ($selectedTarifsRemboursement){
             return ['tarifsRemboursement' => $tab];
@@ -74,29 +75,30 @@ class TarifsRemboursementController
      * Create one tarifsRemboursement
      *
      * @url POST /tarifsremboursement
-     * 
+     *
      */
+
   
     public function createOneTarifsRemboursement(){       
 
-        $data = [ 
+        $data = [
         'MontantRemboursement'  => $_POST["MontantRemboursement"],
         'Unites' => $_POST["Unites"]
         ];
 
-                        
+
         $object = new TarifsRemboursement($data);
         $libelle = "tarifsRemboursement";
 
         return $this->erreur->getCreate($this->manager, $object, $libelle, $data);
 
-    } 
-    
+    }
+
     /**
      * Update one tarifsRemboursement
      *
      * @url PUT /tarifsremboursement/$IdTypeDeFrais
-     * 
+     *
      */
 
     public function updateOneTarifsRemboursement($IdTypeDeFrais){       
@@ -124,17 +126,17 @@ class TarifsRemboursementController
      * Delete one tarifsRemboursement
      *
      * @url DELETE /tarifsremboursement/$IdTypeDeFrais
-     * 
+     *
      */
-  
-    public function deleteOneTarifRemboursement($IdTypeDeFrais){       
+
+    public function deleteOneTarifRemboursement($IdTypeDeFrais){
 
         $result = $this->manager->delete($IdTypeDeFrais);
 
         return ['success' => $result];
 
     }
-    
+
 }
 
-  
+

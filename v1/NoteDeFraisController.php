@@ -14,18 +14,20 @@ class NoteDeFraisController
   	}
 
 
+
     /**
      * Gets all noteDeFrais
      *
      * @url GET /notedefrais
-     * 
+     *
      */
-  
 
-    public function getAllNoteDeFrais(){       
+
+    public function getAllNoteDeFrais(){
+
 
         $listeNoteDeFrais = $this->manager->readAll();
-        
+
         $tabAllNoteDeFrais = [];
 
         foreach ($listeNoteDeFrais as $key => $note) {
@@ -45,27 +47,28 @@ class NoteDeFraisController
             'DistanceSiTransport' => $note->getDistanceSiTransport(),
             'login' => $note->getlogin(),
             'IdClient' => $note->getIdClient()
-            ];     
+            ];
 
             $tabAllNoteDeFrais[] = $data;
 
+
         }
 
 
-        if ($listeNoteDeFrais){
+        if ($tabAllNoteDeFrais){
             return ['noteDeFrais' => $tabAllNoteDeFrais];
         }
-    
+
     }
 
     /**
      * Get one noteDeFrais by id
      *
      * @url GET /notedefrais/$IdNoteDeFrais
-     * 
+     *
      */
-  
-    public function getOneNoteDeFrais($IdNoteDeFrais){       
+
+    public function getOneNoteDeFrais($IdNoteDeFrais){
 
     	$selectedNoteDeFrais = $this->manager->read($IdNoteDeFrais);
 
@@ -85,10 +88,10 @@ class NoteDeFraisController
         'DistanceSiTransport' => $selectedNoteDeFrais->getDistanceSiTransport(),
         'login' => $selectedNoteDeFrais->getlogin(),
         'IdClient' => $selectedNoteDeFrais->getIdClient()
-        ];     
+        ];
 
-                
-        $tab[] = $tabSelectedNoteDeFrais; 
+
+        $tab[] = $tabSelectedNoteDeFrais;
 
         if ($selectedNoteDeFrais){
             return ['noteDeFrais' => $tab];
@@ -100,10 +103,12 @@ class NoteDeFraisController
      * Create one notedefrais
      *
      * @url POST /notedefrais
-     * 
+     *
      */
-  
-    public function createOneNoteDeFrais(){       
+
+
+    public function createOneNoteDeFrais(){
+
 
         $data = [
         'IntituleNDF'  => $_POST["IntituleNDF"],
@@ -122,30 +127,33 @@ class NoteDeFraisController
         'IdClient' => $_POST["IdClient"]
         ];
 
-                        
+
+
         $object = new NoteDeFrais($data);
         $libelle = "noteDeFrais";
 
+
         return $this->erreur->getCreate($this->manager, $object, $libelle, $data);
 
-    } 
-    
+
+    }
+
 
     /**
      * Update one noteDeFrais
      *
      * @url PUT /notedefrais/$IdNoteDeFrais
-     * 
+     *
      */
 
-    public function updateOneNoteDeFrais($IdNoteDeFrais){       
+    public function updateOneNoteDeFrais($IdNoteDeFrais){
 
         $method = $_SERVER['REQUEST_METHOD'];
             if ('PUT' === $method) {
                 parse_str(file_get_contents('php://input'), $_PUT);
             }
 
-         $data = [ 
+         $data = [
          'IdNoteDeFrais' => $IdNoteDeFrais,
          'IntituleNDF'  => $_PUT["IntituleNDF"],
          'DateNDF' => $_PUT["DateNDF"],
@@ -168,25 +176,24 @@ class NoteDeFraisController
 
         return $this->erreur->getUpdate($this->manager, $object, $libelle, $data);
 
-    } 
+    }
+
 
 
     /**
      * Delete one noteDeFrais
      *
      * @url DELETE /notedefrais/$IdNoteDeFrais
-     * 
+     *
      */
-  
 
-    public function deleteOneNoteDeFrais($IdNoteDeFrais){       
+    public function deleteOneNoteDeFrais($IdNoteDeFrais){
 
       $result = $this->manager->delete($IdNoteDeFrais);
-
       return ['success' => $result];
-    
+
     }
 
 }
 
-  
+
