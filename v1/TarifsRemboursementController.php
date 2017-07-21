@@ -5,7 +5,8 @@ use \Jacwright\RestServer\RestException;
 class TarifsRemboursementController
 {
 
-	private $remboursementManager;
+	private $manager;
+    private $erreur;
 
 	public function __construct(){
 		$this->manager = new TarifsRemboursementManager();

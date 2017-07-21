@@ -5,7 +5,8 @@ use \Jacwright\RestServer\RestException;
 class NoteDeFraisController
 {
 
-	  private $noteDeFrais;
+	  private $manager;
+    private $erreur;
 
   	public function __construct(){
   		$this->manager = new NoteDeFraisManager();
