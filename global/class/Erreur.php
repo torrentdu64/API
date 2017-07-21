@@ -42,6 +42,7 @@ class Erreur extends Entity {
 
     public function getUpdate($manager, $object, $libelle, $data){
         if ($object->erreur == []) {   
+                var_dump($object);
                 $manager->update($object);
             return [
                 'success' => true,

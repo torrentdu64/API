@@ -42,7 +42,7 @@ class ClientManager extends Manager {
 
   public function create(Client $client) {
 
-    $this->pdoStatement = $this->pdo->prepare("INSERT INTO client( NomClient, PrenomClient, Adresse1Client, Adresse2Client, CodePostalClient, VilleClient, TelephoneBureauClient, TelephoneMobileClient, MailClient, BudgetMaxRemboursementClient) VALUES(:NomClient, :PrenomClient, :Adresse1Client , :Adresse2Client , :CodePostalClient , :VilleClient, :TelephoneBureauClient, :TelephoneMobileClient, :MailClient, :BudgetMaxRemboursementClient)");
+    $this->pdoStatement = $this->pdo->prepare("INSERT INTO client (NomClient, PrenomClient, Adresse1Client, Adresse2Client, CodePostalClient, VilleClient, TelephoneBureauClient, TelephoneMobileClient, MailClient, BudgetMaxRemboursementClient) VALUES(:NomClient, :PrenomClient, :Adresse1Client , :Adresse2Client , :CodePostalClient , :VilleClient, :TelephoneBureauClient, :TelephoneMobileClient, :MailClient, :BudgetMaxRemboursementClient)");
     $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':PrenomClient', $client->getPrenomClient(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':Adresse1Client', $client->getAdresse1Client(), PDO::PARAM_STR);

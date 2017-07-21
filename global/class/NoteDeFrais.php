@@ -52,11 +52,13 @@ class NoteDeFrais extends Erreur {
          $this->addErreur('la date  n\'est pas remplit');
       }else{
         // date('d/m/Y')
+        // Fonction à revoir car ne fait pas d/m/Y 
+        date_default_timezone_set("Europe/Paris");
         if (DateTime::createFromFormat('Y-m-d', $DateNDF )) {
             $this->DateNDF = $DateNDF;
         } else {
-            $this->addErreur('mauvais format de date');
-        }
+             $this->addErreur('mauvais format de date');
+         }
       }
     }
 
@@ -103,7 +105,7 @@ class NoteDeFrais extends Erreur {
 
 
     public function setEtatNDF($EtatNDF) {
-      $etat = ['en cour', 'rembourser', 'en attent', 'refuser'];
+      $etat = ['en cours', 'rembourse', 'en attente', 'refuse'];
       if($EtatNDF == ''){
          $this->addErreur('l Etat NDF  n\'est pas remplit');
       }else{
@@ -190,12 +192,12 @@ class NoteDeFrais extends Erreur {
 
         public function setLogin($Login) {
            if($Login == ''){
-         $this->addErreur('le login n\'est pas remplit');
+         $this->addErreur('le Login n\'est pas remplit');
           }else{
             if (is_numeric($Login)) {
                 $this->Login = $Login;
             } else {
-                $this->addErreur('Le login est incorrect');
+                $this->addErreur('Le Login est incorrect');
             }
           }
         }

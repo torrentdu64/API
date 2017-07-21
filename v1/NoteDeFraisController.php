@@ -5,12 +5,12 @@ use \Jacwright\RestServer\RestException;
 class NoteDeFraisController
 {
 
-	  private $manager;
+	private $manager;
     private $erreur;
 
   	public function __construct(){
   		$this->manager = new NoteDeFraisManager();
-      $this->erreur = new Erreur();
+        $this->erreur = new Erreur();
   	}
 
 
@@ -45,7 +45,7 @@ class NoteDeFraisController
             'CoordonneesGPSArriveeSiTransport' => $note->getCoordonneesGPSArriveeSiTransport(),
             'TypeDeTransport' => $note->getTypeDeTransport(),
             'DistanceSiTransport' => $note->getDistanceSiTransport(),
-            'login' => $note->getlogin(),
+            'Login' => $note->getLogin(),
             'IdClient' => $note->getIdClient()
             ];
 
@@ -86,7 +86,7 @@ class NoteDeFraisController
         'CoordonneesGPSArriveeSiTransport' => $selectedNoteDeFrais->getCoordonneesGPSArriveeSiTransport(),
         'TypeDeTransport' => $selectedNoteDeFrais->getTypeDeTransport(),
         'DistanceSiTransport' => $selectedNoteDeFrais->getDistanceSiTransport(),
-        'login' => $selectedNoteDeFrais->getlogin(),
+        'Login' => $selectedNoteDeFrais->getLogin(),
         'IdClient' => $selectedNoteDeFrais->getIdClient()
         ];
 
@@ -109,6 +109,7 @@ class NoteDeFraisController
 
     public function createOneNoteDeFrais(){
 
+        var_dump($_POST);
 
         $data = [
         'IntituleNDF'  => $_POST["IntituleNDF"],
@@ -123,11 +124,11 @@ class NoteDeFraisController
         'CoordonneesGPSArriveeSiTransport' => $_POST["CoordonneesGPSArriveeSiTransport"],
         'TypeDeTransport' => $_POST["TypeDeTransport"],
         'DistanceSiTransport' => $_POST["DistanceSiTransport"],
-        'login' => $_POST["login"],
+        'Login' => $_POST["Login"],
         'IdClient' => $_POST["IdClient"]
         ];
 
-
+        var_dump($data);
 
         $object = new NoteDeFrais($data);
         $libelle = "noteDeFrais";
@@ -153,6 +154,9 @@ class NoteDeFraisController
                 parse_str(file_get_contents('php://input'), $_PUT);
             }
 
+
+
+
          $data = [
          'IdNoteDeFrais' => $IdNoteDeFrais,
          'IntituleNDF'  => $_PUT["IntituleNDF"],
@@ -167,9 +171,11 @@ class NoteDeFraisController
          'CoordonneesGPSArriveeSiTransport' => $_PUT["CoordonneesGPSArriveeSiTransport"],
          'TypeDeTransport' => $_PUT["TypeDeTransport"],
          'DistanceSiTransport' => $_PUT["DistanceSiTransport"],
-         'login' => $_PUT["login"],
+         'Login' => $_PUT["Login"],
          'IdClient' => $_PUT["IdClient"]
          ];
+
+      
 
         $object = new NoteDeFrais($data);
         $libelle = "noteDeFrais";

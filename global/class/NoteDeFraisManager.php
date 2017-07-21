@@ -80,7 +80,7 @@ class NoteDeFraisManager extends Manager {
     $this->pdoStatement->bindValue(':DistanceSiTransport', $noteDeFrais->getDistanceSiTransport(), PDO::PARAM_STR); 
     $this->pdoStatement->bindValue(':Login', $noteDeFrais->getLogin(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':IdClient', $noteDeFrais->getIdClient(), PDO::PARAM_INT);  
-    $result = $this->pdoStatement->execute();
+    $this->pdoStatement->execute();
     return $noteDeFrais;
   }
     
