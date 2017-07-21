@@ -5,7 +5,8 @@ use \Jacwright\RestServer\RestException;
 class UserController
 {
 
-	private $userManager;
+	private $manager;
+    private $erreur;
 
 	public function __construct(){
 		$this->manager = new UserManager();
@@ -100,27 +101,29 @@ class UserController
 
     public function createOneUser(){
 
-            $data = [ 'login' => $_POST["login"],
-                       'NomReps'  => $_POST["NomReps"],
-                       'PrenomReps' => $_POST["PrenomReps"],
-                       'Adresse1Reps' => $_POST["Adresse1Reps"],
-                       'Adresse2Reps' => $_POST["Adresse2Reps"],
-                       'CodePostalReps' => $_POST["CodePostalReps"],
-                       'VilleReps' => $_POST["VilleReps"],
-                       'EmailReps' => $_POST["EmailReps"],
-                       'TelephoneReps' => $_POST["TelephoneReps"],
-                       'Commentaires' => $_POST["Commentaires"],
-                       'DateEmbauche' => $_POST["DateEmbauche"],
-                       'TypeDeDroits' => $_POST["TypeDeDroits"],
-                       'MotDePasseUser' => $_POST["MotDePasseUser"],
-                       'CategorieUser' => $_POST["CategorieUser"],
-                       'IdType' => $_POST["IdType"]
-                    ];
+
+            $data = [
+            'NomReps'  => $_POST["NomReps"],
+            'PrenomReps' => $_POST["PrenomReps"],
+            'Adresse1Reps' => $_POST["Adresse1Reps"],
+            'Adresse2Reps' => $_POST["Adresse2Reps"],
+            'CodePostalReps' => $_POST["CodePostalReps"],
+            'VilleReps' => $_POST["VilleReps"],
+            'EmailReps' => $_POST["EmailReps"],
+            'TelephoneReps' => $_POST["TelephoneReps"],
+            'Commentaires' => $_POST["Commentaires"],
+            'DateEmbauche' => $_POST["DateEmbauche"],
+            'TypeDeDroits' => $_POST["TypeDeDroits"],
+            'MotDePasseUser' => $_POST["MotDePasseUser"],
+            'CategorieUser' => $_POST["CategorieUser"],
+            'IdType' => $_POST["IdType"]
+            ];
+
 
         $object = new User($data);
         $libelle = "user";
 
-        return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+        return $this->erreur->getCreate($this->manager, $object, $libelle, $data);
 
     }
 
@@ -134,9 +137,9 @@ class UserController
     public function updateOneUser($IdUser){
 
         $method = $_SERVER['REQUEST_METHOD'];
-            if ('PUT' === $method) {
-                parse_str(file_get_contents('php://input'), $_PUT);
-            }
+          if ('PUT' === $method) {
+            parse_str(file_get_contents('php://input'), $_PUT);
+          }
 
          $data = [
          'login' => $IdUser,
@@ -159,7 +162,7 @@ class UserController
         $object = new User($data);
         $libelle = "user";
 
-        return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+        return $this->erreur->getUpdate($this->manager, $object, $libelle, $data);
 
     }
 
@@ -172,7 +175,7 @@ class UserController
 
     public function deleteOneUser($IdUser){
 
-        $result = $this->manager->delete($IdNoteDeFrais);
+        $result = $this->manager->delete($IdUser);
 
         return ['success' => $result];
 

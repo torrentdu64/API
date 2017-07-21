@@ -28,19 +28,27 @@ class TarifsRemboursement extends Erreur {
         }
       }
 
-      // public function setMontantPrevu($MontantPrevu) {
-      //    if($MontantPrevu == ''){
-      //         $this->addErreur('le Montant Prevu n\'est pas remplit');
-      //     }else{
-      //         $preg_match ="/^[0-9]*[.,]*[0-9]*$/";
-      //         if(preg_match($preg_match,$MontantPrevu)){
 
-      //                 $this->MontantPrevu = $MontantPrevu;
-      //         }else{
-      //                 $this->addErreur('Le montant est incorrect');
-      //         }
-      //     }
-      // }
+    //   public function setMontantPrevu($MontantPrevu) {
+    //      if($MontantPrevu == ''){
+    //      $this->addErreur('le Montant Prevu n\'est pas remplit');
+    //       }else{
+    //     if (strlen($MontantPrevu)) {
+    //         $preg_match ="^[+]?([0-9]{1,2})*[.,]([0-9]{1,1})?$^";
+    //     if(preg_match($preg_match,$MontantPrevu)){
+    //         $this->MontantPrevu = $MontantPrevu;
+    //     }elseif(filter_var($MontantPrevu, FILTER_VALIDATE_INT)){
+    //             $this->MontantPrevu = $MontantPrevu;
+    //         }else{
+    //             $this->addErreurFiltre('Le montant prevu doit être un entier ou un decimal');
+    //         }
+
+    //     } else {
+    //         $this->addErreur('Le montant prevu doit être un entier');
+    //     }
+    //   }
+    // }
+
 
     public function setMontantRemboursement($MontantRemboursement) {
       if($MontantRemboursement == ''){

@@ -5,6 +5,7 @@
  *
  * @author Micka
  */
+
 class Justificatif extends Erreur {
 
     private $IdJustificatif;
