@@ -23,7 +23,7 @@ class JustificatifManager extends Manager {
 
   public function readAll() {
 
-    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM justificatifs");
+    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM justificatif");
     $this->pdoStatement->execute();
     $data = $this->pdoStatement->fetchAll();
 

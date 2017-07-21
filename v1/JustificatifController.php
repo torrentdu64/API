@@ -26,7 +26,7 @@ class JustificatifController{
       $listeJusticatif = $this->manager->readAll();
 
 
-      $tabAlljusticatif = [];
+      $tabAlljustificatif = [];
 
       foreach ($listeJusticatif as $key => $justificatif) {
 
