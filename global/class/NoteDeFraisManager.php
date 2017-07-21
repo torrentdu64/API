@@ -37,9 +37,8 @@ class NoteDeFraisManager extends Manager {
     return $objectNotedefrais;
   }
 
-  public function create(NoteDeFrais &$noteDeFrais) {
-      var_dump($noteDeFrais);
-       $this->pdoStatement = $this->pdo->prepare("INSERT INTO notedefrais( IntituleNDF, DateNDF, MotifNDF, MontantPrevu, EtatNDF, Commentaire, NbreNuiteesSiHotellerie, NbreRepasSiRestauration, CoordonneesGPSDepartSiTransport, CoordonneesGPSArriveeSiTransport,TypeDeTransport,DistanceSiTransport,Login,IdClient) VALUES(:IntituleNDF, :DateNDF, :MotifNDF , :MontantPrevu , :EtatNDF , :Commentaire, :NbreNuiteesSiHotellerie, :NbreRepasSiRestauration, :CoordonneesGPSDepartSiTransport, :CoordonneesGPSArriveeSiTransport, :TypeDeTransport, :DistanceSiTransport, :Login, :IdClient )");
+  public function create(NoteDeFrais $noteDeFrais) {
+       $this->pdoStatement = $this->pdo->prepare("INSERT INTO notedefrais (IntituleNDF, DateNDF, MotifNDF, MontantPrevu, EtatNDF, Commentaire, NbreNuiteesSiHotellerie, NbreRepasSiRestauration, CoordonneesGPSDepartSiTransport, CoordonneesGPSArriveeSiTransport,TypeDeTransport,DistanceSiTransport,Login,IdClient) VALUES(:IntituleNDF, :DateNDF, :MotifNDF , :MontantPrevu , :EtatNDF , :Commentaire, :NbreNuiteesSiHotellerie, :NbreRepasSiRestauration, :CoordonneesGPSDepartSiTransport, :CoordonneesGPSArriveeSiTransport, :TypeDeTransport, :DistanceSiTransport, :Login, :IdClient )");
     $this->pdoStatement->bindValue(':IntituleNDF', $noteDeFrais->getIntituleNDF(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':DateNDF', $noteDeFrais->getDateNDF(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':MotifNDF', $noteDeFrais->getMotifNDF(), PDO::PARAM_STR);
@@ -55,7 +54,6 @@ class NoteDeFraisManager extends Manager {
     $this->pdoStatement->bindValue(':Login', $noteDeFrais->getLogin(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':IdClient', $noteDeFrais->getIdClient(), PDO::PARAM_INT);   
     $result = $this->pdoStatement->execute();
-       var_dump($result);
     if($result){
       $id = $this->pdo->lastInsertId();
       $noteDeFrais = $this->read($id);
@@ -65,8 +63,7 @@ class NoteDeFraisManager extends Manager {
   }
 
     
-      public function update(NoteDeFrais $noteDeFrais) {
-    var_dump($noteDeFrais);          
+      public function update(NoteDeFrais $noteDeFrais) {         
     $this->pdoStatement = $this->pdo->prepare("UPDATE notedefrais SET IntituleNDF = :IntituleNDF, DateNDF = :DateNDF, MotifNDF = :MotifNDF, MontantPrevu = :MontantPrevu , EtatNDF = :EtatNDF , Commentaire = :Commentaire, NbreNuiteesSiHotellerie = :NbreNuiteesSiHotellerie, NbreRepasSiRestauration = :NbreRepasSiRestauration, CoordonneesGPSDepartSiTransport = :CoordonneesGPSDepartSiTransport, CoordonneesGPSArriveeSiTransport = :CoordonneesGPSArriveeSiTransport,  TypeDeTransport = :TypeDeTransport, DistanceSiTransport = :DistanceSiTransport,Login = :Login,IdClient = :IdClient WHERE IdNoteDeFrais = :IdNoteDeFrais");
     $this->pdoStatement->bindValue(':IdNoteDeFrais',$noteDeFrais->getIdNoteDeFrais(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':IntituleNDF', $noteDeFrais->getIntituleNDF(), PDO::PARAM_STR);
@@ -84,7 +81,6 @@ class NoteDeFraisManager extends Manager {
     $this->pdoStatement->bindValue(':Login', $noteDeFrais->getLogin(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':IdClient', $noteDeFrais->getIdClient(), PDO::PARAM_INT);  
     $result = $this->pdoStatement->execute();
-    var_dump($result);
     return $noteDeFrais;
   }
     

@@ -37,31 +37,30 @@ class TarifsRemboursementManager extends Manager {
     return $objectTarifsRemboursement;
   }
     
-  public function create(TarifsRemboursements &$tarifsRemboursements) {
-      var_dump($tarifsRemboursements);
-       $this->pdoStatement = $this->pdo->prepare("INSERT INTO tarifsremboursement( MontantRemboursement, Unites) VALUES(:MontantRemboursement, :Unites)");
-    $this->pdoStatement->bindValue(':MontantRemboursement', $tarifsRemboursements->getMontantRemboursement(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':Unites', $tarifsRemboursements->getUnites(), PDO::PARAM_STR);
+  public function create(TarifsRemboursement $tarifsRemboursement) {
+       $this->pdoStatement = $this->pdo->prepare("INSERT INTO tarifsremboursement (MontantRemboursement, Unites) VALUES(:MontantRemboursement, :Unites)");
+    $this->pdoStatement->bindValue(':MontantRemboursement', $tarifsRemboursement->getMontantRemboursement(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':Unites', $tarifsRemboursement->getUnites(), PDO::PARAM_STR);
     $result = $this->pdoStatement->execute();
        var_dump($result);
     if($result){
-      $TypeDeFrais = $this->pdo->lastInsertId();
-      $tarifsRemboursements = $this->read($TypeDeFrais);
+      $IdTypeDeFrais = $this->pdo->lastInsertId();
+      $tarifsRemboursement = $this->read($IdTypeDeFrais);
     } else {
       return false;
     }  
   }
 
     
-    public function update(TarifsRemboursements $tarifsRemboursements) {
+    public function update(TarifsRemboursement $tarifsRemboursement) {
     var_dump($tarifsRemboursements);          
-    $this->pdoStatement = $this->pdo->prepare("UPDATE tarifsremboursement SET MontantRemboursement = :MontantRemboursement, Unites = :Unites WHERE TypeDeFrais = :TypeDeFrais");
-    $this->pdoStatement->bindValue(':TypeDeFrais',$tarifsRemboursements->getTypeDeFrais(), PDO::PARAM_INT);
-    $this->pdoStatement->bindValue(':MontantRemboursement', $tarifsRemboursements->getMontantRemboursement(), PDO::PARAM_STR);
-    $this->pdoStatement->bindValue(':Unites', $tarifsRemboursements->getUnites(), PDO::PARAM_STR);
+    $this->pdoStatement = $this->pdo->prepare("UPDATE tarifsremboursement SET MontantRemboursement = :MontantRemboursement, Unites = :Unites WHERE TypeDeFrais = :IdTypeDeFrais");
+    $this->pdoStatement->bindValue(':IdTypeDeFrais',$tarifsRemboursement->getTypeDeFrais(), PDO::PARAM_INT);
+    $this->pdoStatement->bindValue(':MontantRemboursement', $tarifsRemboursement->getMontantRemboursement(), PDO::PARAM_STR);
+    $this->pdoStatement->bindValue(':Unites', $tarifsRemboursement->getUnites(), PDO::PARAM_STR);
     $result = $this->pdoStatement->execute();
     var_dump($result);
-    return $tarifsRemboursements;
+    return $tarifsRemboursement;
   }
     
     

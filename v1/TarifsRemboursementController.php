@@ -20,7 +20,7 @@ class TarifsRemboursementController
      * 
      */
 
-    public function getAllTarifRemboursement(){       
+    public function getAllTarifsRemboursement(){       
 
         $listeTarifsRemboursement = $this->manager->readAll();
         
@@ -51,7 +51,7 @@ class TarifsRemboursementController
      * 
      */
   
-    public function getOneTarifRemboursement($IdTypeDeFrais){       
+    public function getOneTarifsRemboursement($IdTypeDeFrais){       
 
         $selectedTarifsRemboursement = $this->manager->read($IdTypeDeFrais);
 
@@ -77,10 +77,9 @@ class TarifsRemboursementController
      * 
      */
   
-    public function createOneTarifRemboursement(){       
+    public function createOneTarifsRemboursement(){       
 
         $data = [ 
-        'TypeDeFrais' => $_POST["TypeDeFrais"],
         'MontantRemboursement'  => $_POST["MontantRemboursement"],
         'Unites' => $_POST["Unites"]
         ];
@@ -89,7 +88,7 @@ class TarifsRemboursementController
         $object = new TarifsRemboursement($data);
         $libelle = "tarifsRemboursement";
 
-        return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+        return $this->erreur->getCreate($this->manager, $object, $libelle, $data);
 
     } 
     
@@ -100,7 +99,7 @@ class TarifsRemboursementController
      * 
      */
 
-    public function updateOneTarifRemboursement($IdTypeDeFrais){       
+    public function updateOneTarifsRemboursement($IdTypeDeFrais){       
 
         $method = $_SERVER['REQUEST_METHOD'];
             if ('PUT' === $method) {
@@ -117,7 +116,7 @@ class TarifsRemboursementController
         $object = new TarifsRemboursement($data);
         $libelle = "tarifsRemboursement";
 
-        return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+        return $this->erreur->getUpdate($this->manager, $object, $libelle, $data);
 
     }
 
@@ -130,7 +129,7 @@ class TarifsRemboursementController
   
     public function deleteOneTarifRemboursement($IdTypeDeFrais){       
 
-        $result = $this->manager->delete($IdNoteDeFrais);
+        $result = $this->manager->delete($IdTypeDeFrais);
 
         return ['success' => $result];
 

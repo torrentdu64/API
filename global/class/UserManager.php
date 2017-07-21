@@ -37,8 +37,7 @@ class UserManager extends Manager {
     return $objectUser;
   }
 
-  public function create(User &$user) {
-      var_dump($user);
+  public function create(User $user) {
        $this->pdoStatement = $this->pdo->prepare("INSERT INTO user( NomReps, PrenomReps, Adresse1Reps, Adresse2Reps, CodePostalReps, VilleReps, EmailReps, TelephoneReps, Commentaires,	DateEmbauche,TypeDeDroits,	MotDePasseUser,CategorieUser,IdType) VALUES( :NomReps, :PrenomReps , :Adresse1Reps , :Adresse2Reps , :CodePostalReps, :VilleReps, :EmailReps, :TelephoneReps, :Commentaires, :DateEmbauche, :TypeDeDroits, :MotDePasseUser, :CategorieUser,:IdType )");
     $this->pdoStatement->bindValue(':NomReps', $user->getNomReps(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':PrenomReps', $user->getPrenomReps(), PDO::PARAM_STR);
@@ -55,7 +54,6 @@ class UserManager extends Manager {
     $this->pdoStatement->bindValue(':CategorieUser',$user->getCategorieUser(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':IdType', $user->getIdType(), PDO::PARAM_INT);   
     $result = $this->pdoStatement->execute();
-       var_dump($result);
     if($result){
       $login = $this->pdo->lastInsertId();
       $user = $this->read($login);
@@ -65,8 +63,7 @@ class UserManager extends Manager {
   }
 
     
-    public function update(User $user) {
-    var_dump($user);          
+    public function update(User $user) {         
     $this->pdoStatement = $this->pdo->prepare("UPDATE user SET NomReps = :NomReps, PrenomReps = :PrenomReps, Adresse1Reps = :Adresse1Reps, Adresse2Reps = :Adresse2Reps , CodePostalReps = :CodePostalReps , VilleReps = :VilleReps, EmailReps = :EmailReps, TelephoneReps = :TelephoneReps, Commentaires = :Commentaires, DateEmbauche = :DateEmbauche,  TypeDeDroits = :TypeDeDroits, MotDePasseUser = :MotDePasseUser,CategorieUser = :CategorieUser,IdType = :IdType WHERE login = :login");
     $this->pdoStatement->bindValue(':login',$user->getlogin(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':NomReps', $user->getNomReps(), PDO::PARAM_STR);
@@ -84,7 +81,6 @@ class UserManager extends Manager {
     $this->pdoStatement->bindValue(':CategorieUser',$user->getCategorieUser(), PDO::PARAM_STR);
     $this->pdoStatement->bindValue(':IdType', $user->getIdType(), PDO::PARAM_INT);   
     $result = $this->pdoStatement->execute();     
-    var_dump($result);
     return $user;
   }
     

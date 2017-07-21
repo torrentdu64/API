@@ -121,8 +121,6 @@ class ClientController{
     $object = new Client($data);
     $libelle = "client";
 
-    var_dump($data);
-
     return $this->erreur->getCreate($this->manager, $object, $libelle, $data);
 
   }
@@ -159,7 +157,7 @@ class ClientController{
       $object = new Client($data);
       $libelle = "client";
 
-      return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+      return $this->erreur->getUpdate($this->manager, $object, $libelle, $data);
 
   }
 

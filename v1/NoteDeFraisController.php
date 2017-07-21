@@ -106,7 +106,6 @@ class NoteDeFraisController
     public function createOneNoteDeFrais(){       
 
         $data = [
-        'IdNoteDeFrais' => $_POST["IdNoteDeFrais"],
         'IntituleNDF'  => $_POST["IntituleNDF"],
         'DateNDF' => $_POST["DateNDF"],
         'MotifNDF' => $_POST["MotifNDF"],
@@ -127,7 +126,7 @@ class NoteDeFraisController
         $object = new NoteDeFrais($data);
         $libelle = "noteDeFrais";
 
-        return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+        return $this->erreur->getCreate($this->manager, $object, $libelle, $data);
 
     } 
     
@@ -167,7 +166,7 @@ class NoteDeFraisController
         $object = new NoteDeFrais($data);
         $libelle = "noteDeFrais";
 
-        return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+        return $this->erreur->getUpdate($this->manager, $object, $libelle, $data);
 
     } 
 

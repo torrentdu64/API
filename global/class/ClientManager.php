@@ -40,7 +40,7 @@ class ClientManager extends Manager {
 
 
 
-  public function create(Client &$client) {
+  public function create(Client $client) {
 
     $this->pdoStatement = $this->pdo->prepare("INSERT INTO client( NomClient, PrenomClient, Adresse1Client, Adresse2Client, CodePostalClient, VilleClient, TelephoneBureauClient, TelephoneMobileClient, MailClient, BudgetMaxRemboursementClient) VALUES(:NomClient, :PrenomClient, :Adresse1Client , :Adresse2Client , :CodePostalClient , :VilleClient, :TelephoneBureauClient, :TelephoneMobileClient, :MailClient, :BudgetMaxRemboursementClient)");
     $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
@@ -64,8 +64,7 @@ class ClientManager extends Manager {
 
   //  !! TODO : change PDO::PARAM_ to good params !!
 
-  public function update($client) {
-    var_dump($client);
+  public function update(Client $client) {
     $this->pdoStatement = $this->pdo->prepare("UPDATE client SET NomCLient = :NomClient, PrenomClient =:PrenomClient, Adresse1Client =:Adresse1Client , Adresse2Client = :Adresse2Client , CodePostalClient = :CodePostalClient , VilleClient = :VilleClient, TelephoneBureauClient = :TelephoneBureauClient, TelephoneMobileClient = :TelephoneMobileClient, MailClient = :MailClient, BudgetMaxRemboursementClient = :BudgetMaxRemboursementClient WHERE IdClient = :IdClient");
     $this->pdoStatement->bindValue(':IdClient', $client->getIdClient(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':NomClient', $client->getNomClient(), PDO::PARAM_STR);
