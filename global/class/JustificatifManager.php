@@ -13,7 +13,7 @@ class JustificatifManager extends Manager {
   }
 
   public function read($IdJustificatif) {
-      $this->pdoStatement = $this->pdo->prepare("SELECT * FROM justificatifs WHERE IdJustificatif = :IdJustificatif");
+      $this->pdoStatement = $this->pdo->prepare("SELECT * FROM justificatif WHERE IdJustificatif = :IdJustificatif");
       $this->pdoStatement->bindValue(':IdJustificatif', $IdJustificatif, PDO::PARAM_INT);
       $this->pdoStatement->execute();
       $data = $this->pdoStatement->fetch();
@@ -23,7 +23,7 @@ class JustificatifManager extends Manager {
 
   public function readAll() {
 
-    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM justificatifs");
+    $this->pdoStatement = $this->pdo->prepare("SELECT * FROM justificatif");
     $this->pdoStatement->execute();
     $data = $this->pdoStatement->fetchAll();
 
@@ -41,7 +41,7 @@ class JustificatifManager extends Manager {
 
 
   public function create(Justificatif $justificatif) {
-       $this->pdoStatement = $this->pdo->prepare("INSERT INTO justificatif(IntituleJustificatif, URLNomFichier,MontantJustificatif) VALUES(:IntituleJustificatif, :URLNomFichier,:MontantJustificatif)");
+       $this->pdoStatement = $this->pdo->prepare("INSERT INTO justificatif (IntituleJustificatif, URLNomFichier,MontantJustificatif) VALUES(:IntituleJustificatif, :URLNomFichier,:MontantJustificatif)");
     $this->pdoStatement->bindValue(':IntituleJustificatif', $justificatif->getIntituleJustificatif(), PDO::PARAM_INT);
     $this->pdoStatement->bindValue(':URLNomFichier', $justificatif->getURLNomFichier(), PDO::PARAM_STR);
       $this->pdoStatement->bindValue(':MontantJustificatif', $justificatif->getMontantJustificatif(), PDO::PARAM_STR);

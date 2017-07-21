@@ -26,7 +26,7 @@ class JustificatifController{
       $listeJusticatif = $this->manager->readAll();
 
 
-      $tabAlljusticatif = [];
+      $tabAlljustificatif = [];
 
       foreach ($listeJusticatif as $key => $justificatif) {
 
@@ -34,10 +34,10 @@ class JustificatifController{
           'IdJustificatif' => $justificatif->getIdJustificatif(),
           'IntituleJustificatif' => $justificatif->getIntituleJustificatif(),
           'URLNomFichier' => $justificatif->getURLNomFichier(),
-          'MontantJustificatif' => $justificatif->getMontantJustificatif(),
+          'MontantJustificatif' => $justificatif->getMontantJustificatif()
           ];
 
-          $tabAlljustificatif[] = $data;
+      $tabAlljustificatif[] = $data;
 
 
       }
