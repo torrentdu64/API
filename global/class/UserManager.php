@@ -96,6 +96,7 @@ class UserManager extends Manager {
     if ($count == 0) {
       return false;
     } else {
+      
       return true;
     }
 }

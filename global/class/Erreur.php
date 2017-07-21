@@ -22,12 +22,12 @@ class Erreur extends Entity {
     }
 
     public function addErreur($erreur){
-        $check = $this->erreur[] = $erreur;
+        $this->erreur[] = $erreur;
     } 
 
-    public function getErreur($manager, $object, $libelle, $data){
-        if ($object->erreur == []) {
-            $manager->update($object);
+    public function getCreate($manager, $object, $libelle, $data){
+        if ($object->erreur == []) {   
+                $manager->create($object);
             return [
                 'success' => true,
                 ''.$libelle.'' => $data
@@ -35,7 +35,22 @@ class Erreur extends Entity {
         } else {
             return [
                 'success' => false,
-                'error' => $object->erreur
+                'erreur' => $object->erreur
+                ];
+        }
+    }
+
+    public function getUpdate($manager, $object, $libelle, $data){
+        if ($object->erreur == []) {   
+                $manager->update($object);
+            return [
+                'success' => true,
+                ''.$libelle.'' => $data
+                ];
+        } else {
+            return [
+                'success' => false,
+                'erreur' => $object->erreur
                 ];
         }
     }
