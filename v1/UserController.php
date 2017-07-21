@@ -17,13 +17,13 @@ class UserController
      * Gets all users
      *
      * @url GET /user
-     * 
+     *
      */
 
-    public function getAllUser(){       
+    public function getAllUser(){
 
         $listeUser = $this->manager->readAll();
-        
+
         $tabAllUser = [];
 
         foreach ($listeUser as $key => $user) {
@@ -44,7 +44,7 @@ class UserController
                  'MotDePasseUser' => $user->getMotDePasseUser(),
                  'CategorieUser' => $user->getCategorieUser(),
                  'IdType' => $user->getIdType()
-                 ];     
+                 ];
 
                 $tabAllUser[] = $data;
         }
@@ -52,17 +52,17 @@ class UserController
         if ($listeUser){
             return ['users' => $tabAllUser];
         }
-    
+
     }
 
     /**
      * Get one user
      *
      * @url GET /user/$IdUser
-     * 
+     *
      */
 
-    public function getOneUser($IdUser){       
+    public function getOneUser($IdUser){
 
         $selectedUser = $this->manager->read($IdUser);
 
@@ -83,8 +83,8 @@ class UserController
         'CategorieUser' => $selectedUser->getCategorieUser(),
         'IdType' => $selectedUser->getIdType()
         ];
-                
-        $tab[] = $tabSelectedUser; 
+
+        $tab[] = $tabSelectedUser;
 
         if ($selectedUser){
             return ['user' => $tab];
@@ -96,12 +96,13 @@ class UserController
      * Create one user
      *
      * @url POST /user
-     * 
+     *
      */
-  
-    public function createOneUser(){       
 
-            $data = [ 
+    public function createOneUser(){
+
+
+            $data = [
             'NomReps'  => $_POST["NomReps"],
             'PrenomReps' => $_POST["PrenomReps"],
             'Adresse1Reps' => $_POST["Adresse1Reps"],
@@ -117,22 +118,23 @@ class UserController
             'CategorieUser' => $_POST["CategorieUser"],
             'IdType' => $_POST["IdType"]
             ];
-                        
+
+
         $object = new User($data);
         $libelle = "user";
 
         return $this->erreur->getCreate($this->manager, $object, $libelle, $data);
 
-    } 
+    }
 
     /**
      * Update one user
      *
      * @url PUT /user/$IdUser
-     * 
+     *
      */
 
-    public function updateOneUser($IdUser){       
+    public function updateOneUser($IdUser){
 
         $method = $_SERVER['REQUEST_METHOD'];
           if ('PUT' === $method) {
@@ -162,16 +164,16 @@ class UserController
 
         return $this->erreur->getUpdate($this->manager, $object, $libelle, $data);
 
-    } 
+    }
 
     /**
      * Delete one user
      *
      * @url DELETE /user/$IdUser
-     * 
+     *
      */
-  
-    public function deleteOneUser($IdUser){ 
+
+    public function deleteOneUser($IdUser){
 
         $result = $this->manager->delete($IdUser);
 
@@ -181,4 +183,4 @@ class UserController
 
 }
 
-  
+

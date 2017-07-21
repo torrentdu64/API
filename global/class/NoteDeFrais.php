@@ -93,12 +93,10 @@ class NoteDeFrais extends Erreur {
             $preg_match ="/^[0-9]*[.,]*[0-9]*$/";
         if(preg_match($preg_match,$MontantPrevu)){
             $this->MontantPrevu = $MontantPrevu;
-        }elseif(filter_var($MontantPrevu, FILTER_VALIDATE_INT)){
-                $this->MontantPrevu = $MontantPrevu;
-            }else{
-                $this->addErreur('Le montant prevu doit etre un entier ou un decimal');
+        }else{
+          $this->addErreur('Le montant prevu doit etre un entier ou un decimal');
             }
-          }
+      }
     }
 
 
