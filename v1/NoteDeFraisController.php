@@ -108,7 +108,7 @@ class NoteDeFraisController
 
     public function createOneNoteDeFrais(){
 
-
+      var_dump($_POST);
         $data = [
         'IdNoteDeFrais' => $_POST["IdNoteDeFrais"],
         'IntituleNDF'  => $_POST["IntituleNDF"],
@@ -128,7 +128,7 @@ class NoteDeFraisController
         ];
 
 
-
+        var_dump($data);
         $object = new NoteDeFrais($data);
         $libelle = "noteDeFrais";
 

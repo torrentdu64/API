@@ -106,18 +106,13 @@ class User extends Erreur {
       if($CodePostalReps == ''){
          $this->addErreur('Code Postal  n\'est pas remplit');
           }else{
-        if (strlen($CodePostalReps) <= 15) {
-            $preg_match  = '#^[0-9]{4,5}$#';   // format d'un code postal belge et français
-            // test du code postal
+
+           $preg_match ="/^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$/";
             if (preg_match($preg_match, $CodePostalReps)) {
                 $this->CodePostalReps = $CodePostalReps;
             }else {
                 $this->addErreur('le format du Code Postal User doit être en format belge ou français');
             }
-
-        } else {
-            $this->addErreur('Le Code Postal doit comporter moins de 25 caracteres');
-        }
       }
     }
 
@@ -164,9 +159,8 @@ class User extends Erreur {
          $this->addErreur('Telephone  n\'est pas remplit');
           }else{
         if (strlen($TelephoneReps) <= 15) {
-            $format_tel = "#^\d{10}$#";
-            $format_tel = "#^(\d{2}[ \-\.\ ]){4}\d{2}$#";
-            if ((preg_match($format_tel,$TelephoneReps))) {
+            $preg_match = "/([+33]|(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4})/";
+            if ((preg_match($preg_match,$TelephoneReps))) {
                 $this->TelephoneReps = $TelephoneReps;
             }else{
                 $this->addErreur('Le Telephone format n\'est pas respecte');
@@ -193,10 +187,10 @@ class User extends Erreur {
       if($DateEmbauche == ''){
          $this->addErreur('Date embauche n\'est pas remplit');
           }else{
-        if (strlen($DateEmbauche)) {
+        if (DateTime::createFromFormat('Y-m-d', $DateEmbauche )) {
             $this->DateEmbauche = $DateEmbauche;
         } else {
-            $this->addErreur('');
+            $this->addErreur('mauvais format de date');
         }
       }
     }

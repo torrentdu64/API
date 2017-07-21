@@ -14,16 +14,16 @@
 class Erreur extends Entity {
 
     protected $erreur = [];
-    
+
     public function __construct($data=NULL) {
         if (is_array($data)){
             parent::__construct($data);
-        }      
+        }
     }
 
     public function addErreur($erreur){
         $check = $this->erreur[] = $erreur;
-    } 
+    }
 
     public function getErreur($manager, $object, $libelle, $data){
         if ($object->erreur == []) {

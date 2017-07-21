@@ -56,7 +56,6 @@ class Justificatif extends Erreur {
       }else{
         $preg_match ="/^[0-9]*[.,]*[0-9]*$/";
         if(preg_match($preg_match,$MontantJustificatif)){
-          //if(is_float($MontantJustificatif) || is_numeric($MontantJustificatif)){
                   $this->MontantJustificatif = $MontantJustificatif;
              }else{
               $this->addErreur('Le montant prevu doit etre un entier ou un decimal');
