@@ -17,16 +17,19 @@ class JustificatifController{
    *
    * @url GET /justificatif
    *
-   */
+   **/
 
 
   public function getAllJustificatif(){
 
+
       $listeJusticatif = $this->manager->readAll();
+
 
       $tabAlljusticatif = [];
 
       foreach ($listeJusticatif as $key => $justificatif) {
+
           $data = [
           'IdJustificatif' => $justificatif->getIdJustificatif(),
           'IntituleJustificatif' => $justificatif->getIntituleJustificatif(),
@@ -34,7 +37,8 @@ class JustificatifController{
           'MontantJustificatif' => $justificatif->getMontantJustificatif(),
           ];
 
-          $tabAlljustificatif[] = $data;     
+          $tabAlljustificatif[] = $data;
+
 
       }
 
@@ -44,7 +48,7 @@ class JustificatifController{
 
   }
 
-  
+
   /**
    * Get one justificatif by id
    *
@@ -52,11 +56,12 @@ class JustificatifController{
    *
    */
 
+
   public function getOneJustifictif($IdJustificatif){
 
       $selectedJustificatif = $this->manager->read($IdJustificatif);
 
-      $tabSelectedJustificatif = [ 
+      $tabSelectedJustificatif = [
       'IdJustificatif' => $selectedJustificatif->getIdJustificatif(),
       'IntituleJustificatif' => $selectedJustificatif->getIntituleJustificatif(),
       'URLNomFichier' => $selectedJustificatif->getURLNomFichier(),
@@ -64,6 +69,7 @@ class JustificatifController{
       ];
 
       return ['justificatif' => $tabSelectedJustificatif];
+
 
   }
 
@@ -76,6 +82,7 @@ class JustificatifController{
 
   public function createOneJustificatif(){
 
+
     $data = [
     'IntituleJustificatif'  => $_POST["IntituleJustificatif"],
     'URLNomFichier' => $_POST["URLNomFichier"],
@@ -86,6 +93,7 @@ class JustificatifController{
     $libelle = "justificatif";
 
     return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+
 
   }
 
@@ -100,20 +108,21 @@ class JustificatifController{
 
      $method = $_SERVER['REQUEST_METHOD'];
         if ('PUT' === $method) {
-            parse_str(file_get_contents('php://input'), $_PUT);  
+            parse_str(file_get_contents('php://input'), $_PUT);
         }
 
-     $data = [ 
+     $data = [
      'IdJustificatif' => $IdJustificatif,
      'IntituleJustificatif'  => $_PUT["IntituleJustificatif"],
      'URLNomFichier' => $_PUT["URLNomFichier"],
      'MontantJustificatif' => $_PUT["MontantJustificatif"]
      ];
-    
+
     $object = new Justificatif($data);
     $libelle = "justificatif";
 
     return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+
 
   }
 
@@ -124,12 +133,13 @@ class JustificatifController{
    *
    */
 
+
   public function deleteOneJustificatif($IdJustificatif){
 
     $result = $this->manager->delete($IdJustificatif);
-
     return ['success' => $result];
 
   }
+
 
 }
