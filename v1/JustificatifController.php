@@ -92,7 +92,7 @@ class JustificatifController{
     $object = new Justificatif($data);
     $libelle = "justificatif";
 
-    return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+    return $this->erreur->getCreate($this->manager, $object, $libelle, $data);
 
 
   }
@@ -121,7 +121,7 @@ class JustificatifController{
     $object = new Justificatif($data);
     $libelle = "justificatif";
 
-    return $this->erreur->getErreur($this->manager, $object, $libelle, $data);
+    return $this->erreur->getUpdate($this->manager, $object, $libelle, $data);
 
 
   }
