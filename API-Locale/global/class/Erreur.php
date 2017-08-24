@@ -14,19 +14,21 @@
 class Erreur extends Entity {
 
     protected $erreur = [];
-    
+
     public function __construct($data=NULL) {
         if (is_array($data)){
             parent::__construct($data);
-        }      
+        }
     }
 
     public function addErreur($erreur){
+
         $this->erreur[] = $erreur;
-    } 
+    }
+
 
     public function getCreate($manager, $object, $libelle, $data){
-        if ($object->erreur == []) {   
+        if ($object->erreur == []) {
                 $manager->create($object);
             return [
                 'success' => true,
@@ -41,7 +43,7 @@ class Erreur extends Entity {
     }
 
     public function getUpdate($manager, $object, $libelle, $data){
-        if ($object->erreur == []) {   
+        if ($object->erreur == []) {
                 var_dump($object);
                 $manager->update($object);
             return [

@@ -1,6 +1,6 @@
 <?php
 
-class NoteDeFrais extends Erreur {
+class NoteDeFraisRestauration extends Erreur {
 
     private $IdNoteDeFrais;
     private $IntituleNDF;
@@ -9,12 +9,7 @@ class NoteDeFrais extends Erreur {
     private $MontantPrevu;
     private $EtatNDF;
     private $Commentaire;
-    private $NbreNuiteesSiHotellerie;
     private $NbreRepasSiRestauration;
-    private $CoordonneesGPSDepartSiTransport;
-    private $CoordonneesGPSArriveeSiTransport;
-    private $TypeDeTransport;
-    private $DistanceSiTransport;
     private $Login;
     private $IdClient;
 
@@ -69,7 +64,7 @@ class NoteDeFrais extends Erreur {
         if (strlen($MotifNDF) <= 250) {
             $this->MotifNDF = $MotifNDF;
         } else {
-            $this->addErreur('Le motif du Note de frais doit comporter moins de 300 caractères');
+            $this->addErreur('Le motif du Note de frais doit comporter moins de 250 caractères');
         }
       }
     }
@@ -93,12 +88,10 @@ class NoteDeFrais extends Erreur {
             $preg_match ="/^[0-9]*[.,]*[0-9]*$/";
         if(preg_match($preg_match,$MontantPrevu)){
             $this->MontantPrevu = $MontantPrevu;
-        }elseif(filter_var($MontantPrevu, FILTER_VALIDATE_INT)){
-                $this->MontantPrevu = $MontantPrevu;
-            }else{
-                $this->addErreur('Le montant prevu doit etre un entier ou un decimal');
+        }else{
+          $this->addErreur('Le montant prevu doit etre un entier ou un decimal');
             }
-          }
+      }
     }
 
 
@@ -117,79 +110,20 @@ class NoteDeFrais extends Erreur {
       }
     }
 
-    public function setNbreNuiteesSiHotellerie($NbreNuiteesSiHotellerie) {
-      if($NbreNuiteesSiHotellerie == ''){
-         $this->addErreur('le nombre de nuit  n\'est pas remplit');
-      }else{
-            if (is_numeric($NbreNuiteesSiHotellerie) &&  $NbreNuiteesSiHotellerie > 0){
-                $this->NbreNuiteesSiHotellerie = $NbreNuiteesSiHotellerie;
-            }else{
-                $this->addErreur('Le nombre de nuitees doit etre superieur a 0');
-            }
-          }
-    }
-
-    public function setNbreRepasSiRestauration($NbreRepasSiRestauration) {
+  public function setNbreRepasSiRestauration($NbreRepasSiRestauration) {
       if($NbreRepasSiRestauration == ''){
          $this->addErreur('le nombre de repas   n\'est pas remplit');
       }else{
-            if ( $NbreRepasSiRestauration > 0  && is_numeric($NbreRepasSiRestauration)){
-                $this->NbreRepasSiRestauration = $NbreRepasSiRestauration;
-            }else{
-                $this->addErreur('Le nombre de repas doit etre superieur a 0');
-            }
-          }
+        if ( $NbreRepasSiRestauration > 0  && is_numeric($NbreRepasSiRestauration)){
+             $this->NbreRepasSiRestauration = $NbreRepasSiRestauration;
+        }else{
+            $this->addErreur('Le nombre de repas doit etre superieur a 0');
         }
+      }
+    }
 
-        public function setCoordonneesGPSDepartSiTransport($CoordonneesGPSDepartSiTransport) {
-          if($CoordonneesGPSDepartSiTransport == ''){
-         $this->addErreur('les coordonnee GPS  n\'est pas remplit');
-          }else{
-            // Vérifier que c'est un integer
-            if (is_numeric($CoordonneesGPSDepartSiTransport)) {
-                $this->CoordonneesGPSDepartSiTransport = $CoordonneesGPSDepartSiTransport;
-            } else {
-                $this->addErreur('le coordonnee Depart incorrect');
-            }
-          }
-        }
 
-        public function setCoordonneesGPSArriveeSiTransport($CoordonneesGPSArriveeSiTransport) {
-          if($CoordonneesGPSArriveeSiTransport == ''){
-         $this->addErreur('les coordonnee GPS  n\'est pas remplit');
-          }else{
-            if (is_numeric($CoordonneesGPSArriveeSiTransport)) {
-                $this->CoordonneesGPSArriveeSiTransport = $CoordonneesGPSArriveeSiTransport;
-            } else {
-                $this->addErreur('Le coordonnee Arrivee incorrect');
-            }
-          }
-        }
-
-        public function setTypeDeTransport($TypeDeTransport) {
-          if($TypeDeTransport == ''){
-         $this->addErreur('le type de transport n\'est pas remplit');
-          }else{
-            if (is_string($TypeDeTransport)) {
-                $this->TypeDeTransport = $TypeDeTransport;
-            } else {
-                $this->addErreur("Le type de transport n'est pas valide");
-            }
-          }
-        }
-
-        public function setDistanceSiTransport($DistanceSiTransport) {
-          if($DistanceSiTransport == ''){
-         $this->addErreur('la distance de transport n\'est pas remplit');
-          }else{
-            if (is_numeric($DistanceSiTransport)) {
-                $this->DistanceSiTransport = $DistanceSiTransport;
-            } else {
-                $this->addErreur('Le distance Transport doit etre un entier');
-            }
-          }
-        }
-
+   
         public function setLogin($Login) {
            if($Login == ''){
          $this->addErreur('le Login n\'est pas remplit');
@@ -244,42 +178,16 @@ class NoteDeFrais extends Erreur {
             return $this->Commentaire;
         }
 
-        function getNbreNuiteesSiHotellerie() {
-            return $this->NbreNuiteesSiHotellerie;
-        }
-
         function getNbreRepasSiRestauration() {
             return $this->NbreRepasSiRestauration;
         }
 
-        function getCoordonneesGPSDepartSiTransport() {
-            return $this->CoordonneesGPSDepartSiTransport;
-        }
-
-        function getCoordonneesGPSArriveeSiTransport() {
-            // Le diviser par 100 (pour convertir centimes en €)
-            return $this->CoordonneesGPSArriveeSiTransport;
-        }
-
-        function getTypeDeTransport() {
-            // Le diviser par 100 (pour convertir centimes en €)
-            return $this->TypeDeTransport;
-        }
-
-        function getDistanceSiTransport() {
-            // Le diviser par 100 (pour convertir centimes en €)
-            return $this->DistanceSiTransport;
-        }
-
+      
         function getLogin() {
-            // Le diviser par 100 (pour convertir centimes en €)
             return $this->Login;
         }
 
         function getIdClient() {
-            // Le diviser par 100 (pour convertir centimes en €)
             return $this->IdClient;
         }
 }
-
-

@@ -107,13 +107,13 @@ class TarifsRemboursementController
             if ('PUT' === $method) {
                 parse_str(file_get_contents('php://input'), $_PUT);
             }
-
+        var_dump($_PUT);
         $data = [
         'TypeDeFrais' => $IdTypeDeFrais,
         'MontantRemboursement'  => $_PUT["MontantRemboursement"],
         'Unites' => $_PUT["Unites"]
         ];
-
+        var_dump($data);
 
         $object = new TarifsRemboursement($data);
         $libelle = "tarifsRemboursement";
