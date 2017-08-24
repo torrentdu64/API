@@ -2,14 +2,14 @@
 
 use \Jacwright\RestServer\RestException;
 
-class NoteDeFraisController
+class NoteDeFraisRestaurationController
 {
 
 	private $manager;
     private $erreur;
 
   	public function __construct(){
-  		$this->manager = new NoteDeFraisManager();
+  		$this->manager = new NoteDeFraisRestaurationManager();
         $this->erreur = new Erreur();
   	}
 
@@ -18,17 +18,17 @@ class NoteDeFraisController
     /**
      * Gets all noteDeFrais
      *
-     * @url GET /notedefrais
+     * @url GET /notedefraisrestauration
      *
      */
 
 
-    public function getAllNoteDeFrais(){
+    public function getAllNoteDeFraisRestauration(){
 
 
-        $listeNoteDeFrais = $this->manager->readAll();
+        $listeNoteDeFraisRestauration = $this->manager->readAll();
 
-        $tabAllNoteDeFrais = [];
+        $tabAllNoteDeFraisRestauration = [];
 
         foreach ($listeNoteDeFrais as $key => $note) {
             $data = [
@@ -39,38 +39,33 @@ class NoteDeFraisController
             'MontantPrevu' => $note->getMontantPrevu(),
             'EtatNDF' => $note->getEtatNDF(),
             'Commentaire' => $note->getCommentaire(),
-            'NbreNuiteesSiHotellerie' => $note->getNbreNuiteesSiHotellerie(),
             'NbreRepasSiRestauration' => $note->getNbreRepasSiRestauration(),
-            'CoordonneesGPSDepartSiTransport' => $note->getCoordonneesGPSDepartSiTransport(),
-            'CoordonneesGPSArriveeSiTransport' => $note->getCoordonneesGPSArriveeSiTransport(),
-            'TypeDeTransport' => $note->getTypeDeTransport(),
-            'DistanceSiTransport' => $note->getDistanceSiTransport(),
             'Login' => $note->getLogin(),
             'IdClient' => $note->getIdClient()
             ];
 
-            $tabAllNoteDeFrais[] = $data;
+            $tabAllNoteDeFraisRestauration[] = $data;
 
 
         }
 
 
-        if ($tabAllNoteDeFrais){
-            return ['noteDeFrais' => $tabAllNoteDeFrais];
+        if ($listeNoteDeFraisRestauration){
+            return ['noteDeFraisRestauration' => $tabAllNoteDeFraisRestauration];
         }
 
     }
 
     /**
-     * Get one noteDeFrais by id
+     * Get one noteDeFraisRestauration by id
      *
-     * @url GET /notedefrais/$IdNoteDeFrais
+     * @url GET /notedefraisrestauration/$IdNoteDeFrais
      *
      */
 
-    public function getOneNoteDeFrais($IdNoteDeFrais){
+    public function getOneNoteDeFraisRestauration($IdNoteDeFrais){
 
-    	$selectedNoteDeFrais = $this->manager->read($IdNoteDeFrais);
+    	$selectedNoteDeFraisRestauration = $this->manager->read($IdNoteDeFrais);
 
         $tabSelectedNoteDeFrais = [
         'IdNoteDeFrais' => $selectedNoteDeFrais->getIdNoteDeFrais(),
@@ -80,36 +75,31 @@ class NoteDeFraisController
         'MontantPrevu' => $selectedNoteDeFrais->getMontantPrevu(),
         'EtatNDF' => $selectedNoteDeFrais->getEtatNDF(),
         'Commentaire' => $selectedNoteDeFrais->getCommentaire(),
-        'NbreNuiteesSiHotellerie' => $selectedNoteDeFrais->getNbreNuiteesSiHotellerie(),
         'NbreRepasSiRestauration' => $selectedNoteDeFrais->getNbreRepasSiRestauration(),
-        'CoordonneesGPSDepartSiTransport' => $selectedNoteDeFrais->getCoordonneesGPSDepartSiTransport(),
-        'CoordonneesGPSArriveeSiTransport' => $selectedNoteDeFrais->getCoordonneesGPSArriveeSiTransport(),
-        'TypeDeTransport' => $selectedNoteDeFrais->getTypeDeTransport(),
-        'DistanceSiTransport' => $selectedNoteDeFrais->getDistanceSiTransport(),
         'Login' => $selectedNoteDeFrais->getLogin(),
         'IdClient' => $selectedNoteDeFrais->getIdClient()
         ];
 
 
-        $tab[] = $tabSelectedNoteDeFrais;
+        $tab[] = $selectedNoteDeFraisRestauration;
 
-        if ($selectedNoteDeFrais){
-            return ['noteDeFrais' => $tab];
+        if ($selectedNoteDeFraisRestauration){
+            return ['noteDeFraisRestauration' => $tab];
         }
 
     }
 
     /**
-     * Create one notedefrais
+     * Create one noteDeFraisRestauration
      *
-     * @url POST /notedefrais
+     * @url POST /notedefraisrestauration
      *
      */
 
 
-    public function createOneNoteDeFrais(){
+    public function createOneNoteDeFraisRestauration(){
 
-        var_dump($_POST);
+
 
         $data = [
         'IntituleNDF'  => $_POST["IntituleNDF"],
@@ -118,20 +108,14 @@ class NoteDeFraisController
         'MontantPrevu' => $_POST["MontantPrevu"],
         'EtatNDF' => $_POST["EtatNDF"],
         'Commentaire' => $_POST["Commentaire"],
-        'NbreNuiteesSiHotellerie' => $_POST["NbreNuiteesSiHotellerie"],
         'NbreRepasSiRestauration' => $_POST["NbreRepasSiRestauration"],
-        'CoordonneesGPSDepartSiTransport' => $_POST["CoordonneesGPSDepartSiTransport"],
-        'CoordonneesGPSArriveeSiTransport' => $_POST["CoordonneesGPSArriveeSiTransport"],
-        'TypeDeTransport' => $_POST["TypeDeTransport"],
-        'DistanceSiTransport' => $_POST["DistanceSiTransport"],
         'Login' => $_POST["Login"],
         'IdClient' => $_POST["IdClient"]
         ];
 
-        var_dump($data);
 
-        $object = new NoteDeFrais($data);
-        $libelle = "noteDeFrais";
+        $object = new NoteDeFraisRestauration($data);
+        $libelle = "noteDeFraisRestauration";
 
 
         return $this->erreur->getCreate($this->manager, $object, $libelle, $data);
@@ -141,20 +125,18 @@ class NoteDeFraisController
 
 
     /**
-     * Update one noteDeFrais
+     * Update one noteDeFraisRestauration
      *
-     * @url PUT /notedefrais/$IdNoteDeFrais
+     * @url PUT /notedefraisrestauration/$IdNoteDeFrais
      *
      */
 
-    public function updateOneNoteDeFrais($IdNoteDeFrais){
+    public function updateOneNoteDeFraisRestauration($IdNoteDeFrais){
 
         $method = $_SERVER['REQUEST_METHOD'];
             if ('PUT' === $method) {
                 parse_str(file_get_contents('php://input'), $_PUT);
             }
-
-
 
 
          $data = [
@@ -165,20 +147,15 @@ class NoteDeFraisController
          'MontantPrevu' => $_PUT["MontantPrevu"],
          'EtatNDF' => $_PUT["EtatNDF"],
          'Commentaire' => $_PUT["Commentaire"],
-         'NbreNuiteesSiHotellerie' => $_PUT["NbreNuiteesSiHotellerie"],
          'NbreRepasSiRestauration' => $_PUT["NbreRepasSiRestauration"],
-         'CoordonneesGPSDepartSiTransport' => $_PUT["CoordonneesGPSDepartSiTransport"],
-         'CoordonneesGPSArriveeSiTransport' => $_PUT["CoordonneesGPSArriveeSiTransport"],
-         'TypeDeTransport' => $_PUT["TypeDeTransport"],
-         'DistanceSiTransport' => $_PUT["DistanceSiTransport"],
          'Login' => $_PUT["Login"],
          'IdClient' => $_PUT["IdClient"]
          ];
 
-      
 
-        $object = new NoteDeFrais($data);
-        $libelle = "noteDeFrais";
+
+        $object = new NoteDeFraisRestauration($data);
+        $libelle = "noteDeFraisRestauration";
 
         return $this->erreur->getUpdate($this->manager, $object, $libelle, $data);
 
@@ -187,13 +164,13 @@ class NoteDeFraisController
 
 
     /**
-     * Delete one noteDeFrais
+     * Delete one noteDeFraisRestauration
      *
-     * @url DELETE /notedefrais/$IdNoteDeFrais
+     * @url DELETE /notedefraisrestauration/$IdNoteDeFrais
      *
      */
 
-    public function deleteOneNoteDeFrais($IdNoteDeFrais){
+    public function deleteOneNoteDeFraisRestauration($IdNoteDeFrais){
 
       $result = $this->manager->delete($IdNoteDeFrais);
       return ['success' => $result];
